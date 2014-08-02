@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="cat.ppicas.cleanarch">
+
+    <application
+            android:name=".app.App"
+            android:allowBackup="true"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/global__app_name"
+            android:theme="@style/AppTheme">
+        <activity
+                android:name=".activity.FruitListActivity"
+                android:label="@string/fruits__activity_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
