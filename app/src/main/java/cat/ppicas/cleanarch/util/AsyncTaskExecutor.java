@@ -45,9 +45,6 @@ public class AsyncTaskExecutor implements TaskExecutor {
             if (rt.get() == task) {
                 return true;
             }
-            if (rt.get() == null) {
-                iterator.remove();
-            }
         }
 
         return false;
@@ -61,11 +58,7 @@ public class AsyncTaskExecutor implements TaskExecutor {
         Iterator<WeakReference<Task<?>>> iterator = mRunningTasks.iterator();
         while (iterator.hasNext()) {
             WeakReference<Task<?>> rt = iterator.next();
-            if (rt.get() == task) {
-                iterator.remove();
-                return;
-            }
-            if (rt.get() == null) {
+            if (rt.get() == task || rt.get() == null) {
                 iterator.remove();
             }
         }

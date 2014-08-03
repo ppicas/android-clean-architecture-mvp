@@ -1,64 +1,63 @@
 package cat.ppicas.cleanarch.fragment;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import cat.ppicas.cleanarch.activity.PresenterFactory;
 import cat.ppicas.cleanarch.presenter.Presenter;
-import cat.ppicas.cleanarch.presenter.view.View;
 
-public class PresenterHolderFragment<T extends Presenter<?>> extends Fragment {
+public class PresenterHolderFragment extends Fragment {
 
-    private static final String STATE_PRESENTER = "presenterState";
-
-    private T mPresenter;
-
-    public static <T extends Presenter<S>, S extends View> PresenterHolderFragment<T> findOrCreate(
-            FragmentManager manager, String tag, PresenterFactory<T> factory, S view) {
-
-        @SuppressWarnings("unchecked")
-        PresenterHolderFragment<T> holder = (PresenterHolderFragment<T>)
-                manager.findFragmentByTag(tag);
-        if (holder == null) {
-            holder = new PresenterHolderFragment<T>();
-            manager.beginTransaction().add(android.R.id.content, holder, tag).commit();
-        }
-        if (holder.mPresenter == null) {
-            holder.mPresenter = factory.create();
-        }
-        holder.mPresenter.bindView(view);
-
-        return holder;
-    }
+    private final Map<String, Presenter<?>> mPresenterMap = new HashMap<String, Presenter<?>>();
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate(Bundle state) {
+        super.onCreate(state);
         setRetainInstance(true);
-        if (savedInstanceState != null) {
-            mPresenter.restoreState(savedInstanceState.getBundle(STATE_PRESENTER));
+
+        if (state != null) {
+            for (Map.Entry<String, Presenter<?>> entry : mPresenterMap.entrySet()) {
+                if (state.containsKey(entry.getKey())) {
+                    entry.getValue().restoreState(state.getBundle(entry.getKey()));
+                }
+            }
         }
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        Bundle presenterState = new Bundle();
-        mPresenter.saveState(presenterState);
-        outState.putBundle(STATE_PRESENTER, presenterState);
+    public void onSaveInstanceState(Bundle state) {
+        super.onSaveInstanceState(state);
+        for (Map.Entry<String, Presenter<?>> entry : mPresenterMap.entrySet()) {
+            Bundle bundle = new Bundle();
+            entry.getValue().saveState(bundle);
+            state.putBundle(entry.getKey(), bundle);
+        }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mPresenter.unbindView();
+    public <T extends Presenter<?>> T getPresenter(String tag, PresenterFactory<T> presenterFactory) {
+        @SuppressWarnings("unchecked")
+        T presenter = (T) mPresenterMap.get(tag);
+
+        if (presenter == null) {
+            presenter = presenterFactory.createPresenter();
+            mPresenterMap.put(tag, presenter);
+        }
+
+        return presenter;
     }
 
-    public T getPresenter() {
-        return mPresenter;
+    public void removePresenter(String tag) {
+        mPresenterMap.remove(tag);
     }
 
-    public void remove() {
-        getFragmentManager().beginTransaction().remove(this).commit();
+    public String createTag(PresenterFactory<?> presenterFactory) {
+        return presenterFactory.getClass().getName();
+    }
+
+    public String createTag(PresenterFactory<?> presenterFactory, int index) {
+        return presenterFactory.getClass().getName() + "." + index;
     }
 }
