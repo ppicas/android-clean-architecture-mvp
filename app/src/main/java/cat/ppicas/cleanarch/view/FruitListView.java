@@ -1,4 +1,4 @@
-package cat.ppicas.cleanarch.presenter.view;
+package cat.ppicas.cleanarch.view;
 
 import java.util.List;
 

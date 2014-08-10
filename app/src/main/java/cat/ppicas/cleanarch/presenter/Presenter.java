@@ -2,7 +2,7 @@ package cat.ppicas.cleanarch.presenter;
 
 import android.os.Bundle;
 
-import cat.ppicas.cleanarch.presenter.view.View;
+import cat.ppicas.cleanarch.view.View;
 import cat.ppicas.cleanarch.util.Binder;
 
 public abstract class Presenter<T extends View> {

@@ -1,4 +1,4 @@
-package cat.ppicas.cleanarch.fragment;
+package cat.ppicas.cleanarch.ui.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -6,11 +6,11 @@ import android.util.Log;
 
 import java.util.List;
 
-import cat.ppicas.cleanarch.activity.PresenterFactory;
-import cat.ppicas.cleanarch.activity.PresenterHolder;
+import cat.ppicas.cleanarch.ui.activity.PresenterFactory;
+import cat.ppicas.cleanarch.ui.activity.PresenterHolder;
 import cat.ppicas.cleanarch.domain.Fruit;
 import cat.ppicas.cleanarch.presenter.FruitListPresenter;
-import cat.ppicas.cleanarch.presenter.view.FruitListView;
+import cat.ppicas.cleanarch.view.FruitListView;
 
 public class FruitListFragment extends Fragment
         implements PresenterFactory<FruitListPresenter>, FruitListView {

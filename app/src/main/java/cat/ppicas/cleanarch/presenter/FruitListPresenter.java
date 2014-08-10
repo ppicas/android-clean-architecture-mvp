@@ -5,7 +5,7 @@ import java.util.List;
 import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.app.App;
 import cat.ppicas.cleanarch.domain.Fruit;
-import cat.ppicas.cleanarch.presenter.view.FruitListView;
+import cat.ppicas.cleanarch.view.FruitListView;
 import cat.ppicas.cleanarch.task.ListFruitsTask;
 import cat.ppicas.cleanarch.util.TaskCallback;
 import cat.ppicas.cleanarch.util.TaskExecutor;

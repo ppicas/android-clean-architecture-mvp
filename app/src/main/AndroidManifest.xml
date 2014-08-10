@@ -9,7 +9,7 @@
             android:label="@string/global__app_name"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".activity.FruitListActivity"
+                android:name=".ui.activity.FruitListActivity"
                 android:label="@string/fruits__activity_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

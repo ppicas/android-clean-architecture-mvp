@@ -1,4 +1,4 @@
-package cat.ppicas.cleanarch.fragment;
+package cat.ppicas.cleanarch.ui.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.os.Bundle;
 import java.util.HashMap;
 import java.util.Map;
 
-import cat.ppicas.cleanarch.activity.PresenterFactory;
+import cat.ppicas.cleanarch.ui.activity.PresenterFactory;
 import cat.ppicas.cleanarch.presenter.Presenter;
 
 public class PresenterHolderFragment extends Fragment {

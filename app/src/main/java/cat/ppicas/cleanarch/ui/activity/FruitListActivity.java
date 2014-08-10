@@ -1,11 +1,11 @@
-package cat.ppicas.cleanarch.activity;
+package cat.ppicas.cleanarch.ui.activity;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 
-import cat.ppicas.cleanarch.fragment.FruitListFragment;
-import cat.ppicas.cleanarch.fragment.PresenterHolderFragment;
+import cat.ppicas.cleanarch.ui.fragment.FruitListFragment;
+import cat.ppicas.cleanarch.ui.fragment.PresenterHolderFragment;
 import cat.ppicas.cleanarch.presenter.Presenter;
 
 public class FruitListActivity extends Activity implements PresenterHolder {

@@ -1,4 +1,4 @@
-package cat.ppicas.cleanarch.activity;
+package cat.ppicas.cleanarch.ui.activity;
 
 import cat.ppicas.cleanarch.presenter.Presenter;
 
