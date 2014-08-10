@@ -11,7 +11,11 @@ import cat.ppicas.cleanarch.presenter.Presenter;
 
 public class PresenterHolderFragment extends Fragment {
 
+    private static final String STATE_PRESENTERS = "presenters";
+
     private final Map<String, Presenter<?>> mPresenterMap = new HashMap<String, Presenter<?>>();
+
+    private Bundle mPresentersStates;
 
     @Override
     public void onCreate(Bundle state) {
@@ -19,22 +23,20 @@ public class PresenterHolderFragment extends Fragment {
         setRetainInstance(true);
 
         if (state != null) {
-            for (Map.Entry<String, Presenter<?>> entry : mPresenterMap.entrySet()) {
-                if (state.containsKey(entry.getKey())) {
-                    entry.getValue().restoreState(state.getBundle(entry.getKey()));
-                }
-            }
+            mPresentersStates = state.getBundle(STATE_PRESENTERS);
         }
     }
 
     @Override
     public void onSaveInstanceState(Bundle state) {
         super.onSaveInstanceState(state);
+        Bundle presentersStates = new Bundle();
         for (Map.Entry<String, Presenter<?>> entry : mPresenterMap.entrySet()) {
-            Bundle bundle = new Bundle();
-            entry.getValue().saveState(bundle);
-            state.putBundle(entry.getKey(), bundle);
+            Bundle presenterState = new Bundle();
+            entry.getValue().saveState(presenterState);
+            presentersStates.putBundle(entry.getKey(), presenterState);
         }
+        state.putBundle(STATE_PRESENTERS, presentersStates);
     }
 
     public <T extends Presenter<?>> T getPresenter(String tag, PresenterFactory<T> presenterFactory) {
@@ -43,6 +45,9 @@ public class PresenterHolderFragment extends Fragment {
 
         if (presenter == null) {
             presenter = presenterFactory.createPresenter();
+            if (mPresentersStates != null && mPresentersStates.containsKey(tag)) {
+                presenter.restoreState(mPresentersStates.getBundle(tag));
+            }
             mPresenterMap.put(tag, presenter);
         }
 
