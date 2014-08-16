@@ -14,6 +14,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        sServiceContainer = new DefaultServiceContainer();
+        sServiceContainer = new DefaultServiceContainer(this);
     }
 }

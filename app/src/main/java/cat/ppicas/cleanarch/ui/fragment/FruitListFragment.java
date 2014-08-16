@@ -1,21 +1,11 @@
 package cat.ppicas.cleanarch.ui.fragment;
 
 import android.app.Fragment;
-import android.os.Bundle;
-import android.util.Log;
-
-import java.util.List;
-
-import cat.ppicas.cleanarch.ui.activity.PresenterFactory;
-import cat.ppicas.cleanarch.ui.activity.PresenterHolder;
-import cat.ppicas.cleanarch.domain.Fruit;
-import cat.ppicas.cleanarch.presenter.FruitListPresenter;
-import cat.ppicas.cleanarch.view.FruitListView;
 
 public class FruitListFragment extends Fragment
-        implements PresenterFactory<FruitListPresenter>, FruitListView {
+        /*implements PresenterFactory<FruitListPresenter>, FruitListView*/ {
 
-    private static final String TAG = FruitListFragment.class.getSimpleName();
+    /*private static final String TAG = FruitListFragment.class.getSimpleName();
 
     private FruitListPresenter mPresenter;
 
@@ -56,5 +46,5 @@ public class FruitListFragment extends Fragment
 
     @Override
     public void showError(int stringResId) {
-    }
+    }*/
 }
