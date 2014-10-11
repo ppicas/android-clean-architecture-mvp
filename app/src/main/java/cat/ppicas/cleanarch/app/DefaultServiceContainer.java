@@ -58,13 +58,13 @@ class DefaultServiceContainer implements ServiceContainer {
             mOkClient.setConnectTimeout(10, TimeUnit.SECONDS);
             mOkClient.setReadTimeout(5, TimeUnit.SECONDS);
             mOkClient.setWriteTimeout(5, TimeUnit.SECONDS);
-            mOkClient.setCache(getOkHttpCache());
+            mOkClient.setCache(createOkHttpCache());
         }
 
         return mOkClient;
     }
 
-    private Cache getOkHttpCache() {
+    private Cache createOkHttpCache() {
         try {
             File directory = new File(mContext.getCacheDir(), "ok-http");
             return new Cache(directory, 3000000);
