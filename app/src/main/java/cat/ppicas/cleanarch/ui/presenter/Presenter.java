@@ -11,27 +11,25 @@ public abstract class Presenter<T extends View<?>> {
 
     public void bindView(T view) {
         mView.bind(view);
-        onViewBound();
     }
 
     public void unbindView() {
         mView.unbind();
-        onViewUnbound();
+    }
+
+    public T getView() {
+        return mView.getProxy();
+    }
+
+    public void onViewStart() {
+    }
+
+    public void onViewStop() {
     }
 
     public abstract void saveState(Bundle state);
 
     public abstract void restoreState(Bundle state);
-
-    protected void onViewBound() {
-    }
-
-    protected void onViewUnbound() {
-    }
-
-    protected T getView() {
-        return mView.getProxy();
-    }
 
     protected abstract Class<T> getViewClassToken();
 }

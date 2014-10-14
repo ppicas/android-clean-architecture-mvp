@@ -4,9 +4,9 @@ import cat.ppicas.cleanarch.ui.presenter.Presenter;
 
 public interface View<T extends Presenter<?>> {
 
-    T createPresenter();
+    public T createPresenter();
 
-    void showProgress(boolean show);
+    public void showProgress(boolean show);
 
-    void showError(int stringResId);
+    public void showError(int stringResId);
 }

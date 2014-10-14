@@ -9,6 +9,7 @@ public class FindCityTask implements Task<List<City>> {
 
     private String mCityName;
     private CityRepository mRepository;
+    private boolean mCancelled;
 
     public FindCityTask(String cityName, CityRepository repository) {
         mCityName = cityName;
@@ -17,6 +18,15 @@ public class FindCityTask implements Task<List<City>> {
 
     @Override
     public List<City> execute() throws Exception {
-        return mRepository.findCity(mCityName);
+        List<City> cities = mRepository.findCity(mCityName);
+        if (mCancelled) {
+            throw new TaskCancelledException();
+        }
+        return cities;
+    }
+
+    @Override
+    public void cancel() {
+        mCancelled = true;
     }
 }

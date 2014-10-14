@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="cat.ppicas.cleanarch">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
             android:name=".app.App"
             android:allowBackup="true"
@@ -9,8 +11,8 @@
             android:label="@string/global__app_name"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".ui.activity.FruitListActivity"
-                android:label="@string/fruits__activity_title">
+                android:name=".ui.activity.SearchCitiesActivity"
+                android:label="@string/search_cities__title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

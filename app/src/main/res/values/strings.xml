@@ -3,8 +3,10 @@
 
     <string name="global__app_name">Clean Architecture</string>
 
-    <string name="fruits__activity_title">Fruits List</string>
-
     <string name="error__connection">Connection problem</string>
+
+    <string name="search_cities__title">Search city</string>
+    <string name="search_cities__search_hint">City name</string>
+    <string name="search_cities__no_results">No cities found</string>
 
 </resources>

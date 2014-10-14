@@ -10,6 +10,8 @@ public class CityWeather {
     private String mCityName;
     @SerializedName("main")
     private Main mMain;
+    @SerializedName("sys")
+    private System mSystem;
 
     public String getCityId() {
         return mCityId;
@@ -23,24 +25,37 @@ public class CityWeather {
         return mMain;
     }
 
+    public System getSystem() {
+        return mSystem;
+    }
+
     public class Main {
         @SerializedName("temp")
-        private int mTemp;
+        private double mTemp;
         @SerializedName("temp_min")
-        private int mMinTemp;
+        private double mMinTemp;
         @SerializedName("temp_max")
-        private int mMaxTemp;
+        private double mMaxTemp;
 
-        public int getTemp() {
+        public double getTemp() {
             return mTemp;
         }
 
-        public int getMinTemp() {
+        public double getMinTemp() {
             return mMinTemp;
         }
 
-        public int getMaxTemp() {
+        public double getMaxTemp() {
             return mMaxTemp;
+        }
+    }
+
+    public class System {
+        @SerializedName("country")
+        private String mCountry;
+
+        public String getCountry() {
+            return mCountry;
         }
     }
 }

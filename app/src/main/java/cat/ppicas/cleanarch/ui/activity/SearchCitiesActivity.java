@@ -34,7 +34,7 @@ public class SearchCitiesActivity extends Activity implements PresenterHolder {
     }
 
     @Override
-    public <T extends Presenter<?>> T getPresenter(View<T> view) {
+    public <T extends Presenter<?>> T getOrCreatePresenter(View<T> view) {
         return mPresenterHolder.getPresenter("presenter", view);
     }
 }

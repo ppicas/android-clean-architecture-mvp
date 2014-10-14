@@ -18,7 +18,8 @@ public class RestCityRepository implements CityRepository {
 
     @Override
     public City getCity(String cityId) {
-        throw new RuntimeException("Not implemented");
+        CityWeather cw = mService.getCityById(cityId);
+        return createCityFromCityWeather(cw);
     }
 
     @Override
@@ -26,12 +27,16 @@ public class RestCityRepository implements CityRepository {
         List<City> cities = new ArrayList<City>();
         CityWeatherList citiesWeather = mService.findCitiesWeather(name);
         for (CityWeather cw : citiesWeather.getCityWeathers()) {
-            City city = new City(cw.getCityId(), cw.getCityName());
-            CurrentWeather weather = new CurrentWeather(cw.getCityId(), cw.getMain().getTemp(),
-                    cw.getMain().getMaxTemp(), cw.getMain().getMinTemp());
-            city.setCurrentWeather(weather);
-            cities.add(city);
+            cities.add(createCityFromCityWeather(cw));
         }
         return cities;
+    }
+
+    private City createCityFromCityWeather(CityWeather cw) {
+        City city = new City(cw.getCityId(), cw.getCityName());
+        CurrentWeather weather = new CurrentWeather(cw.getCityId(), cw.getMain().getTemp(),
+                cw.getMain().getMaxTemp(), cw.getMain().getMinTemp());
+        city.setCurrentWeather(weather);
+        return city;
     }
 }
