@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import cat.ppicas.cleanarch.repository.CityRepository;
+import cat.ppicas.cleanarch.rest.OWMService;
 import cat.ppicas.cleanarch.rest.RestCityRepository;
 import cat.ppicas.cleanarch.util.AsyncTaskExecutor;
 import cat.ppicas.cleanarch.util.TaskExecutor;
@@ -20,6 +21,7 @@ class DefaultServiceContainer implements ServiceContainer {
 
     private Context mContext;
 
+    private OWMService mOWMService;
     private RestAdapter mRestAdapter;
     private OkHttpClient mOkClient;
     private AsyncTaskExecutor mTaskExecutor;
@@ -30,7 +32,7 @@ class DefaultServiceContainer implements ServiceContainer {
 
     @Override
     public CityRepository getCityRepository() {
-        return new RestCityRepository(getRestAdapter());
+        return new RestCityRepository(getOWMService());
     }
 
     @Override
@@ -39,6 +41,13 @@ class DefaultServiceContainer implements ServiceContainer {
             mTaskExecutor = new AsyncTaskExecutor();
         }
         return mTaskExecutor;
+    }
+
+    private OWMService getOWMService() {
+        if (mOWMService == null) {
+            mOWMService = getRestAdapter().create(OWMService.class);
+        }
+        return mOWMService;
     }
 
     private RestAdapter getRestAdapter() {

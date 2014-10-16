@@ -6,14 +6,13 @@ import java.util.List;
 import cat.ppicas.cleanarch.domain.City;
 import cat.ppicas.cleanarch.domain.CurrentWeather;
 import cat.ppicas.cleanarch.repository.CityRepository;
-import retrofit.RestAdapter;
 
 public class RestCityRepository implements CityRepository {
 
     private final OWMService mService;
 
-    public RestCityRepository(RestAdapter adapter) {
-        mService = adapter.create(OWMService.class);
+    public RestCityRepository(OWMService service) {
+        mService = service;
     }
 
     @Override
