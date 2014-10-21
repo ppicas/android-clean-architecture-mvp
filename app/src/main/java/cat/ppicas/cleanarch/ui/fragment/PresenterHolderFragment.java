@@ -39,6 +39,14 @@ public class PresenterHolderFragment extends Fragment {
         state.putBundle(STATE_PRESENTERS, presentersStates);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        for (Presenter<?> presenter : mPresenterMap.values()) {
+            presenter.onDestroy();
+        }
+    }
+
     public <T extends Presenter<?>> T getPresenter(String tag, View<T> view) {
         @SuppressWarnings("unchecked")
         T presenter = (T) mPresenterMap.get(tag);
@@ -55,6 +63,10 @@ public class PresenterHolderFragment extends Fragment {
     }
 
     public void removePresenter(String tag) {
+        Presenter<?> presenter = mPresenterMap.get(tag);
+        if (presenter != null) {
+            presenter.onDestroy();
+        }
         mPresenterMap.remove(tag);
     }
 }

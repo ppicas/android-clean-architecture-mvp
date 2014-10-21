@@ -3,33 +3,17 @@ package cat.ppicas.cleanarch.ui.presenter;
 import android.os.Bundle;
 
 import cat.ppicas.cleanarch.ui.view.View;
-import cat.ppicas.cleanarch.util.Binder;
 
-public abstract class Presenter<T extends View<?>> {
+public interface Presenter<T extends View<?>> {
 
-    private Binder<T> mView = new Binder<T>(getViewClassToken());
+    void bindView(T view);
 
-    public void bindView(T view) {
-        mView.bind(view);
-    }
+    void unbindView();
 
-    public void unbindView() {
-        mView.unbind();
-    }
+    void saveState(Bundle state);
 
-    public T getView() {
-        return mView.getProxy();
-    }
+    void restoreState(Bundle state);
 
-    public void onViewStart() {
-    }
+    void onDestroy();
 
-    public void onViewStop() {
-    }
-
-    public abstract void saveState(Bundle state);
-
-    public abstract void restoreState(Bundle state);
-
-    protected abstract Class<T> getViewClassToken();
 }
