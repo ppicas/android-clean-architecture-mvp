@@ -27,14 +27,20 @@ import cat.ppicas.cleanarch.ui.view.SearchCitiesView;
 
 public class SearchCitiesFragment extends Fragment implements SearchCitiesView {
 
+    private static final String STATE_LIST_GROUP_VISIBILITY = "listGroupVisibility";
+    private static final String STATE_LIST_VISIBILITY = "listVisibility";
+    private static final String STATE_EMPTY_VISIBILITY = "emptyVisibility";
+    private static final String STATE_PROGRESS_VISIBILITY = "progressVisibility";
+
     private SearchCitiesPresenter mPresenter;
 
     private CityAdapter mAdapter;
 
     private SearchView mSearch;
+    private View mListGroup;
     private ListView mList;
-    private ProgressBar mProgress;
     private TextView mEmpty;
+    private ProgressBar mProgress;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,6 +75,10 @@ public class SearchCitiesFragment extends Fragment implements SearchCitiesView {
         mProgress.setVisibility(View.GONE);
         mEmpty.setVisibility(View.GONE);
 
+        if (state != null) {
+            restoreViewsState(state);
+        }
+
         return view;
     }
 
@@ -85,6 +95,23 @@ public class SearchCitiesFragment extends Fragment implements SearchCitiesView {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle state) {
+        super.onSaveInstanceState(state);
+        state.putInt(STATE_LIST_GROUP_VISIBILITY, mListGroup.getVisibility());
+        state.putInt(STATE_LIST_VISIBILITY, mList.getVisibility());
+        state.putInt(STATE_EMPTY_VISIBILITY, mEmpty.getVisibility());
+        state.putInt(STATE_PROGRESS_VISIBILITY, mProgress.getVisibility());
+    }
+
+    @SuppressWarnings("ResourceType")
+    public void restoreViewsState(Bundle state) {
+        mListGroup.setVisibility(state.getInt(STATE_LIST_GROUP_VISIBILITY));
+        mList.setVisibility(state.getInt(STATE_LIST_VISIBILITY));
+        mEmpty.setVisibility(state.getInt(STATE_EMPTY_VISIBILITY));
+        mProgress.setVisibility(state.getInt(STATE_PROGRESS_VISIBILITY));
+    }
+
+    @Override
     public SearchCitiesPresenter createPresenter() {
         ServiceContainer sc = App.getServiceContainer();
         return new SearchCitiesPresenterImpl(sc.getTaskExecutor(), sc.getCityRepository());
@@ -92,26 +119,22 @@ public class SearchCitiesFragment extends Fragment implements SearchCitiesView {
 
     @Override
     public void showCities(List<City> cities) {
+        mList.setVisibility(View.VISIBLE);
+        mEmpty.setVisibility(View.GONE);
         mAdapter.clear();
-        if (cities.isEmpty()) {
-            mEmpty.setVisibility(View.VISIBLE);
-        } else {
-            mEmpty.setVisibility(View.GONE);
-            mAdapter.addAll(cities);
-        }
+        mAdapter.addAll(cities);
+    }
+
+    @Override
+    public void showCitiesNotFound() {
+        mList.setVisibility(View.GONE);
+        mEmpty.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showProgress(boolean show) {
-        if (show) {
-            mList.setVisibility(View.GONE);
-            mEmpty.setVisibility(View.GONE);
-            mProgress.setVisibility(View.VISIBLE);
-        } else {
-            mProgress.setVisibility(View.GONE);
-            mList.setVisibility(mAdapter.isEmpty() ? View.GONE : View.VISIBLE);
-            mEmpty.setVisibility(mAdapter.isEmpty() ? View.VISIBLE : View.GONE);
-        }
+        mListGroup.setVisibility(show ? View.GONE : View.VISIBLE);
+        mProgress.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -121,8 +144,9 @@ public class SearchCitiesFragment extends Fragment implements SearchCitiesView {
 
     private void bindViews(View view) {
         mSearch = (SearchView) view.findViewById(R.id.search_cities__search);
+        mListGroup = view.findViewById(R.id.search_cities__list_group);
         mList = (ListView) view.findViewById(R.id.search_cities__list);
-        mProgress = (ProgressBar) view.findViewById(R.id.search_cities__progress);
         mEmpty = (TextView) view.findViewById(R.id.search_cities__empty);
+        mProgress = (ProgressBar) view.findViewById(R.id.search_cities__progress);
     }
 }

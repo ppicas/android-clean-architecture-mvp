@@ -1,6 +1,7 @@
 package cat.ppicas.cleanarch.ui.presenter.impl;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import java.util.List;
 
@@ -15,11 +16,14 @@ import cat.ppicas.cleanarch.util.TaskExecutor;
 public class SearchCitiesPresenterImpl extends AbstractPresenter<SearchCitiesView>
         implements SearchCitiesPresenter {
 
+    private static final String STATE_LAST_SEARCH = "lastSearch";
+
     private TaskExecutor mTaskExecutor;
     private CityRepository mCityRepository;
     private FindCityTask mFindCityTask;
 
-    private List<City> mRecentResults;
+    private String mLastSearch;
+    private List<City> mLastResults;
 
     public SearchCitiesPresenterImpl(TaskExecutor taskExecutor, CityRepository cityRepository) {
         mTaskExecutor = taskExecutor;
@@ -30,37 +34,47 @@ public class SearchCitiesPresenterImpl extends AbstractPresenter<SearchCitiesVie
     public void bindView(SearchCitiesView view) {
         super.bindView(view);
 
-        if (mFindCityTask != null && mTaskExecutor.isRunning(mFindCityTask)) {
-            view.showProgress(true);
-        } else if (mRecentResults != null) {
-            view.showCities(mRecentResults);
+        if (mLastResults != null) {
+            view.showCities(mLastResults);
+        } else if (!TextUtils.isEmpty(mLastSearch)) {
+            if (mFindCityTask == null || !mTaskExecutor.isRunning(mFindCityTask)) {
+                onCitySearch(mLastSearch);
+            }
         }
     }
 
     @Override
     public void onCitySearch(String cityName) {
+        getView().showProgress(true);
+        mLastSearch = cityName;
+
         if (mFindCityTask != null && mTaskExecutor.isRunning(mFindCityTask)) {
             mFindCityTask.cancel();
         }
-        getView().showProgress(true);
         mFindCityTask = new FindCityTask(cityName, mCityRepository);
         mTaskExecutor.execute(mFindCityTask, new ShowErrorTaskCallback(this) {
             @Override
             public void onSuccess(List<City> result) {
                 if (getView() != null) {
                     getView().showProgress(false);
-                    getView().showCities(result);
+                    if (result.isEmpty()) {
+                        getView().showCitiesNotFound();
+                    } else {
+                        getView().showCities(result);
+                    }
                 }
-                mRecentResults = result;
+                mLastResults = result;
             }
         });
     }
 
     @Override
     public void saveState(Bundle state) {
+        state.putString(STATE_LAST_SEARCH, mLastSearch);
     }
 
     @Override
     public void restoreState(Bundle state) {
+        mLastSearch = state.getString(STATE_LAST_SEARCH);
     }
 }

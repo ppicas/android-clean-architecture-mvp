@@ -17,18 +17,25 @@
         android:layout_weight="1"
         android:animateLayoutChanges="true">
 
-        <ListView
-            android:id="@+id/search_cities__list"
+        <FrameLayout
+            android:id="@+id/search_cities__list_group"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true">
 
-        <TextView
-            android:id="@+id/search_cities__empty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="64dp"
-            android:text="@string/search_cities__no_results"/>
+            <ListView
+                android:id="@+id/search_cities__list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:id="@+id/search_cities__empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="64dp"
+                android:text="@string/search_cities__no_results"/>
+        </FrameLayout>
 
         <ProgressBar
             android:id="@+id/search_cities__progress"

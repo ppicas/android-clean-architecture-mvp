@@ -8,4 +8,6 @@ import cat.ppicas.cleanarch.ui.presenter.SearchCitiesPresenter;
 public interface SearchCitiesView extends View<SearchCitiesPresenter> {
 
     public void showCities(List<City> cities);
+
+    public void showCitiesNotFound();
 }
