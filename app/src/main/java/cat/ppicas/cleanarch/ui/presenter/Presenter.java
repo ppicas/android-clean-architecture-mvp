@@ -4,16 +4,28 @@ import android.os.Bundle;
 
 import cat.ppicas.cleanarch.ui.view.View;
 
-public interface Presenter<T extends View<?>> {
+public abstract class Presenter<T extends View<?>> {
 
-    void bindView(T view);
+    private T mView;
 
-    void unbindView();
+    public T getView() {
+        return mView;
+    }
 
-    void saveState(Bundle state);
+    public void bindView(T view, boolean recreated) {
+        mView = view;
+    }
 
-    void restoreState(Bundle state);
+    public void unbindView() {
+        mView = null;
+    }
 
-    void onDestroy();
+    public void saveState(Bundle state) {
+    }
 
+    public void restoreState(Bundle state) {
+    }
+
+    public void onDestroy() {
+    }
 }

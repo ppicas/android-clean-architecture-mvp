@@ -39,9 +39,7 @@ public class AsyncTaskExecutor implements TaskExecutor {
 
     @Override
     public synchronized boolean isRunning(Task<?> task) {
-        Iterator<WeakReference<Task<?>>> iterator = mRunningTasks.iterator();
-        while (iterator.hasNext()) {
-            WeakReference<Task<?>> rt = iterator.next();
+        for (WeakReference<Task<?>> rt : mRunningTasks) {
             if (rt.get() == task) {
                 return true;
             }

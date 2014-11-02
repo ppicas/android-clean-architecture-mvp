@@ -22,7 +22,6 @@ import cat.ppicas.cleanarch.domain.City;
 import cat.ppicas.cleanarch.ui.activity.PresenterHolder;
 import cat.ppicas.cleanarch.ui.adapter.CityAdapter;
 import cat.ppicas.cleanarch.ui.presenter.SearchCitiesPresenter;
-import cat.ppicas.cleanarch.ui.presenter.impl.SearchCitiesPresenterImpl;
 import cat.ppicas.cleanarch.ui.view.SearchCitiesView;
 
 public class SearchCitiesFragment extends Fragment implements SearchCitiesView {
@@ -85,7 +84,7 @@ public class SearchCitiesFragment extends Fragment implements SearchCitiesView {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mPresenter.bindView(this);
+        mPresenter.bindView(this, savedInstanceState != null);
     }
 
     @Override
@@ -114,7 +113,12 @@ public class SearchCitiesFragment extends Fragment implements SearchCitiesView {
     @Override
     public SearchCitiesPresenter createPresenter() {
         ServiceContainer sc = App.getServiceContainer();
-        return new SearchCitiesPresenterImpl(sc.getTaskExecutor(), sc.getCityRepository());
+        return new SearchCitiesPresenter(sc.getTaskExecutor(), sc.getCityRepository());
+    }
+
+    @Override
+    public String getPresenterTag() {
+        return SearchCitiesFragment.class.getName();
     }
 
     @Override

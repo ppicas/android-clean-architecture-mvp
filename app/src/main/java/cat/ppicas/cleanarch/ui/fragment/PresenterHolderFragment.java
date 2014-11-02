@@ -6,10 +6,11 @@ import android.os.Bundle;
 import java.util.HashMap;
 import java.util.Map;
 
+import cat.ppicas.cleanarch.ui.activity.PresenterHolder;
 import cat.ppicas.cleanarch.ui.presenter.Presenter;
 import cat.ppicas.cleanarch.ui.view.View;
 
-public class PresenterHolderFragment extends Fragment {
+public class PresenterHolderFragment extends Fragment implements PresenterHolder {
 
     private static final String STATE_PRESENTERS = "presenters";
 
@@ -47,7 +48,10 @@ public class PresenterHolderFragment extends Fragment {
         }
     }
 
-    public <T extends Presenter<?>> T getPresenter(String tag, View<T> view) {
+    @Override
+    public <T extends Presenter<?>> T getOrCreatePresenter(View<T> view) {
+        String tag = view.getPresenterTag();
+
         @SuppressWarnings("unchecked")
         T presenter = (T) mPresenterMap.get(tag);
 
@@ -62,7 +66,9 @@ public class PresenterHolderFragment extends Fragment {
         return presenter;
     }
 
-    public void removePresenter(String tag) {
+    @Override
+    public void destroyPresenter(View<?> view) {
+        String tag = view.getPresenterTag();
         Presenter<?> presenter = mPresenterMap.get(tag);
         if (presenter != null) {
             presenter.onDestroy();

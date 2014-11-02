@@ -11,7 +11,7 @@ import cat.ppicas.cleanarch.ui.view.View;
 
 public class SearchCitiesActivity extends Activity implements PresenterHolder {
 
-    private PresenterHolderFragment mPresenterHolder;
+    private PresenterHolder mPresenterHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +28,18 @@ public class SearchCitiesActivity extends Activity implements PresenterHolder {
     @Override
     public void onAttachFragment(Fragment fragment) {
         super.onAttachFragment(fragment);
-        if (fragment instanceof PresenterHolderFragment) {
-            mPresenterHolder = (PresenterHolderFragment) fragment;
+        if (fragment instanceof PresenterHolder) {
+            mPresenterHolder = (PresenterHolder) fragment;
         }
     }
 
     @Override
     public <T extends Presenter<?>> T getOrCreatePresenter(View<T> view) {
-        return mPresenterHolder.getPresenter("presenter", view);
+        return mPresenterHolder.getOrCreatePresenter(view);
+    }
+
+    @Override
+    public void destroyPresenter(View<?> view) {
+        mPresenterHolder.destroyPresenter(view);
     }
 }

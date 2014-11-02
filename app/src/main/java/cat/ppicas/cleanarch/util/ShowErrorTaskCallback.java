@@ -5,21 +5,27 @@ import java.util.List;
 import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.domain.City;
 import cat.ppicas.cleanarch.task.TaskCancelledException;
-import cat.ppicas.cleanarch.ui.presenter.impl.AbstractPresenter;
+import cat.ppicas.cleanarch.ui.presenter.Presenter;
+import cat.ppicas.cleanarch.ui.view.View;
 
 public abstract class ShowErrorTaskCallback implements TaskCallback<List<City>> {
 
-    private final AbstractPresenter<?> mPresenter;
+    private final Presenter<?> mPresenter;
 
-    public ShowErrorTaskCallback(AbstractPresenter<?> presenter) {
+    public ShowErrorTaskCallback(Presenter<?> presenter) {
         mPresenter = presenter;
     }
 
     public void onError(Exception error) {
-        mPresenter.getView().showProgress(false);
+        View<?> view = mPresenter.getView();
+        if (view == null) {
+            return;
+        }
+
+        view.showProgress(false);
         if (!(error instanceof TaskCancelledException)) {
             error.printStackTrace();
-            mPresenter.getView().showError(R.string.error__connection);
+            view.showError(R.string.error__connection);
         }
     }
 }
