@@ -1,14 +1,11 @@
 package cat.ppicas.cleanarch.util;
 
-import java.util.List;
-
 import cat.ppicas.cleanarch.R;
-import cat.ppicas.cleanarch.domain.City;
 import cat.ppicas.cleanarch.task.TaskCancelledException;
 import cat.ppicas.cleanarch.ui.presenter.Presenter;
-import cat.ppicas.cleanarch.ui.view.View;
+import cat.ppicas.cleanarch.ui.view.MainView;
 
-public abstract class ShowErrorTaskCallback implements TaskCallback<List<City>> {
+public abstract class ShowErrorTaskCallback<T> implements TaskCallback<T> {
 
     private final Presenter<?> mPresenter;
 
@@ -17,7 +14,7 @@ public abstract class ShowErrorTaskCallback implements TaskCallback<List<City>> 
     }
 
     public void onError(Exception error) {
-        View<?> view = mPresenter.getView();
+        MainView<?> view = mPresenter.getView();
         if (view == null) {
             return;
         }

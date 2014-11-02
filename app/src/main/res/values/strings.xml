@@ -9,4 +9,7 @@
     <string name="search_cities__search_hint">City name</string>
     <string name="search_cities__no_results">No cities found</string>
 
+    <string name="city_details__title">%s weather</string>
+    <string name="city_details__title_loading">Loading weather</string>
+
 </resources>

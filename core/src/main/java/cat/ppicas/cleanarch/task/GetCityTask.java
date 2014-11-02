@@ -4,9 +4,9 @@ import cat.ppicas.cleanarch.domain.City;
 
 public class GetCityTask extends CancellableTask<City> {
 
-    private int mId;
+    private String mId;
 
-    public GetCityTask(int id) {
+    public GetCityTask(String id) {
         mId = id;
     }
 

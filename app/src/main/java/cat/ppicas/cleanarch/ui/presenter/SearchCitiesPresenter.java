@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import java.util.List;
 
+import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.domain.City;
 import cat.ppicas.cleanarch.repository.CityRepository;
 import cat.ppicas.cleanarch.task.FindCityTask;
@@ -32,6 +33,8 @@ public class SearchCitiesPresenter extends Presenter<SearchCitiesView> {
     public void bindView(SearchCitiesView view, boolean recreated) {
         super.bindView(view, recreated);
 
+        view.setTitle(R.string.search_cities__title);
+
         if (recreated) {
             if (mLastResults != null) {
                 view.showCities(mLastResults);
@@ -49,7 +52,7 @@ public class SearchCitiesPresenter extends Presenter<SearchCitiesView> {
             mFindCityTask.cancel();
         }
         mFindCityTask = new FindCityTask(cityName, mCityRepository);
-        mTaskExecutor.execute(mFindCityTask, new ShowErrorTaskCallback(this) {
+        mTaskExecutor.execute(mFindCityTask, new ShowErrorTaskCallback<List<City>>(this) {
             @Override
             public void onSuccess(List<City> result) {
                 if (getView() != null) {
@@ -62,6 +65,12 @@ public class SearchCitiesPresenter extends Presenter<SearchCitiesView> {
                 }
                 mLastResults = result;
             }
+
+            @Override
+            public void onError(Exception error) {
+                super.onError(error);
+                mLastSearch = null;
+            }
         });
     }
 
@@ -73,5 +82,12 @@ public class SearchCitiesPresenter extends Presenter<SearchCitiesView> {
     @Override
     public void restoreState(Bundle state) {
         mLastSearch = state.getString(STATE_LAST_SEARCH);
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mFindCityTask != null) {
+            mFindCityTask.cancel();
+        }
     }
 }

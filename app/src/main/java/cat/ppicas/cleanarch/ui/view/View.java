@@ -8,8 +8,4 @@ public interface View<T extends Presenter<?>> {
 
     public String getPresenterTag();
 
-    public void showProgress(boolean show);
-
-    public void showError(int stringResId);
-
 }

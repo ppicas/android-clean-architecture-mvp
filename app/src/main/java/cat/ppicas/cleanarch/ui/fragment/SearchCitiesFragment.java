@@ -122,6 +122,11 @@ public class SearchCitiesFragment extends Fragment implements SearchCitiesView {
     }
 
     @Override
+    public void setTitle(int stringResId, Object... args) {
+        getActivity().setTitle(getString(stringResId, args));
+    }
+
+    @Override
     public void showCities(List<City> cities) {
         mList.setVisibility(View.VISIBLE);
         mEmpty.setVisibility(View.GONE);
