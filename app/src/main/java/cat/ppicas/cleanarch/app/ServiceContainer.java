@@ -8,4 +8,5 @@ public interface ServiceContainer {
     public CityRepository getCityRepository();
 
     public TaskExecutor getTaskExecutor();
+
 }

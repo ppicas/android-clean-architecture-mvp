@@ -2,18 +2,19 @@ package cat.ppicas.cleanarch.app;
 
 import android.app.Application;
 
-public class App extends Application {
+public class App extends Application implements ServiceContainerProvider {
 
-    private static ServiceContainer sServiceContainer;
-
-    public static ServiceContainer getServiceContainer() {
-        return sServiceContainer;
-    }
+    private ServiceContainer mServiceContainer;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        sServiceContainer = new DefaultServiceContainer(this);
+        mServiceContainer = new DefaultServiceContainer(this);
+    }
+
+    @Override
+    public ServiceContainer getServiceContainer() {
+        return mServiceContainer;
     }
 }

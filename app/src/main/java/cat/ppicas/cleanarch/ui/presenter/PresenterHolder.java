@@ -1,4 +1,4 @@
-package cat.ppicas.cleanarch.ui.activity;
+package cat.ppicas.cleanarch.ui.presenter;
 
 import cat.ppicas.cleanarch.ui.presenter.Presenter;
 import cat.ppicas.cleanarch.ui.view.View;

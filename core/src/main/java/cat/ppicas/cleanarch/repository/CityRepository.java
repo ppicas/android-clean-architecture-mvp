@@ -9,4 +9,5 @@ public interface CityRepository {
     public City getCity(String cityId);
 
     public List<City> findCity(String name);
+
 }

@@ -30,7 +30,11 @@ public class CityDetailPresenter extends Presenter<CityDetailView> {
 
         view.setTitle(R.string.city_details__title_loading);
 
-        if (mCity != null && mTaskExecutor.isRunning(mGetCityTask)) {
+        if (recreated && mCity != null) {
+            view.setTitle(R.string.city_details__title, mCity.getName());
+        }
+
+        if (recreated && mTaskExecutor.isRunning(mGetCityTask)) {
             return;
         }
 

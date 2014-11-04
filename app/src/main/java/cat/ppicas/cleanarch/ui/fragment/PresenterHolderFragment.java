@@ -6,7 +6,7 @@ import android.os.Bundle;
 import java.util.HashMap;
 import java.util.Map;
 
-import cat.ppicas.cleanarch.ui.activity.PresenterHolder;
+import cat.ppicas.cleanarch.ui.presenter.PresenterHolder;
 import cat.ppicas.cleanarch.ui.presenter.Presenter;
 import cat.ppicas.cleanarch.ui.view.View;
 

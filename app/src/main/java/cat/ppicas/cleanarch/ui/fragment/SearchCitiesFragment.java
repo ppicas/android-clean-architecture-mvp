@@ -1,5 +1,6 @@
 package cat.ppicas.cleanarch.ui.fragment;
 
+import android.app.Application;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -16,11 +17,11 @@ import android.widget.Toast;
 import java.util.List;
 
 import cat.ppicas.cleanarch.R;
-import cat.ppicas.cleanarch.app.App;
 import cat.ppicas.cleanarch.app.ServiceContainer;
+import cat.ppicas.cleanarch.app.ServiceContainerProvider;
 import cat.ppicas.cleanarch.domain.City;
-import cat.ppicas.cleanarch.ui.activity.PresenterHolder;
 import cat.ppicas.cleanarch.ui.adapter.CityAdapter;
+import cat.ppicas.cleanarch.ui.presenter.PresenterHolder;
 import cat.ppicas.cleanarch.ui.presenter.SearchCitiesPresenter;
 import cat.ppicas.cleanarch.ui.view.SearchCitiesView;
 
@@ -111,22 +112,6 @@ public class SearchCitiesFragment extends Fragment implements SearchCitiesView {
     }
 
     @Override
-    public SearchCitiesPresenter createPresenter() {
-        ServiceContainer sc = App.getServiceContainer();
-        return new SearchCitiesPresenter(sc.getTaskExecutor(), sc.getCityRepository());
-    }
-
-    @Override
-    public String getPresenterTag() {
-        return SearchCitiesFragment.class.getName();
-    }
-
-    @Override
-    public void setTitle(int stringResId, Object... args) {
-        getActivity().setTitle(getString(stringResId, args));
-    }
-
-    @Override
     public void showCities(List<City> cities) {
         mList.setVisibility(View.VISIBLE);
         mEmpty.setVisibility(View.GONE);
@@ -141,14 +126,31 @@ public class SearchCitiesFragment extends Fragment implements SearchCitiesView {
     }
 
     @Override
+    public void setTitle(int stringResId, Object... args) {
+        getActivity().setTitle(getString(stringResId, args));
+    }
+
+    @Override
     public void showProgress(boolean show) {
         mListGroup.setVisibility(show ? View.GONE : View.VISIBLE);
         mProgress.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override
-    public void showError(int stringResId) {
-        Toast.makeText(getActivity(), stringResId, Toast.LENGTH_LONG).show();
+    public void showError(int stringResId, Object... args) {
+        Toast.makeText(getActivity().getApplicationContext(), stringResId, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public SearchCitiesPresenter createPresenter() {
+        Application app = getActivity().getApplication();
+        ServiceContainer sc = ((ServiceContainerProvider) app).getServiceContainer();
+        return new SearchCitiesPresenter(sc.getTaskExecutor(), sc.getCityRepository());
+    }
+
+    @Override
+    public String getPresenterTag() {
+        return SearchCitiesFragment.class.getName();
     }
 
     private void bindViews(View view) {

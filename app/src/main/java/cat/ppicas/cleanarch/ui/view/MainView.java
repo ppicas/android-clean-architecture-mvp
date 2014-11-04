@@ -8,6 +8,6 @@ public interface MainView<T extends Presenter<?>> extends View<T> {
 
     public void showProgress(boolean show);
 
-    public void showError(int stringResId);
+    public void showError(int stringResId, Object... args);
 
 }

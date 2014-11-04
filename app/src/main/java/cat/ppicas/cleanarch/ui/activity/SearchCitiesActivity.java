@@ -7,6 +7,7 @@ import android.os.Bundle;
 import cat.ppicas.cleanarch.ui.fragment.PresenterHolderFragment;
 import cat.ppicas.cleanarch.ui.fragment.SearchCitiesFragment;
 import cat.ppicas.cleanarch.ui.presenter.Presenter;
+import cat.ppicas.cleanarch.ui.presenter.PresenterHolder;
 import cat.ppicas.cleanarch.ui.view.View;
 
 public class SearchCitiesActivity extends Activity implements PresenterHolder {
