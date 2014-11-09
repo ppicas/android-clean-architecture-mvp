@@ -3,11 +3,13 @@ package cat.ppicas.cleanarch.ui.fragment;
 import android.app.Application;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v13.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.app.ServiceContainer;
 import cat.ppicas.cleanarch.app.ServiceContainerProvider;
 import cat.ppicas.cleanarch.ui.presenter.CityDetailPresenter;
@@ -41,8 +43,15 @@ public class CityDetailFragment extends Fragment implements CityDetailView {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO Inflate layout
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_city_detail, container, false);
+
+        FragmentTabHost tabHost = (FragmentTabHost) view.findViewById(R.id.city_detail__tabs);
+        tabHost.setup(getActivity(), getFragmentManager(), R.id.city_detail__tabs_content);
+
+        // TODO Add tabs
+        // tabHost.addTab();
+
+        return view;
     }
 
     @Override

@@ -12,14 +12,14 @@
         android:label="@string/global__app_name"
         android:theme="@style/AppTheme">
 
-        <activity
-            android:name=".ui.activity.SearchCitiesActivity">
-
+        <activity android:name=".ui.activity.SearchCitiesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".ui.activity.CityDetailsActivity"/>
     </application>
 
 </manifest>
