@@ -7,9 +7,9 @@ import cat.ppicas.cleanarch.ui.view.MainView;
 
 public abstract class ShowErrorTaskCallback<T> implements TaskCallback<T> {
 
-    private final Presenter<?> mPresenter;
+    private final Presenter<? extends MainView<?>> mPresenter;
 
-    public ShowErrorTaskCallback(Presenter<?> presenter) {
+    public ShowErrorTaskCallback(Presenter<? extends MainView<?>> presenter) {
         mPresenter = presenter;
     }
 

@@ -45,11 +45,13 @@ public class CityDetailFragment extends Fragment implements CityDetailView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_city_detail, container, false);
 
-        FragmentTabHost tabHost = (FragmentTabHost) view.findViewById(R.id.city_detail__tabs);
-        tabHost.setup(getActivity(), getFragmentManager(), R.id.city_detail__tabs_content);
+        FragmentTabHost tabHost = (FragmentTabHost) view.findViewById(R.id.city_detail__tab_host);
+        tabHost.setup(getActivity(), getFragmentManager(), android.R.id.tabcontent);
 
-        // TODO Add tabs
-        // tabHost.addTab();
+        tabHost.addTab(tabHost.newTabSpec("weather").setIndicator("Weather"),
+                CityCurrentWeatherFragment.class, null);
+        tabHost.addTab(tabHost.newTabSpec("forecast").setIndicator("Forecast"),
+                Fragment.class, null);
 
         return view;
     }

@@ -7,4 +7,5 @@ public interface TaskExecutor {
     public <T> void execute(Task<T> task, TaskCallback<T> callback);
 
     public boolean isRunning(Task<?> task);
+
 }

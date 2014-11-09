@@ -2,6 +2,7 @@ package cat.ppicas.cleanarch.ui.activity;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 
 import cat.ppicas.cleanarch.ui.fragment.CityDetailFragment;
@@ -19,9 +20,10 @@ public class CityDetailsActivity extends Activity implements PresenterHolder {
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState == null) {
+            Intent intent = new Intent(getIntent());
             getFragmentManager().beginTransaction()
                     .add(new PresenterHolderFragment(), null)
-                    .add(android.R.id.content, CityDetailFragment.newInstance(cityId))
+                    .add(android.R.id.content, CityDetailFragment.newInstance(intent.getCityId()))
                     .commit();
         }
     }
@@ -42,5 +44,23 @@ public class CityDetailsActivity extends Activity implements PresenterHolder {
     @Override
     public void destroyPresenter(View<?> view) {
         mPresenterHolder.destroyPresenter(view);
+    }
+
+    public static class Intent extends android.content.Intent {
+
+        private static final String EXTRA_CITY_ID = "cityId";
+
+        public Intent(Context packageContext, String cityId) {
+            super(packageContext, CityDetailsActivity.class);
+            putExtra(EXTRA_CITY_ID, cityId);
+        }
+
+        public Intent(android.content.Intent intent) {
+            super(intent);
+        }
+
+        public String getCityId() {
+            return getStringExtra(EXTRA_CITY_ID);
+        }
     }
 }

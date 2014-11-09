@@ -27,7 +27,7 @@ class DefaultServiceContainer implements ServiceContainer {
     private AsyncTaskExecutor mTaskExecutor;
 
     public DefaultServiceContainer(Context context) {
-        mContext = context;
+        mContext = context.getApplicationContext();
     }
 
     @Override

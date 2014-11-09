@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
@@ -20,6 +21,8 @@ import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.app.ServiceContainer;
 import cat.ppicas.cleanarch.app.ServiceContainerProvider;
 import cat.ppicas.cleanarch.domain.City;
+import cat.ppicas.cleanarch.ui.activity.ActivityNavigator;
+import cat.ppicas.cleanarch.ui.activity.ActivityNavigatorImpl;
 import cat.ppicas.cleanarch.ui.adapter.CityAdapter;
 import cat.ppicas.cleanarch.ui.presenter.PresenterHolder;
 import cat.ppicas.cleanarch.ui.presenter.SearchCitiesPresenter;
@@ -71,6 +74,13 @@ public class SearchCitiesFragment extends Fragment implements SearchCitiesView {
 
         mAdapter = new CityAdapter(getActivity());
         mList.setAdapter(mAdapter);
+        mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                City city = mAdapter.getItem(position);
+                mPresenter.onCitySelected(city.getId());
+            }
+        });
 
         mProgress.setVisibility(View.GONE);
         mEmpty.setVisibility(View.GONE);
@@ -145,7 +155,11 @@ public class SearchCitiesFragment extends Fragment implements SearchCitiesView {
     public SearchCitiesPresenter createPresenter() {
         Application app = getActivity().getApplication();
         ServiceContainer sc = ((ServiceContainerProvider) app).getServiceContainer();
-        return new SearchCitiesPresenter(sc.getTaskExecutor(), sc.getCityRepository());
+
+        ActivityNavigator activityNavigator =  new ActivityNavigatorImpl(getActivity());
+
+        return new SearchCitiesPresenter(sc.getTaskExecutor(), activityNavigator,
+                sc.getCityRepository());
     }
 
     @Override

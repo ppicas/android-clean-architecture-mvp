@@ -9,6 +9,7 @@ import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.domain.City;
 import cat.ppicas.cleanarch.repository.CityRepository;
 import cat.ppicas.cleanarch.task.FindCityTask;
+import cat.ppicas.cleanarch.ui.activity.ActivityNavigator;
 import cat.ppicas.cleanarch.ui.view.SearchCitiesView;
 import cat.ppicas.cleanarch.util.ShowErrorTaskCallback;
 import cat.ppicas.cleanarch.util.TaskExecutor;
@@ -18,14 +19,17 @@ public class SearchCitiesPresenter extends Presenter<SearchCitiesView> {
     private static final String STATE_LAST_SEARCH = "lastSearch";
 
     private TaskExecutor mTaskExecutor;
+    private ActivityNavigator mActivityNavigator;
     private CityRepository mCityRepository;
-    private FindCityTask mFindCityTask;
 
+    private FindCityTask mFindCityTask;
     private String mLastSearch;
     private List<City> mLastResults;
 
-    public SearchCitiesPresenter(TaskExecutor taskExecutor, CityRepository cityRepository) {
+    public SearchCitiesPresenter(TaskExecutor taskExecutor, ActivityNavigator activityNavigator,
+            CityRepository cityRepository) {
         mTaskExecutor = taskExecutor;
+        mActivityNavigator = activityNavigator;
         mCityRepository = cityRepository;
     }
 
@@ -72,6 +76,10 @@ public class SearchCitiesPresenter extends Presenter<SearchCitiesView> {
                 mLastSearch = null;
             }
         });
+    }
+
+    public void onCitySelected(String cityId) {
+        mActivityNavigator.openCityDetails(cityId);
     }
 
     @Override
