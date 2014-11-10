@@ -12,7 +12,7 @@ public abstract class Presenter<T extends View<?>> {
         return mView;
     }
 
-    public void bindView(T view, boolean recreated) {
+    public void bindView(T view) {
         mView = view;
     }
 

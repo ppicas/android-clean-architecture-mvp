@@ -1,5 +1,6 @@
 package cat.ppicas.cleanarch.ui.fragment;
 
+import android.app.Activity;
 import android.app.Application;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.app.ServiceContainer;
 import cat.ppicas.cleanarch.app.ServiceContainerProvider;
 import cat.ppicas.cleanarch.ui.presenter.CityDetailPresenter;
+import cat.ppicas.cleanarch.ui.presenter.PresenterHolder;
 import cat.ppicas.cleanarch.ui.view.CityDetailView;
 
 public class CityDetailFragment extends Fragment implements CityDetailView {
@@ -21,12 +23,23 @@ public class CityDetailFragment extends Fragment implements CityDetailView {
 
     private String mCityId;
 
+    private CityDetailPresenter mPresenter;
+
     public static CityDetailFragment newInstance(String cityId) {
         Bundle args = new Bundle();
         args.putString(ARG_CITY_ID, cityId);
         CityDetailFragment fragment = new CityDetailFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (!(activity instanceof CityDetailFragmentProvider)) {
+            throw new RuntimeException("Activity must implement "
+                    + CityDetailFragmentProvider.class.getSimpleName());
+        }
     }
 
     @Override
@@ -39,6 +52,8 @@ public class CityDetailFragment extends Fragment implements CityDetailView {
         }
 
         mCityId = args.getString(ARG_CITY_ID);
+
+        mPresenter = ((PresenterHolder) getActivity()).getOrCreatePresenter(this);
     }
 
     @Override
@@ -54,6 +69,18 @@ public class CityDetailFragment extends Fragment implements CityDetailView {
                 Fragment.class, null);
 
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mPresenter.bindView(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.unbindView();
     }
 
     @Override
@@ -76,11 +103,17 @@ public class CityDetailFragment extends Fragment implements CityDetailView {
     public CityDetailPresenter createPresenter() {
         Application app = getActivity().getApplication();
         ServiceContainer sc = ((ServiceContainerProvider) app).getServiceContainer();
-        return new CityDetailPresenter(sc.getTaskExecutor(), mCityId);
+        return new CityDetailPresenter(sc.getTaskExecutor(), sc.getCityRepository(), mCityId);
     }
 
     @Override
     public String getPresenterTag() {
         return CityDetailFragment.class.getName();
+    }
+
+    public interface CityDetailFragmentProvider {
+
+        public CityDetailFragment getCityDetailFragment();
+
     }
 }

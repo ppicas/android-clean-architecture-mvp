@@ -34,17 +34,15 @@ public class SearchCitiesPresenter extends Presenter<SearchCitiesView> {
     }
 
     @Override
-    public void bindView(SearchCitiesView view, boolean recreated) {
-        super.bindView(view, recreated);
+    public void bindView(SearchCitiesView view) {
+        super.bindView(view);
 
         view.setTitle(R.string.search_cities__title);
 
-        if (recreated) {
-            if (mLastResults != null) {
-                view.showCities(mLastResults);
-            } else if (!TextUtils.isEmpty(mLastSearch) && !mTaskExecutor.isRunning(mFindCityTask)) {
-                onCitySearch(mLastSearch);
-            }
+        if (mLastResults != null) {
+            view.showCities(mLastResults);
+        } else if (!TextUtils.isEmpty(mLastSearch) && !mTaskExecutor.isRunning(mFindCityTask)) {
+            onCitySearch(mLastSearch);
         }
     }
 

@@ -13,8 +13,8 @@ public class CityCurrentWeatherPresenter extends Presenter<CityCurrentWeatherVie
     }
 
     @Override
-    public void bindView(final CityCurrentWeatherView view, boolean recreated) {
-        super.bindView(view, recreated);
+    public void bindView(final CityCurrentWeatherView view) {
+        super.bindView(view);
 
         mMasterPresenter.getCity(new CityDetailPresenter.GetCityCallback() {
             @Override

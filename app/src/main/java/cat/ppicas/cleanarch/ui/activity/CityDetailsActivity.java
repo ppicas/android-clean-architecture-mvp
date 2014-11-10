@@ -11,9 +11,12 @@ import cat.ppicas.cleanarch.ui.presenter.Presenter;
 import cat.ppicas.cleanarch.ui.presenter.PresenterHolder;
 import cat.ppicas.cleanarch.ui.view.View;
 
-public class CityDetailsActivity extends Activity implements PresenterHolder {
+public class CityDetailsActivity extends Activity implements PresenterHolder,
+        CityDetailFragment.CityDetailFragmentProvider {
 
     private PresenterHolder mPresenterHolder;
+
+    private CityDetailFragment mCityDetailFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,8 @@ public class CityDetailsActivity extends Activity implements PresenterHolder {
         super.onAttachFragment(fragment);
         if (fragment instanceof PresenterHolder) {
             mPresenterHolder = (PresenterHolder) fragment;
+        } else if (fragment instanceof CityDetailFragment) {
+            mCityDetailFragment = (CityDetailFragment) fragment;
         }
     }
 
@@ -44,6 +49,11 @@ public class CityDetailsActivity extends Activity implements PresenterHolder {
     @Override
     public void destroyPresenter(View<?> view) {
         mPresenterHolder.destroyPresenter(view);
+    }
+
+    @Override
+    public CityDetailFragment getCityDetailFragment() {
+        return mCityDetailFragment;
     }
 
     public static class Intent extends android.content.Intent {

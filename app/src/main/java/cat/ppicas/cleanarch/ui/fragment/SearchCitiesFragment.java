@@ -95,7 +95,7 @@ public class SearchCitiesFragment extends Fragment implements SearchCitiesView {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mPresenter.bindView(this, savedInstanceState != null);
+        mPresenter.bindView(this);
     }
 
     @Override
