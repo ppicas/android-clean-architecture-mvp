@@ -15,7 +15,7 @@ public class GetCityTask extends CancellableTask<City> {
     }
 
     @Override
-    protected City doExecute() {
+    protected City doExecute() throws Exception {
         return mCityRepository.getCity(mId);
     }
 }

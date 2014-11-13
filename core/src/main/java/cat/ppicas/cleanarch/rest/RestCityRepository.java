@@ -32,7 +32,7 @@ public class RestCityRepository implements CityRepository {
     }
 
     private City createCityFromCityWeather(CityWeather cw) {
-        City city = new City(cw.getCityId(), cw.getCityName());
+        City city = new City(cw.getCityId(), cw.getCityName(), cw.getSystem().getCountry());
         CurrentWeather weather = new CurrentWeather(cw.getCityId(), cw.getMain().getTemp(),
                 cw.getMain().getMaxTemp(), cw.getMain().getMinTemp());
         city.setCurrentWeather(weather);

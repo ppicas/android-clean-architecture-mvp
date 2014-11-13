@@ -4,11 +4,13 @@ public class City {
 
     private String mId;
     private String mName;
+    private String mCountry;
     private CurrentWeather mCurrentWeather;
 
-    public City(String id, String name) {
+    public City(String id, String name, String country) {
         mId = id;
         mName = name;
+        mCountry = country;
     }
 
     public String getId() {
@@ -17,6 +19,10 @@ public class City {
 
     public String getName() {
         return mName;
+    }
+
+    public String getCountry() {
+        return mCountry;
     }
 
     public void setCurrentWeather(CurrentWeather currentWeather) {

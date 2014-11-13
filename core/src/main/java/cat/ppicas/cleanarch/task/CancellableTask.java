@@ -18,5 +18,5 @@ public abstract class CancellableTask<T> implements Task<T> {
         mCancelled = true;
     }
 
-    protected abstract T doExecute();
+    protected abstract T doExecute() throws Exception;
 }

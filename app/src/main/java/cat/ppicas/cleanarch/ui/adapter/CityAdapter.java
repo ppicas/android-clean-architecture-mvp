@@ -17,12 +17,15 @@ public class CityAdapter extends ArrayAdapter<City> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         City city = getItem(position);
-        String text = city.getName();
+
+        String text = city.getName() + ", " + city.getCountry();
         if (city.getCurrentWeather() != null) {
             text += "\n" + city.getCurrentWeather().getCurrentTemp();
         }
+
         TextView view = (TextView) super.getView(position, convertView, parent);
         view.setText(text);
+
         return view;
     }
 }
