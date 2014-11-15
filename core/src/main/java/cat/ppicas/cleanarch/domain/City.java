@@ -5,12 +5,20 @@ public class City {
     private String mId;
     private String mName;
     private String mCountry;
-    private CurrentWeather mCurrentWeather;
+    private CurrentWeatherPreview mCurrentWeatherPreview;
 
     public City(String id, String name, String country) {
         mId = id;
         mName = name;
         mCountry = country;
+    }
+
+    public City(String id, String name, String country,
+            CurrentWeatherPreview currentWeatherPreview) {
+        mId = id;
+        mName = name;
+        mCountry = country;
+        mCurrentWeatherPreview = currentWeatherPreview;
     }
 
     public String getId() {
@@ -25,11 +33,7 @@ public class City {
         return mCountry;
     }
 
-    public void setCurrentWeather(CurrentWeather currentWeather) {
-        mCurrentWeather = currentWeather;
-    }
-
-    public CurrentWeather getCurrentWeather() {
-        return mCurrentWeather;
+    public CurrentWeatherPreview getCurrentWeatherPreview() {
+        return mCurrentWeatherPreview;
     }
 }

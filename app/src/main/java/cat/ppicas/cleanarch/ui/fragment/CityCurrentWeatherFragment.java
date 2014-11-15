@@ -21,8 +21,8 @@ public class CityCurrentWeatherFragment extends Fragment implements CityCurrentW
     private CityCurrentWeatherPresenter mPresenter;
 
     private TextView mCurrent;
-    private TextView mMin;
-    private TextView mMax;
+    private TextView mHumidity;
+    private TextView mWindSpeed;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,9 +35,9 @@ public class CityCurrentWeatherFragment extends Fragment implements CityCurrentW
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle state) {
         View view = inflater.inflate(R.layout.fragment_city_current_weather, container, false);
 
-        mCurrent = (TextView) view.findViewById(R.id.city_current_weather__current);
-        mMin = (TextView) view.findViewById(R.id.city_current_weather__min);
-        mMax = (TextView) view.findViewById(R.id.city_current_weather__max);
+        mCurrent = (TextView) view.findViewById(R.id.city_weather__current);
+        mHumidity = (TextView) view.findViewById(R.id.city_weather__humidity);
+        mWindSpeed = (TextView) view.findViewById(R.id.city_weather__wind_speed);
 
         return view;
     }
@@ -60,13 +60,13 @@ public class CityCurrentWeatherFragment extends Fragment implements CityCurrentW
     }
 
     @Override
-    public void setMaxTemp(double temp) {
-        mMax.setText(temp + "º");
+    public void setHumidity(int humidity) {
+        mHumidity.setText(humidity + "º");
     }
 
     @Override
-    public void setMinTemp(double temp) {
-        mMin.setText(temp + "º");
+    public void setWindSpeed(double windSpeed) {
+        mWindSpeed.setText(windSpeed + "º");
     }
 
     @Override

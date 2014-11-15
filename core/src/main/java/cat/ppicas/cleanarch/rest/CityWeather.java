@@ -10,6 +10,8 @@ public class CityWeather {
     private String mCityName;
     @SerializedName("main")
     private Main mMain;
+    @SerializedName("wind")
+    private Wind mWind;
     @SerializedName("sys")
     private System mSystem;
 
@@ -25,6 +27,10 @@ public class CityWeather {
         return mMain;
     }
 
+    public Wind getWind() {
+        return mWind;
+    }
+
     public System getSystem() {
         return mSystem;
     }
@@ -32,21 +38,24 @@ public class CityWeather {
     public class Main {
         @SerializedName("temp")
         private double mTemp;
-        @SerializedName("temp_min")
-        private double mMinTemp;
-        @SerializedName("temp_max")
-        private double mMaxTemp;
+        @SerializedName("humidity")
+        private int mHumidity;
 
         public double getTemp() {
             return mTemp;
         }
 
-        public double getMinTemp() {
-            return mMinTemp;
+        public int getHumidity() {
+            return mHumidity;
         }
+    }
 
-        public double getMaxTemp() {
-            return mMaxTemp;
+    public class Wind {
+        @SerializedName("speed")
+        private double mSpeed;
+
+        public double getSpeed() {
+            return mSpeed;
         }
     }
 

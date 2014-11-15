@@ -2,44 +2,43 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-        >
+                android:layout_height="match_parent">
 
     <TextView
-            android:id="@+id/city_current_weather__current"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:paddingBottom="32dp"
-            android:text="0º"
-            android:textSize="32sp"
-            android:textStyle="bold"
-            tools:ignore="HardcodedText"/>
+        android:id="@+id/city_weather__current"
+        style="@style/CityWeather_Value"
+        android:text="0º"
+        tools:ignore="HardcodedText"/>
 
     <TextView
-            android:id="@+id/city_current_weather__min"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/city_current_weather__current"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="32dp"
-            android:text="0º"
-            android:textSize="24sp"
-            android:textColor="#ff2979ff"
-            tools:ignore="HardcodedText,RtlHardcoded"/>
+        android:id="@+id/city_weather__current_label"
+        style="@style/CityWeather_Label"
+        android:layout_below="@+id/city_weather__current"
+        android:text="@string/city_weather__temperature"/>
 
     <TextView
-            android:id="@+id/city_current_weather__max"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/city_current_weather__current"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="32dp"
-            android:text="0º"
-            android:textSize="24sp"
-            android:textColor="#ffff5b4f"
-            tools:ignore="HardcodedText,RtlHardcoded"/>
+        android:id="@+id/city_weather__humidity"
+        style="@style/CityWeather_Value"
+        android:layout_below="@+id/city_weather__current_label"
+        android:text="0º"
+        tools:ignore="HardcodedText,RtlHardcoded"/>
+
+    <TextView
+        android:id="@+id/city_weather__humidity_label"
+        style="@style/CityWeather_Label"
+        android:layout_below="@+id/city_weather__humidity"
+        android:text="@string/city_weather__humidity"/>
+
+    <TextView
+        android:id="@+id/city_weather__wind_speed"
+        style="@style/CityWeather_Value"
+        android:layout_below="@+id/city_weather__humidity_label"
+        android:text="0º"
+        tools:ignore="HardcodedText,RtlHardcoded"/>
+
+    <TextView
+        android:id="@+id/city_weather__wind_speed_label"
+        style="@style/CityWeather_Label"
+        android:layout_below="@+id/city_weather__wind_speed"
+        android:text="@string/city_weather__wind_speed"/>
 </RelativeLayout>

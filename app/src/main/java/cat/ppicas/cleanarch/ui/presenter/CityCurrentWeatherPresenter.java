@@ -19,10 +19,10 @@ public class CityCurrentWeatherPresenter extends Presenter<CityCurrentWeatherVie
         mMasterPresenter.getCity(new CityDetailPresenter.GetCityCallback() {
             @Override
             public void onGetCityResult(City city) {
-                CurrentWeather cw = city.getCurrentWeather();
+                CurrentWeather cw = city.getCurrentWeatherPreview();
                 view.setCurrentTemp(cw.getCurrentTemp());
-                view.setMaxTemp(cw.getMaxTemp());
-                view.setMinTemp(cw.getMinTemp());
+                view.setHumidity(cw.getHumidity());
+                view.setWindSpeed(cw.getWindSpeed());
             }
         });
     }

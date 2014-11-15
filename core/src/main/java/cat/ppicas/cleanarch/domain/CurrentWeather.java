@@ -1,37 +1,21 @@
 package cat.ppicas.cleanarch.domain;
 
-public class CurrentWeather {
+public class CurrentWeather extends CurrentWeatherPreview {
 
-    private String mCityId;
-    private double mCurrentTemp;
-    private Double mMaxTemp;
-    private Double mMinTemp;
+    private int mHumidity;
+    private double mWindSpeed;
 
-    public CurrentWeather(String cityId, double currentTemp) {
-        mCityId = cityId;
-        mCurrentTemp = currentTemp;
+    public CurrentWeather(String cityId, double currentTemp, int humidity, double windSpeed) {
+        super(cityId, currentTemp);
+        mHumidity = humidity;
+        mWindSpeed = windSpeed;
     }
 
-    public CurrentWeather(String cityId, double currentTemp, double maxTemp, double minTemp) {
-        mCityId = cityId;
-        mCurrentTemp = currentTemp;
-        mMaxTemp = maxTemp;
-        mMinTemp = minTemp;
+    public int getHumidity() {
+        return mHumidity;
     }
 
-    public String getCityId() {
-        return mCityId;
-    }
-
-    public double getCurrentTemp() {
-        return mCurrentTemp;
-    }
-
-    public Double getMaxTemp() {
-        return mMaxTemp;
-    }
-
-    public Double getMinTemp() {
-        return mMinTemp;
+    public double getWindSpeed() {
+        return mWindSpeed;
     }
 }

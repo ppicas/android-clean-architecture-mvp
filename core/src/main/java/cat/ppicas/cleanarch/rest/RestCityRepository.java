@@ -5,6 +5,7 @@ import java.util.List;
 
 import cat.ppicas.cleanarch.domain.City;
 import cat.ppicas.cleanarch.domain.CurrentWeather;
+import cat.ppicas.cleanarch.domain.CurrentWeatherPreview;
 import cat.ppicas.cleanarch.repository.CityRepository;
 
 public class RestCityRepository implements CityRepository {
@@ -32,10 +33,10 @@ public class RestCityRepository implements CityRepository {
     }
 
     private City createCityFromCityWeather(CityWeather cw) {
-        City city = new City(cw.getCityId(), cw.getCityName(), cw.getSystem().getCountry());
-        CurrentWeather weather = new CurrentWeather(cw.getCityId(), cw.getMain().getTemp(),
-                cw.getMain().getMaxTemp(), cw.getMain().getMinTemp());
-        city.setCurrentWeather(weather);
+        CurrentWeatherPreview weatherPreview = new CurrentWeatherPreview(
+                cw.getCityId(), cw.getMain().getTemp());
+        City city = new City(cw.getCityId(), cw.getCityName(),
+                cw.getSystem().getCountry(), weatherPreview);
         return city;
     }
 }

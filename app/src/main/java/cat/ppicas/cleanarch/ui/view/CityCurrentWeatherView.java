@@ -6,8 +6,8 @@ public interface CityCurrentWeatherView extends View<CityCurrentWeatherPresenter
 
     public void setCurrentTemp(double temp);
 
-    public void setMaxTemp(double temp);
+    public void setHumidity(int humidity);
 
-    public void setMinTemp(double temp);
+    public void setWindSpeed(double windSpeed);
 
 }

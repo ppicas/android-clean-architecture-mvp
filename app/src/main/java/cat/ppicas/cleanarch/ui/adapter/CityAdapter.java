@@ -19,8 +19,8 @@ public class CityAdapter extends ArrayAdapter<City> {
         City city = getItem(position);
 
         String text = city.getName() + ", " + city.getCountry();
-        if (city.getCurrentWeather() != null) {
-            text += "\n" + city.getCurrentWeather().getCurrentTemp();
+        if (city.getCurrentWeatherPreview() != null) {
+            text += "\n" + city.getCurrentWeatherPreview().getCurrentTemp();
         }
 
         TextView view = (TextView) super.getView(position, convertView, parent);
