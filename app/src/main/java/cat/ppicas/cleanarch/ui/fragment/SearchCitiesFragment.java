@@ -122,7 +122,12 @@ public class SearchCitiesFragment extends Fragment implements SearchCitiesView {
     }
 
     @Override
-    public void showCities(List<City> cities) {
+    public void setTitle(int stringResId, Object... args) {
+        getActivity().setTitle(getString(stringResId, args));
+    }
+
+    @Override
+    public void setCities(List<City> cities) {
         mList.setVisibility(View.VISIBLE);
         mEmpty.setVisibility(View.GONE);
         mAdapter.clear();
@@ -130,24 +135,19 @@ public class SearchCitiesFragment extends Fragment implements SearchCitiesView {
     }
 
     @Override
-    public void showCitiesNotFound() {
+    public void displayCitiesNotFound() {
         mList.setVisibility(View.GONE);
         mEmpty.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void setTitle(int stringResId, Object... args) {
-        getActivity().setTitle(getString(stringResId, args));
-    }
-
-    @Override
-    public void showProgress(boolean show) {
+    public void displayLoading(boolean show) {
         mListGroup.setVisibility(show ? View.GONE : View.VISIBLE);
         mProgress.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override
-    public void showError(int stringResId, Object... args) {
+    public void displayError(int stringResId, Object... args) {
         Toast.makeText(getActivity().getApplicationContext(), stringResId, Toast.LENGTH_LONG).show();
     }
 

@@ -7,15 +7,15 @@ public class GetCityTask extends CancellableTask<City> {
 
     private String mId;
 
-    private CityRepository mCityRepository;
+    private CityRepository mRepository;
 
-    public GetCityTask(CityRepository cityRepository, String id) {
+    public GetCityTask(CityRepository repository, String id) {
         mId = id;
-        mCityRepository = cityRepository;
+        mRepository = repository;
     }
 
     @Override
     protected City doExecute() throws Exception {
-        return mCityRepository.getCity(mId);
+        return mRepository.getCity(mId);
     }
 }

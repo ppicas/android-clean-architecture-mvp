@@ -1,9 +1,10 @@
-package cat.ppicas.cleanarch.owm;
+package cat.ppicas.cleanarch.owm.model;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+@SuppressWarnings("UnusedDeclaration")
 public class OWMCurrentWeatherList {
 
     @SerializedName("count")

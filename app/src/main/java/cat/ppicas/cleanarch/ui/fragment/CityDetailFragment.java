@@ -1,10 +1,11 @@
 package cat.ppicas.cleanarch.ui.fragment;
 
-import android.app.Activity;
 import android.app.Application;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v13.app.FragmentTabHost;
+import android.support.v13.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.app.ServiceContainer;
 import cat.ppicas.cleanarch.app.ServiceContainerProvider;
+import cat.ppicas.cleanarch.res.AppStringResources;
 import cat.ppicas.cleanarch.ui.presenter.CityDetailPresenter;
 import cat.ppicas.cleanarch.ui.presenter.PresenterHolder;
 import cat.ppicas.cleanarch.ui.view.CityDetailView;
@@ -34,15 +36,6 @@ public class CityDetailFragment extends Fragment implements CityDetailView {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        if (!(activity instanceof CityDetailFragmentProvider)) {
-            throw new RuntimeException("Activity must implement "
-                    + CityDetailFragmentProvider.class.getSimpleName());
-        }
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -60,13 +53,8 @@ public class CityDetailFragment extends Fragment implements CityDetailView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_city_detail, container, false);
 
-        FragmentTabHost tabHost = (FragmentTabHost) view.findViewById(R.id.city_detail__tab_host);
-        tabHost.setup(getActivity(), getFragmentManager(), android.R.id.tabcontent);
-
-        tabHost.addTab(tabHost.newTabSpec("weather").setIndicator("Weather"),
-                CityCurrentWeatherFragment.class, null);
-        tabHost.addTab(tabHost.newTabSpec("forecast").setIndicator("Forecast"),
-                Fragment.class, null);
+        ViewPager viewPager = (ViewPager) view.findViewById(R.id.city_detail__view_pager);
+        viewPager.setAdapter(new LocalPageAdapter(getFragmentManager()));
 
         return view;
     }
@@ -89,13 +77,13 @@ public class CityDetailFragment extends Fragment implements CityDetailView {
     }
 
     @Override
-    public void showProgress(boolean show) {
+    public void displayLoading(boolean display) {
         getActivity().setProgressBarIndeterminate(true);
-        getActivity().setProgressBarIndeterminateVisibility(show);
+        getActivity().setProgressBarIndeterminateVisibility(display);
     }
 
     @Override
-    public void showError(int stringResId, Object... args) {
+    public void displayError(int stringResId, Object... args) {
         Toast.makeText(getActivity().getApplicationContext(), stringResId, Toast.LENGTH_LONG).show();
     }
 
@@ -103,7 +91,8 @@ public class CityDetailFragment extends Fragment implements CityDetailView {
     public CityDetailPresenter createPresenter() {
         Application app = getActivity().getApplication();
         ServiceContainer sc = ((ServiceContainerProvider) app).getServiceContainer();
-        return new CityDetailPresenter(sc.getTaskExecutor(), sc.getCityRepository(), mCityId);
+        return new CityDetailPresenter(sc.getTaskExecutor(), sc.getCityRepository(),
+                new AppStringResources(getResources()), mCityId);
     }
 
     @Override
@@ -111,9 +100,33 @@ public class CityDetailFragment extends Fragment implements CityDetailView {
         return CityDetailFragment.class.getName();
     }
 
-    public interface CityDetailFragmentProvider {
+    private class LocalPageAdapter extends FragmentStatePagerAdapter {
 
-        public CityDetailFragment getCityDetailFragment();
+        public LocalPageAdapter(FragmentManager fm) {
+            super(fm);
+        }
 
+        @Override
+        public Fragment getItem(int position) {
+            if (position == 0) {
+                return CityCurrentWeatherFragment.newInstance(mCityId);
+            } else {
+                return new Fragment();
+            }
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            if (position == 0) {
+                return getString(R.string.city_details__tab_current);
+            } else {
+                return mPresenter.getForecastPageTitle(position - 1);
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return 1 + 3;
+        }
     }
 }

@@ -9,9 +9,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import cat.ppicas.cleanarch.owm.OWMCurrentWeatherRepository;
 import cat.ppicas.cleanarch.repository.CityRepository;
 import cat.ppicas.cleanarch.owm.OWMCityRepository;
 import cat.ppicas.cleanarch.owm.OWMService;
+import cat.ppicas.cleanarch.repository.CurrentWeatherRepository;
 import cat.ppicas.cleanarch.util.AsyncTaskExecutor;
 import cat.ppicas.cleanarch.util.TaskExecutor;
 import retrofit.RestAdapter;
@@ -33,6 +35,11 @@ class DefaultServiceContainer implements ServiceContainer {
     @Override
     public CityRepository getCityRepository() {
         return new OWMCityRepository(getOWMService());
+    }
+
+    @Override
+    public CurrentWeatherRepository getCurrentWeatherRepository() {
+        return new OWMCurrentWeatherRepository(getOWMService());
     }
 
     @Override

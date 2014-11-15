@@ -5,10 +5,12 @@ import java.util.List;
 import cat.ppicas.cleanarch.domain.City;
 import cat.ppicas.cleanarch.ui.presenter.SearchCitiesPresenter;
 
-public interface SearchCitiesView extends MainView<SearchCitiesPresenter> {
+public interface SearchCitiesView extends TaskResultView<SearchCitiesPresenter> {
 
-    public void showCities(List<City> cities);
+    public void setTitle(int stringResId, Object... args);
 
-    public void showCitiesNotFound();
+    public void setCities(List<City> cities);
+
+    public void displayCitiesNotFound();
 
 }

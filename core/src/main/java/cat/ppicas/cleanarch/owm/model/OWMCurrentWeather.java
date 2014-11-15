@@ -1,7 +1,8 @@
-package cat.ppicas.cleanarch.owm;
+package cat.ppicas.cleanarch.owm.model;
 
 import com.google.gson.annotations.SerializedName;
 
+@SuppressWarnings("UnusedDeclaration")
 public class OWMCurrentWeather {
 
     @SerializedName("id")

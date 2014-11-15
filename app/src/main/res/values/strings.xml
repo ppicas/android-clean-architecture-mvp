@@ -2,6 +2,8 @@
 <resources>
 
     <string name="global__app_name">Clean Architecture</string>
+    <string name="global__today">Today</string>
+    <string name="global__tomorrow">Tomorrow</string>
 
     <string name="error__connection">Connection problem</string>
 
@@ -11,6 +13,8 @@
 
     <string name="city_details__title">%s weather</string>
     <string name="city_details__title_loading">Loading weather</string>
+    <string name="city_details__tab_current">Current weather</string>
+    <string name="city_details__tab_forecast">%s\'s forecast</string>
 
     <string name="city_weather__temperature">Temperature</string>
     <string name="city_weather__humidity">Humidity</string>

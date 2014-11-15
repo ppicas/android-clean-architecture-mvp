@@ -41,4 +41,16 @@
         style="@style/CityWeather_Label"
         android:layout_below="@+id/city_weather__wind_speed"
         android:text="@string/city_weather__wind_speed"/>
+
+    <FrameLayout
+            android:id="@+id/city_weather__loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#8000">
+
+        <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+    </FrameLayout>
 </RelativeLayout>

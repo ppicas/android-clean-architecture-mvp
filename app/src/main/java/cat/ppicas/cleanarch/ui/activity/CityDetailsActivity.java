@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Window;
 
 import cat.ppicas.cleanarch.ui.fragment.CityDetailFragment;
 import cat.ppicas.cleanarch.ui.fragment.PresenterHolderFragment;
@@ -11,16 +12,15 @@ import cat.ppicas.cleanarch.ui.presenter.Presenter;
 import cat.ppicas.cleanarch.ui.presenter.PresenterHolder;
 import cat.ppicas.cleanarch.ui.view.View;
 
-public class CityDetailsActivity extends Activity implements PresenterHolder,
-        CityDetailFragment.CityDetailFragmentProvider {
+public class CityDetailsActivity extends Activity implements PresenterHolder {
 
     private PresenterHolder mPresenterHolder;
-
-    private CityDetailFragment mCityDetailFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
         if (savedInstanceState == null) {
             Intent intent = new Intent(getIntent());
@@ -36,8 +36,6 @@ public class CityDetailsActivity extends Activity implements PresenterHolder,
         super.onAttachFragment(fragment);
         if (fragment instanceof PresenterHolder) {
             mPresenterHolder = (PresenterHolder) fragment;
-        } else if (fragment instanceof CityDetailFragment) {
-            mCityDetailFragment = (CityDetailFragment) fragment;
         }
     }
 
@@ -49,11 +47,6 @@ public class CityDetailsActivity extends Activity implements PresenterHolder,
     @Override
     public void destroyPresenter(View<?> view) {
         mPresenterHolder.destroyPresenter(view);
-    }
-
-    @Override
-    public CityDetailFragment getCityDetailFragment() {
-        return mCityDetailFragment;
     }
 
     public static class Intent extends android.content.Intent {

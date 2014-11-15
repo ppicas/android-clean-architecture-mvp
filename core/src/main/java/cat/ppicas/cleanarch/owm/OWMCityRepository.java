@@ -5,6 +5,8 @@ import java.util.List;
 
 import cat.ppicas.cleanarch.domain.City;
 import cat.ppicas.cleanarch.domain.CurrentWeatherPreview;
+import cat.ppicas.cleanarch.owm.model.OWMCurrentWeather;
+import cat.ppicas.cleanarch.owm.model.OWMCurrentWeatherList;
 import cat.ppicas.cleanarch.repository.CityRepository;
 
 public class OWMCityRepository implements CityRepository {
