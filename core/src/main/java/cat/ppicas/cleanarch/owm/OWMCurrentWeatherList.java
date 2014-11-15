@@ -1,21 +1,21 @@
-package cat.ppicas.cleanarch.rest;
+package cat.ppicas.cleanarch.owm;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class CityWeatherList {
+public class OWMCurrentWeatherList {
 
     @SerializedName("count")
     private int mCount;
     @SerializedName("list")
-    private List<CityWeather> mCityWeathers;
+    private List<OWMCurrentWeather> mCurrentWeatherList;
 
     public int getCount() {
         return mCount;
     }
 
-    public List<CityWeather> getCityWeathers() {
-        return mCityWeathers;
+    public List<OWMCurrentWeather> getList() {
+        return mCurrentWeatherList;
     }
 }

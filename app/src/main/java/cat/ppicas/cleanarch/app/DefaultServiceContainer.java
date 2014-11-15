@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import cat.ppicas.cleanarch.repository.CityRepository;
-import cat.ppicas.cleanarch.rest.OWMService;
-import cat.ppicas.cleanarch.rest.RestCityRepository;
+import cat.ppicas.cleanarch.owm.OWMCityRepository;
+import cat.ppicas.cleanarch.owm.OWMService;
 import cat.ppicas.cleanarch.util.AsyncTaskExecutor;
 import cat.ppicas.cleanarch.util.TaskExecutor;
 import retrofit.RestAdapter;
@@ -32,7 +32,7 @@ class DefaultServiceContainer implements ServiceContainer {
 
     @Override
     public CityRepository getCityRepository() {
-        return new RestCityRepository(getOWMService());
+        return new OWMCityRepository(getOWMService());
     }
 
     @Override

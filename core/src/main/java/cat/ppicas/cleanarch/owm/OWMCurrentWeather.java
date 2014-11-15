@@ -1,8 +1,8 @@
-package cat.ppicas.cleanarch.rest;
+package cat.ppicas.cleanarch.owm;
 
 import com.google.gson.annotations.SerializedName;
 
-public class CityWeather {
+public class OWMCurrentWeather {
 
     @SerializedName("id")
     private String mCityId;
