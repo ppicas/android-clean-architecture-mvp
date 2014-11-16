@@ -5,52 +5,44 @@
                 android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/city_weather__current"
-        style="@style/CityWeather_Value"
-        android:text="0º"
-        tools:ignore="HardcodedText"/>
+            android:id="@+id/city_weather__current"
+            style="@style/CityWeather_Value"
+            android:text="0º"
+            tools:ignore="HardcodedText"/>
 
     <TextView
-        android:id="@+id/city_weather__current_label"
-        style="@style/CityWeather_Label"
-        android:layout_below="@+id/city_weather__current"
-        android:text="@string/city_weather__temperature"/>
+            android:id="@+id/city_weather__current_label"
+            style="@style/CityWeather_Label"
+            android:layout_below="@+id/city_weather__current"
+            android:text="@string/city_weather__temperature"/>
 
     <TextView
-        android:id="@+id/city_weather__humidity"
-        style="@style/CityWeather_Value"
-        android:layout_below="@+id/city_weather__current_label"
-        android:text="0º"
-        tools:ignore="HardcodedText,RtlHardcoded"/>
+            android:id="@+id/city_weather__humidity"
+            style="@style/CityWeather_Value"
+            android:layout_below="@+id/city_weather__current_label"
+            android:text="0º"
+            tools:ignore="HardcodedText,RtlHardcoded"/>
 
     <TextView
-        android:id="@+id/city_weather__humidity_label"
-        style="@style/CityWeather_Label"
-        android:layout_below="@+id/city_weather__humidity"
-        android:text="@string/city_weather__humidity"/>
+            android:id="@+id/city_weather__humidity_label"
+            style="@style/CityWeather_Label"
+            android:layout_below="@+id/city_weather__humidity"
+            android:text="@string/city_weather__humidity"/>
 
     <TextView
-        android:id="@+id/city_weather__wind_speed"
-        style="@style/CityWeather_Value"
-        android:layout_below="@+id/city_weather__humidity_label"
-        android:text="0º"
-        tools:ignore="HardcodedText,RtlHardcoded"/>
+            android:id="@+id/city_weather__wind_speed"
+            style="@style/CityWeather_Value"
+            android:layout_below="@+id/city_weather__humidity_label"
+            android:text="0º"
+            tools:ignore="HardcodedText,RtlHardcoded"/>
 
     <TextView
-        android:id="@+id/city_weather__wind_speed_label"
-        style="@style/CityWeather_Label"
-        android:layout_below="@+id/city_weather__wind_speed"
-        android:text="@string/city_weather__wind_speed"/>
+            android:id="@+id/city_weather__wind_speed_label"
+            style="@style/CityWeather_Label"
+            android:layout_below="@+id/city_weather__wind_speed"
+            android:text="@string/city_weather__wind_speed"/>
 
-    <FrameLayout
+    <include
             android:id="@+id/city_weather__loading"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#8000">
-
-        <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"/>
-    </FrameLayout>
+            layout="@layout/include_loading_layer"/>
 </RelativeLayout>

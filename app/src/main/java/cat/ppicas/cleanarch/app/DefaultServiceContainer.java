@@ -10,10 +10,12 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import cat.ppicas.cleanarch.owm.OWMCurrentWeatherRepository;
+import cat.ppicas.cleanarch.owm.OWMDailyForecastRepository;
 import cat.ppicas.cleanarch.repository.CityRepository;
 import cat.ppicas.cleanarch.owm.OWMCityRepository;
 import cat.ppicas.cleanarch.owm.OWMService;
 import cat.ppicas.cleanarch.repository.CurrentWeatherRepository;
+import cat.ppicas.cleanarch.repository.DailyForecastRepository;
 import cat.ppicas.cleanarch.util.AsyncTaskExecutor;
 import cat.ppicas.cleanarch.util.TaskExecutor;
 import retrofit.RestAdapter;
@@ -40,6 +42,11 @@ class DefaultServiceContainer implements ServiceContainer {
     @Override
     public CurrentWeatherRepository getCurrentWeatherRepository() {
         return new OWMCurrentWeatherRepository(getOWMService());
+    }
+
+    @Override
+    public DailyForecastRepository getDailyForecastRepository() {
+        return new OWMDailyForecastRepository(getOWMService());
     }
 
     @Override

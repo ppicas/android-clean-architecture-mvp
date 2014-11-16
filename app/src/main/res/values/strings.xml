@@ -20,4 +20,6 @@
     <string name="city_weather__humidity">Humidity</string>
     <string name="city_weather__wind_speed">Wind speed</string>
 
+    <string name="daily_forecast__label">Forecast:</string>
+
 </resources>

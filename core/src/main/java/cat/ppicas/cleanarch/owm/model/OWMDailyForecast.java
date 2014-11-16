@@ -11,8 +11,8 @@ public class OWMDailyForecast {
     private Temp mTemp;
     @SerializedName("humidity")
     private int mHumidity;
-    @SerializedName("wind")
-    private Wind mWind;
+    @SerializedName("speed")
+    private double mWindSpeed;
     @SerializedName("weather")
     private Weather[] mWeatherList;
 
@@ -28,8 +28,8 @@ public class OWMDailyForecast {
         return mHumidity;
     }
 
-    public Wind getWind() {
-        return mWind;
+    public double getWindSpeed() {
+        return mWindSpeed;
     }
 
     public Weather[] getWeatherList() {
@@ -63,15 +63,6 @@ public class OWMDailyForecast {
 
         public String getDescription() {
             return mDescription;
-        }
-    }
-
-    public class Wind {
-        @SerializedName("speed")
-        private double mSpeed;
-
-        public double getSpeed() {
-            return mSpeed;
         }
     }
 }

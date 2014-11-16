@@ -111,7 +111,7 @@ public class CityDetailFragment extends Fragment implements CityDetailView {
             if (position == 0) {
                 return CityCurrentWeatherFragment.newInstance(mCityId);
             } else {
-                return new Fragment();
+                return CityDailyForecastFragment.newInstance(mCityId, position - 1);
             }
         }
 

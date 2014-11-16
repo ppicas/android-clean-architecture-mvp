@@ -17,7 +17,8 @@ public interface OWMService {
     @Headers("Cache-Control: max-age=900, max-stale=3600")
     public OWMCurrentWeather getCurrentWeatherByCityId(@Query("id") String id);
 
-    @GET("/data/2.5/forecast/daily?units=metric&cnt=1")
+    @GET("/data/2.5/forecast/daily?units=metric")
     @Headers("Cache-Control: max-age=900, max-stale=3600")
-    public OWMDailyForecastList getDailyForecastByCityId(@Query("id") String id);
+    public OWMDailyForecastList getDailyForecastByCityId(@Query("id") String id,
+            @Query("cnt") int days);
 }

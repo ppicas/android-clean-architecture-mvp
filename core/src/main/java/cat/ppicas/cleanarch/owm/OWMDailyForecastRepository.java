@@ -11,6 +11,8 @@ import cat.ppicas.cleanarch.repository.DailyForecastRepository;
 
 public class OWMDailyForecastRepository implements DailyForecastRepository {
 
+    private static final int FORECAST_DAYS = 3;
+
     private OWMService mService;
 
     public OWMDailyForecastRepository(OWMService service) {
@@ -18,9 +20,9 @@ public class OWMDailyForecastRepository implements DailyForecastRepository {
     }
 
     @Override
-    public List<DailyForecast> getDailyForecast(String cityId) {
+    public List<DailyForecast> getDailyForecasts(String cityId) {
         List<DailyForecast> list = new ArrayList<DailyForecast>();
-        OWMDailyForecastList owmDFList = mService.getDailyForecastByCityId(cityId);
+        OWMDailyForecastList owmDFList = mService.getDailyForecastByCityId(cityId, FORECAST_DAYS);
         for (OWMDailyForecast owmDF : owmDFList.getList()) {
             list.add(createDailyForecast(cityId, owmDF));
         }
@@ -29,10 +31,10 @@ public class OWMDailyForecastRepository implements DailyForecastRepository {
 
     private DailyForecast createDailyForecast(String cityId, OWMDailyForecast owmDF) {
         Date data = new Date(owmDF.getTimestamp() * 1000L);
-        String description = (owmDF.getWeatherList().length > 1)
+        String description = (owmDF.getWeatherList().length >= 1)
                 ? owmDF.getWeatherList()[0].getDescription() : "Not available";
         OWMDailyForecast.Temp temp = owmDF.getTemp();
         return new DailyForecast(cityId, data, description, temp.getDay(), temp.getMin(),
-                temp.getMax(), owmDF.getHumidity(), owmDF.getWind().getSpeed());
+                temp.getMax(), owmDF.getHumidity(), owmDF.getWindSpeed());
     }
 }
