@@ -6,9 +6,9 @@ import android.os.Bundle;
 import java.util.HashMap;
 import java.util.Map;
 
-import cat.ppicas.cleanarch.ui.presenter.PresenterHolder;
 import cat.ppicas.cleanarch.ui.presenter.Presenter;
-import cat.ppicas.cleanarch.ui.view.View;
+import cat.ppicas.cleanarch.ui.presenter.PresenterFactory;
+import cat.ppicas.cleanarch.ui.presenter.PresenterHolder;
 
 public class PresenterHolderFragment extends Fragment implements PresenterHolder {
 
@@ -49,14 +49,14 @@ public class PresenterHolderFragment extends Fragment implements PresenterHolder
     }
 
     @Override
-    public <T extends Presenter<?>> T getOrCreatePresenter(View<T> view) {
-        String tag = view.getPresenterTag();
+    public <T extends Presenter<?>> T getOrCreatePresenter(PresenterFactory<T> presenterFactory) {
+        String tag = presenterFactory.getPresenterTag();
 
         @SuppressWarnings("unchecked")
         T presenter = (T) mPresenterMap.get(tag);
 
         if (presenter == null) {
-            presenter = view.createPresenter();
+            presenter = presenterFactory.createPresenter();
             if (mPresentersStates != null && mPresentersStates.containsKey(tag)) {
                 presenter.restoreState(mPresentersStates.getBundle(tag));
             }
@@ -67,8 +67,8 @@ public class PresenterHolderFragment extends Fragment implements PresenterHolder
     }
 
     @Override
-    public void destroyPresenter(View<?> view) {
-        String tag = view.getPresenterTag();
+    public void destroyPresenter(PresenterFactory<?> presenterFactory) {
+        String tag = presenterFactory.getPresenterTag();
         Presenter<?> presenter = mPresenterMap.get(tag);
         if (presenter != null) {
             presenter.onDestroy();

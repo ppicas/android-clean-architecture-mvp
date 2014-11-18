@@ -1,8 +1,6 @@
 package cat.ppicas.cleanarch.ui.view;
 
-import cat.ppicas.cleanarch.ui.presenter.CityDetailPresenter;
-
-public interface CityDetailView extends TaskResultView<CityDetailPresenter> {
+public interface CityDetailView extends TaskResultView {
 
     public void setTitle(int stringResId, Object... args);
 

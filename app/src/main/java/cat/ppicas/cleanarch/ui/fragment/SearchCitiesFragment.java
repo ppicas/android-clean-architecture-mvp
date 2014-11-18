@@ -24,11 +24,13 @@ import cat.ppicas.cleanarch.domain.City;
 import cat.ppicas.cleanarch.ui.activity.ActivityNavigator;
 import cat.ppicas.cleanarch.ui.activity.ActivityNavigatorImpl;
 import cat.ppicas.cleanarch.ui.adapter.CityAdapter;
+import cat.ppicas.cleanarch.ui.presenter.PresenterFactory;
 import cat.ppicas.cleanarch.ui.presenter.PresenterHolder;
 import cat.ppicas.cleanarch.ui.presenter.SearchCitiesPresenter;
 import cat.ppicas.cleanarch.ui.view.SearchCitiesView;
 
-public class SearchCitiesFragment extends Fragment implements SearchCitiesView {
+public class SearchCitiesFragment extends Fragment implements SearchCitiesView,
+        PresenterFactory<SearchCitiesPresenter> {
 
     private static final String STATE_LIST_GROUP_VISIBILITY = "listGroupVisibility";
     private static final String STATE_LIST_VISIBILITY = "listVisibility";

@@ -1,11 +1,9 @@
 package cat.ppicas.cleanarch.ui.presenter;
 
-import cat.ppicas.cleanarch.ui.view.View;
-
 public interface PresenterHolder {
 
-    public <T extends Presenter<?>> T getOrCreatePresenter(View<T> view);
+    public <T extends Presenter<?>> T getOrCreatePresenter(PresenterFactory<T> presenterFactory);
 
-    public void destroyPresenter(View<?> view);
+    public void destroyPresenter(PresenterFactory<?> presenterFactory);
 
 }

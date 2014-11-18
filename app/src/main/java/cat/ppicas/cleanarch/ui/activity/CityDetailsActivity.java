@@ -9,8 +9,8 @@ import android.view.Window;
 import cat.ppicas.cleanarch.ui.fragment.CityDetailFragment;
 import cat.ppicas.cleanarch.ui.fragment.PresenterHolderFragment;
 import cat.ppicas.cleanarch.ui.presenter.Presenter;
+import cat.ppicas.cleanarch.ui.presenter.PresenterFactory;
 import cat.ppicas.cleanarch.ui.presenter.PresenterHolder;
-import cat.ppicas.cleanarch.ui.view.View;
 
 public class CityDetailsActivity extends Activity implements PresenterHolder {
 
@@ -40,13 +40,13 @@ public class CityDetailsActivity extends Activity implements PresenterHolder {
     }
 
     @Override
-    public <T extends Presenter<?>> T getOrCreatePresenter(View<T> view) {
-        return mPresenterHolder.getOrCreatePresenter(view);
+    public <T extends Presenter<?>> T getOrCreatePresenter(PresenterFactory<T> presenterFactory) {
+        return mPresenterHolder.getOrCreatePresenter(presenterFactory);
     }
 
     @Override
-    public void destroyPresenter(View<?> view) {
-        mPresenterHolder.destroyPresenter(view);
+    public void destroyPresenter(PresenterFactory<?> presenterFactory) {
+        mPresenterHolder.destroyPresenter(presenterFactory);
     }
 
     public static class Intent extends android.content.Intent {

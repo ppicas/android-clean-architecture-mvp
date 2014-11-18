@@ -7,14 +7,14 @@ import cat.ppicas.cleanarch.ui.view.TaskResultView;
 
 public abstract class DisplayErrorTaskCallback<T> implements TaskCallback<T> {
 
-    private final Presenter<? extends TaskResultView<?>> mPresenter;
+    private final Presenter<? extends TaskResultView> mPresenter;
 
-    public DisplayErrorTaskCallback(Presenter<? extends TaskResultView<?>> presenter) {
+    public DisplayErrorTaskCallback(Presenter<? extends TaskResultView> presenter) {
         mPresenter = presenter;
     }
 
     public void onError(Exception error) {
-        TaskResultView<?> view = mPresenter.getView();
+        TaskResultView view = mPresenter.getView();
         if (view == null) {
             return;
         }

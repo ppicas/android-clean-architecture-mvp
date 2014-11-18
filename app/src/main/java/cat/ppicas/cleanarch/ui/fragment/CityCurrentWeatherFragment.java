@@ -16,10 +16,12 @@ import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.app.ServiceContainer;
 import cat.ppicas.cleanarch.app.ServiceContainerProvider;
 import cat.ppicas.cleanarch.ui.presenter.CityCurrentWeatherPresenter;
+import cat.ppicas.cleanarch.ui.presenter.PresenterFactory;
 import cat.ppicas.cleanarch.ui.presenter.PresenterHolder;
 import cat.ppicas.cleanarch.ui.view.CityCurrentWeatherView;
 
-public class CityCurrentWeatherFragment extends Fragment implements CityCurrentWeatherView {
+public class CityCurrentWeatherFragment extends Fragment implements CityCurrentWeatherView,
+        PresenterFactory<CityCurrentWeatherPresenter> {
 
     private static final String ARG_CITY_ID = "cityId";
 

@@ -1,8 +1,6 @@
 package cat.ppicas.cleanarch.ui.view;
 
-import cat.ppicas.cleanarch.ui.presenter.Presenter;
-
-public interface TaskResultView<T extends Presenter<?>> extends View<T> {
+public interface TaskResultView extends View {
 
     public void displayLoading(boolean display);
 

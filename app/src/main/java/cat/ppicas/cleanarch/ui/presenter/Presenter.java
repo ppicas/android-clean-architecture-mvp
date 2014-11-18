@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import cat.ppicas.cleanarch.ui.view.View;
 
-public abstract class Presenter<T extends View<?>> {
+public abstract class Presenter<T extends View> {
 
     private T mView;
 
