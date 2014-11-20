@@ -69,6 +69,12 @@ public class CityDailyForecastFragment extends Fragment implements CityDailyFore
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.unbindView();
+    }
+
+    @Override
     public void setForecastDescription(String description) {
         mDescription.setText(description);
     }

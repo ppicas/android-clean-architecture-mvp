@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="global__view_adapter" type="id"/>
+    <item name="global__view_presenter" type="id"/>
+</resources>
