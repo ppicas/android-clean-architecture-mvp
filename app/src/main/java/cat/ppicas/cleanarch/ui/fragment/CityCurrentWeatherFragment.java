@@ -10,11 +10,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.NumberFormat;
-
 import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.app.ServiceContainer;
 import cat.ppicas.cleanarch.app.ServiceContainerProvider;
+import cat.ppicas.cleanarch.text.NumberFormat;
 import cat.ppicas.cleanarch.ui.presenter.CityCurrentWeatherPresenter;
 import cat.ppicas.cleanarch.ui.presenter.PresenterFactory;
 import cat.ppicas.cleanarch.ui.presenter.PresenterHolder;
@@ -24,12 +23,6 @@ public class CityCurrentWeatherFragment extends Fragment implements CityCurrentW
         PresenterFactory<CityCurrentWeatherPresenter> {
 
     private static final String ARG_CITY_ID = "cityId";
-
-    public static final NumberFormat DECIMAL_FORMATTER;
-    static {
-        DECIMAL_FORMATTER = NumberFormat.getInstance();
-        DECIMAL_FORMATTER.setMaximumFractionDigits(2);
-    }
 
     private String mCityId;
     private CityCurrentWeatherPresenter mPresenter;
@@ -88,7 +81,7 @@ public class CityCurrentWeatherFragment extends Fragment implements CityCurrentW
 
     @Override
     public void setCurrentTemp(double temp) {
-        mCurrent.setText(DECIMAL_FORMATTER.format(temp) + "º");
+        mCurrent.setText(NumberFormat.formatDecimal(temp) + "º");
     }
 
     @Override
@@ -98,7 +91,7 @@ public class CityCurrentWeatherFragment extends Fragment implements CityCurrentW
 
     @Override
     public void setWindSpeed(double windSpeed) {
-        mWindSpeed.setText(DECIMAL_FORMATTER.format(windSpeed) + " m/s");
+        mWindSpeed.setText(NumberFormat.formatDecimal(windSpeed) + " m/s");
     }
 
     @Override

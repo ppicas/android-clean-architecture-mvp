@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import cat.ppicas.cleanarch.R;
+import cat.ppicas.cleanarch.text.NumberFormat;
 import cat.ppicas.cleanarch.ui.view.CityListItemView;
 
 public class CityListItemViewAdapter implements CityListItemView {
@@ -36,7 +37,7 @@ public class CityListItemViewAdapter implements CityListItemView {
 
     @Override
     public void setCurrentTemp(Double temp) {
-        mTempView.setText(temp + "º");
+        mTempView.setText(NumberFormat.formatDecimal(temp) + "º");
     }
 
     private void updateNameView() {
