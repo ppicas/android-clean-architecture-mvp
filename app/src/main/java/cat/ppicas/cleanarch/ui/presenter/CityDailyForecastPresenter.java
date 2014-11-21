@@ -46,7 +46,7 @@ public class CityDailyForecastPresenter extends Presenter<CityDailyForecastView>
                     @Override
                     public void onSuccess(List<DailyForecast> list) {
                         DailyForecast dailyForecast = null;
-                        if (list.size() >= mDaysFromToday - 1) {
+                        if (list.size() >= mDaysFromToday + 1) {
                             dailyForecast = list.get(mDaysFromToday);
                         }
 
