@@ -10,6 +10,7 @@ public class App extends Application implements ServiceContainerProvider {
     public void onCreate() {
         super.onCreate();
 
+        // Initialize the default implementation of the ServiceContainer interface
         mServiceContainer = new DefaultServiceContainer(this);
     }
 

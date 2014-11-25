@@ -22,6 +22,7 @@ public class CityAdapter extends ArrayAdapter<City> {
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
+        // Initialize the class to adapt the View to CityListItemView interface
         CityListItemViewAdapter viewAdapter;
         if (view == null) {
             view = mInflater.inflate(R.layout.view_city_list_item, parent, false);
@@ -33,6 +34,7 @@ public class CityAdapter extends ArrayAdapter<City> {
 
         City city = getItem(position);
 
+        // Initialize or reconfigures a Presenter for CityListItemView
         CityListItemPresenter presenter = (CityListItemPresenter) view.getTag(
                 R.id.global__view_presenter);
         if (presenter == null) {

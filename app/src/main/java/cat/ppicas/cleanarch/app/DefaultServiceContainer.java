@@ -21,6 +21,10 @@ import cat.ppicas.cleanarch.util.TaskExecutor;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 
+/**
+ * Implementation of {@link ServiceContainer} interface exposing a default configuration
+ * for the app.
+ */
 class DefaultServiceContainer implements ServiceContainer {
 
     private Context mContext;

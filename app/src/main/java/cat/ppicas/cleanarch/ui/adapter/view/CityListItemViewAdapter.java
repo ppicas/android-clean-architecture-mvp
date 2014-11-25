@@ -7,6 +7,10 @@ import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.text.NumberFormat;
 import cat.ppicas.cleanarch.ui.view.CityListItemView;
 
+/**
+ * Class to provide an adapter for {@link CityListItemView} interface from a {@link View}
+ * inflated using layout {@link R.layout#view_city_list_item}.
+ */
 public class CityListItemViewAdapter implements CityListItemView {
 
     private String mName;
