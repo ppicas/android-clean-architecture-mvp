@@ -14,7 +14,6 @@ import android.widget.Toast;
 import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.app.ServiceContainer;
 import cat.ppicas.cleanarch.app.ServiceContainerProvider;
-import cat.ppicas.cleanarch.res.AppStringResources;
 import cat.ppicas.cleanarch.ui.display.CityDetailDisplay;
 import cat.ppicas.cleanarch.ui.presenter.CityDetailPresenter;
 import cat.ppicas.cleanarch.ui.presenter.PresenterFactory;
@@ -94,7 +93,7 @@ public class CityDetailFragment extends Fragment implements CityDetailDisplay,
         Application app = getActivity().getApplication();
         ServiceContainer sc = ((ServiceContainerProvider) app).getServiceContainer();
         return new CityDetailPresenter(sc.getTaskExecutor(), sc.getCityRepository(),
-                new AppStringResources(getResources()), mCityId);
+                getResources(), mCityId);
     }
 
     @Override
