@@ -66,9 +66,14 @@ public class CityDailyForecastPresenter extends Presenter<CityDailyForecastDispl
                 });
     }
 
-    private void updateDisplay(CityDailyForecastDisplay display, DailyForecast dailyForecast) {
+    private void updateDisplay(CityDailyForecastDisplay display, DailyForecast df) {
         display.setForecastDescription(capitalizeFirstLetter(
-                dailyForecast.getDescription()));
+                df.getDescription()));
+        display.setDayTemp(df.getDayTemp());
+        display.setMinTemp(df.getMinTemp());
+        display.setMaxTemp(df.getMaxTemp());
+        display.setHumidity(df.getHumidity());
+        display.setWindSpeed(df.getWindSpeed());
     }
 
     private String capitalizeFirstLetter(String text) {

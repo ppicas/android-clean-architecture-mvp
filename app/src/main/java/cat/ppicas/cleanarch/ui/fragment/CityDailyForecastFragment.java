@@ -80,6 +80,31 @@ public class CityDailyForecastFragment extends Fragment implements CityDailyFore
     }
 
     @Override
+    public void setDayTemp(double temp) {
+
+    }
+
+    @Override
+    public void setMinTemp(double temp) {
+
+    }
+
+    @Override
+    public void setMaxTemp(double temp) {
+
+    }
+
+    @Override
+    public void setHumidity(double humidity) {
+
+    }
+
+    @Override
+    public void setWindSpeed(double windSpeed) {
+
+    }
+
+    @Override
     public void displayLoading(boolean display) {
         mLoading.setVisibility(display ? View.VISIBLE : View.GONE);
     }
