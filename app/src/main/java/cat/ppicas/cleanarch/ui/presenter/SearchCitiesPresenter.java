@@ -10,11 +10,11 @@ import cat.ppicas.cleanarch.domain.City;
 import cat.ppicas.cleanarch.repository.CityRepository;
 import cat.ppicas.cleanarch.task.FindCityTask;
 import cat.ppicas.cleanarch.ui.activity.ActivityNavigator;
-import cat.ppicas.cleanarch.ui.view.SearchCitiesView;
+import cat.ppicas.cleanarch.ui.display.SearchCitiesDisplay;
 import cat.ppicas.cleanarch.util.DisplayErrorTaskCallback;
 import cat.ppicas.cleanarch.util.TaskExecutor;
 
-public class SearchCitiesPresenter extends Presenter<SearchCitiesView> {
+public class SearchCitiesPresenter extends Presenter<SearchCitiesDisplay> {
 
     private static final String STATE_LAST_SEARCH = "lastSearch";
 
@@ -34,20 +34,20 @@ public class SearchCitiesPresenter extends Presenter<SearchCitiesView> {
     }
 
     @Override
-    public void bindView(SearchCitiesView view) {
-        super.bindView(view);
+    public void bindDisplay(SearchCitiesDisplay display) {
+        super.bindDisplay(display);
 
-        view.setTitle(R.string.search_cities__title);
+        display.setTitle(R.string.search_cities__title);
 
         if (mLastResults != null) {
-            view.setCities(mLastResults);
+            display.setCities(mLastResults);
         } else if (!TextUtils.isEmpty(mLastSearch) && !mTaskExecutor.isRunning(mFindCityTask)) {
             onCitySearch(mLastSearch);
         }
     }
 
     public void onCitySearch(String cityName) {
-        getView().displayLoading(true);
+        getDisplay().displayLoading(true);
         mLastSearch = cityName;
 
         if (mFindCityTask != null) {
@@ -58,13 +58,13 @@ public class SearchCitiesPresenter extends Presenter<SearchCitiesView> {
             @Override
             public void onSuccess(List<City> result) {
                 mLastResults = result;
-                SearchCitiesView view = getView();
-                if (view != null) {
-                    view.displayLoading(false);
+                SearchCitiesDisplay display = getDisplay();
+                if (display != null) {
+                    display.displayLoading(false);
                     if (result.isEmpty()) {
-                        view.displayCitiesNotFound();
+                        display.displayCitiesNotFound();
                     } else {
-                        view.setCities(result);
+                        display.setCities(result);
                     }
                 }
             }

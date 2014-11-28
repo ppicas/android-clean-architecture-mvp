@@ -1,6 +1,6 @@
-package cat.ppicas.cleanarch.ui.view;
+package cat.ppicas.cleanarch.ui.display;
 
-public interface CityListItemView extends View {
+public interface CityListItemDisplay extends Display {
 
     public void setCityName(String name);
 

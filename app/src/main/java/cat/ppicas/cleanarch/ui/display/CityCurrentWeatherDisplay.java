@@ -1,6 +1,6 @@
-package cat.ppicas.cleanarch.ui.view;
+package cat.ppicas.cleanarch.ui.display;
 
-public interface CityCurrentWeatherView extends TaskResultView {
+public interface CityCurrentWeatherDisplay extends TaskResultDisplay {
 
     public void setCurrentTemp(double temp);
 

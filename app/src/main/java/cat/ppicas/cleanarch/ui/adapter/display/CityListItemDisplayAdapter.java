@@ -1,17 +1,17 @@
-package cat.ppicas.cleanarch.ui.adapter.view;
+package cat.ppicas.cleanarch.ui.adapter.display;
 
 import android.view.View;
 import android.widget.TextView;
 
 import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.text.NumberFormat;
-import cat.ppicas.cleanarch.ui.view.CityListItemView;
+import cat.ppicas.cleanarch.ui.display.CityListItemDisplay;
 
 /**
- * Class to provide an adapter for {@link CityListItemView} interface from a {@link View}
+ * Class to provide an adapter for {@link cat.ppicas.cleanarch.ui.display.CityListItemDisplay} interface from a {@link View}
  * inflated using layout {@link R.layout#view_city_list_item}.
  */
-public class CityListItemViewAdapter implements CityListItemView {
+public class CityListItemDisplayAdapter implements CityListItemDisplay {
 
     private String mName;
     private String mCountry;
@@ -22,7 +22,7 @@ public class CityListItemViewAdapter implements CityListItemView {
     /**
      * @param view a {@link View} inflated using layout {@link R.layout#view_city_list_item}
      */
-    public CityListItemViewAdapter(View view) {
+    public CityListItemDisplayAdapter(View view) {
         mNameView = (TextView) view.findViewById(R.id.city_list_item__name);
         mTempView = (TextView) view.findViewById(R.id.city_list_item__temp);
     }

@@ -14,12 +14,12 @@ import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.app.ServiceContainer;
 import cat.ppicas.cleanarch.app.ServiceContainerProvider;
 import cat.ppicas.cleanarch.text.NumberFormat;
+import cat.ppicas.cleanarch.ui.display.CityCurrentWeatherDisplay;
 import cat.ppicas.cleanarch.ui.presenter.CityCurrentWeatherPresenter;
 import cat.ppicas.cleanarch.ui.presenter.PresenterFactory;
 import cat.ppicas.cleanarch.ui.presenter.PresenterHolder;
-import cat.ppicas.cleanarch.ui.view.CityCurrentWeatherView;
 
-public class CityCurrentWeatherFragment extends Fragment implements CityCurrentWeatherView,
+public class CityCurrentWeatherFragment extends Fragment implements CityCurrentWeatherDisplay,
         PresenterFactory<CityCurrentWeatherPresenter> {
 
     private static final String ARG_CITY_ID = "cityId";
@@ -70,13 +70,13 @@ public class CityCurrentWeatherFragment extends Fragment implements CityCurrentW
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mPresenter.bindView(this);
+        mPresenter.bindDisplay(this);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mPresenter.unbindView();
+        mPresenter.unbindDisplay();
     }
 
     @Override

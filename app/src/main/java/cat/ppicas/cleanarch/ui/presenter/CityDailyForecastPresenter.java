@@ -6,11 +6,11 @@ import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.domain.DailyForecast;
 import cat.ppicas.cleanarch.repository.DailyForecastRepository;
 import cat.ppicas.cleanarch.task.GetDailyForecastsTask;
-import cat.ppicas.cleanarch.ui.view.CityDailyForecastView;
+import cat.ppicas.cleanarch.ui.display.CityDailyForecastDisplay;
 import cat.ppicas.cleanarch.util.DisplayErrorTaskCallback;
 import cat.ppicas.cleanarch.util.TaskExecutor;
 
-public class CityDailyForecastPresenter extends Presenter<CityDailyForecastView> {
+public class CityDailyForecastPresenter extends Presenter<CityDailyForecastDisplay> {
 
     private TaskExecutor mTaskExecutor;
     private DailyForecastRepository mRepository;
@@ -29,11 +29,12 @@ public class CityDailyForecastPresenter extends Presenter<CityDailyForecastView>
     }
 
     @Override
-    public void bindView(CityDailyForecastView view) {
-        super.bindView(view);
+    public void bindDisplay(CityDailyForecastDisplay display) {
+        super.bindDisplay(display);
 
         if (mLastDailyForecast != null) {
-            view.setForecastDescription(capitalizeFirstLetter(mLastDailyForecast.getDescription()));
+            updateDisplay(display, mLastDailyForecast);
+            return;
         }
 
         if (mTaskExecutor.isRunning(mGetDailyForecastsTask)) {
@@ -52,18 +53,22 @@ public class CityDailyForecastPresenter extends Presenter<CityDailyForecastView>
 
                         mLastDailyForecast = dailyForecast;
 
-                        CityDailyForecastView view = getView();
-                        if (view != null) {
-                            view.displayLoading(false);
+                        CityDailyForecastDisplay display = getDisplay();
+                        if (display != null) {
+                            display.displayLoading(false);
                             if (dailyForecast != null) {
-                                view.setForecastDescription(capitalizeFirstLetter(
-                                        dailyForecast.getDescription()));
+                                updateDisplay(display, dailyForecast);
                             } else {
-                                view.displayError(R.string.error__connection);
+                                display.displayError(R.string.error__connection);
                             }
                         }
                     }
                 });
+    }
+
+    private void updateDisplay(CityDailyForecastDisplay display, DailyForecast dailyForecast) {
+        display.setForecastDescription(capitalizeFirstLetter(
+                dailyForecast.getDescription()));
     }
 
     private String capitalizeFirstLetter(String text) {

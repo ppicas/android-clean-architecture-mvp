@@ -1,10 +1,10 @@
-package cat.ppicas.cleanarch.ui.view;
+package cat.ppicas.cleanarch.ui.display;
 
 import java.util.List;
 
 import cat.ppicas.cleanarch.domain.City;
 
-public interface SearchCitiesView extends TaskResultView {
+public interface SearchCitiesDisplay extends TaskResultDisplay {
 
     public void setTitle(int stringResId, Object... args);
 

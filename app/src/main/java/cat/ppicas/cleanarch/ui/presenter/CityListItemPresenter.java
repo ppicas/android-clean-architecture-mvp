@@ -1,9 +1,9 @@
 package cat.ppicas.cleanarch.ui.presenter;
 
 import cat.ppicas.cleanarch.domain.City;
-import cat.ppicas.cleanarch.ui.view.CityListItemView;
+import cat.ppicas.cleanarch.ui.display.CityListItemDisplay;
 
-public class CityListItemPresenter extends Presenter<CityListItemView> {
+public class CityListItemPresenter extends Presenter<CityListItemDisplay> {
 
     private City mCity;
 
@@ -12,9 +12,9 @@ public class CityListItemPresenter extends Presenter<CityListItemView> {
     }
 
     @Override
-    public void bindView(CityListItemView view) {
-        super.bindView(view);
-        updateView();
+    public void bindDisplay(CityListItemDisplay display) {
+        super.bindDisplay(display);
+        updateDisplay();
     }
 
     public String getCityId() {
@@ -23,17 +23,17 @@ public class CityListItemPresenter extends Presenter<CityListItemView> {
 
     public void setCity(City city) {
         mCity = city;
-        updateView();
+        updateDisplay();
     }
 
-    private void updateView() {
-        CityListItemView view = getView();
-        if (view == null) {
+    private void updateDisplay() {
+        CityListItemDisplay display = getDisplay();
+        if (display == null) {
             return;
         }
 
-        view.setCityName(mCity.getName());
-        view.setCountry(mCity.getCountry());
-        view.setCurrentTemp(mCity.getCurrentWeatherPreview().getCurrentTemp());
+        display.setCityName(mCity.getName());
+        display.setCountry(mCity.getCountry());
+        display.setCurrentTemp(mCity.getCurrentWeatherPreview().getCurrentTemp());
     }
 }

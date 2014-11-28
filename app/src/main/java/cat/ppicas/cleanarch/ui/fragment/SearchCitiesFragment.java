@@ -24,12 +24,12 @@ import cat.ppicas.cleanarch.domain.City;
 import cat.ppicas.cleanarch.ui.activity.ActivityNavigator;
 import cat.ppicas.cleanarch.ui.activity.ActivityNavigatorImpl;
 import cat.ppicas.cleanarch.ui.adapter.CityAdapter;
+import cat.ppicas.cleanarch.ui.display.SearchCitiesDisplay;
 import cat.ppicas.cleanarch.ui.presenter.PresenterFactory;
 import cat.ppicas.cleanarch.ui.presenter.PresenterHolder;
 import cat.ppicas.cleanarch.ui.presenter.SearchCitiesPresenter;
-import cat.ppicas.cleanarch.ui.view.SearchCitiesView;
 
-public class SearchCitiesFragment extends Fragment implements SearchCitiesView,
+public class SearchCitiesFragment extends Fragment implements SearchCitiesDisplay,
         PresenterFactory<SearchCitiesPresenter> {
 
     private static final String STATE_LIST_GROUP_VISIBILITY = "listGroupVisibility";
@@ -97,13 +97,13 @@ public class SearchCitiesFragment extends Fragment implements SearchCitiesView,
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mPresenter.bindView(this);
+        mPresenter.bindDisplay(this);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mPresenter.unbindView();
+        mPresenter.unbindDisplay();
     }
 
     @Override

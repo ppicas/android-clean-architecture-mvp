@@ -2,22 +2,22 @@ package cat.ppicas.cleanarch.ui.presenter;
 
 import android.os.Bundle;
 
-import cat.ppicas.cleanarch.ui.view.View;
+import cat.ppicas.cleanarch.ui.display.Display;
 
-public abstract class Presenter<T extends View> {
+public abstract class Presenter<T extends Display> {
 
-    private T mView;
+    private T mDisplay;
 
-    public T getView() {
-        return mView;
+    public T getDisplay() {
+        return mDisplay;
     }
 
-    public void bindView(T view) {
-        mView = view;
+    public void bindDisplay(T display) {
+        mDisplay = display;
     }
 
-    public void unbindView() {
-        mView = null;
+    public void unbindDisplay() {
+        mDisplay = null;
     }
 
     public void saveState(Bundle state) {

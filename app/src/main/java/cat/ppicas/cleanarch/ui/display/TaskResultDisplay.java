@@ -1,6 +1,6 @@
-package cat.ppicas.cleanarch.ui.view;
+package cat.ppicas.cleanarch.ui.display;
 
-public interface TaskResultView extends View {
+public interface TaskResultDisplay extends Display {
 
     public void displayLoading(boolean display);
 

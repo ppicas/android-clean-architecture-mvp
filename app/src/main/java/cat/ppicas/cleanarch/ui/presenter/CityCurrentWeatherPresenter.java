@@ -3,11 +3,11 @@ package cat.ppicas.cleanarch.ui.presenter;
 import cat.ppicas.cleanarch.domain.CurrentWeather;
 import cat.ppicas.cleanarch.repository.CurrentWeatherRepository;
 import cat.ppicas.cleanarch.task.GetCurrentWeatherTask;
-import cat.ppicas.cleanarch.ui.view.CityCurrentWeatherView;
+import cat.ppicas.cleanarch.ui.display.CityCurrentWeatherDisplay;
 import cat.ppicas.cleanarch.util.DisplayErrorTaskCallback;
 import cat.ppicas.cleanarch.util.TaskExecutor;
 
-public class CityCurrentWeatherPresenter extends Presenter<CityCurrentWeatherView> {
+public class CityCurrentWeatherPresenter extends Presenter<CityCurrentWeatherDisplay> {
 
     private TaskExecutor mTaskExecutor;
     private CurrentWeatherRepository mRepository;
@@ -24,11 +24,11 @@ public class CityCurrentWeatherPresenter extends Presenter<CityCurrentWeatherVie
     }
 
     @Override
-    public void bindView(CityCurrentWeatherView view) {
-        super.bindView(view);
+    public void bindDisplay(CityCurrentWeatherDisplay display) {
+        super.bindDisplay(display);
 
         if (mLastCurrentWeather != null) {
-            updateView(mLastCurrentWeather);
+            updateDisplay(mLastCurrentWeather);
             return;
         }
 
@@ -36,25 +36,25 @@ public class CityCurrentWeatherPresenter extends Presenter<CityCurrentWeatherVie
             return;
         }
 
-        view.displayLoading(true);
+        display.displayLoading(true);
         mGetCurrentWeatherTask = new GetCurrentWeatherTask(mRepository, mCityId);
         mTaskExecutor.execute(mGetCurrentWeatherTask,
                 new DisplayErrorTaskCallback<CurrentWeather>(this) {
                     @Override
                     public void onSuccess(CurrentWeather cw) {
                         mLastCurrentWeather = cw;
-                        updateView(cw);
+                        updateDisplay(cw);
                     }
                 });
     }
 
-    private void updateView(CurrentWeather cw) {
-        CityCurrentWeatherView view = getView();
-        if (view != null) {
-            view.displayLoading(false);
-            view.setCurrentTemp(cw.getCurrentTemp());
-            view.setHumidity(cw.getHumidity());
-            view.setWindSpeed(cw.getWindSpeed());
+    private void updateDisplay(CurrentWeather cw) {
+        CityCurrentWeatherDisplay display = getDisplay();
+        if (display != null) {
+            display.displayLoading(false);
+            display.setCurrentTemp(cw.getCurrentTemp());
+            display.setHumidity(cw.getHumidity());
+            display.setWindSpeed(cw.getWindSpeed());
         }
     }
 }

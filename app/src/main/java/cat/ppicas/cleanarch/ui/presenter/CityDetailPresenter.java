@@ -9,11 +9,11 @@ import cat.ppicas.cleanarch.domain.City;
 import cat.ppicas.cleanarch.repository.CityRepository;
 import cat.ppicas.cleanarch.res.StringResources;
 import cat.ppicas.cleanarch.task.GetCityTask;
-import cat.ppicas.cleanarch.ui.view.CityDetailView;
+import cat.ppicas.cleanarch.ui.display.CityDetailDisplay;
 import cat.ppicas.cleanarch.util.DisplayErrorTaskCallback;
 import cat.ppicas.cleanarch.util.TaskExecutor;
 
-public class CityDetailPresenter extends Presenter<CityDetailView> {
+public class CityDetailPresenter extends Presenter<CityDetailDisplay> {
 
     private static final String DAY_OF_WEEK_DATE_FORMAT_PATTERN = "cccc";
 
@@ -34,29 +34,30 @@ public class CityDetailPresenter extends Presenter<CityDetailView> {
     }
 
     @Override
-    public void bindView(CityDetailView view) {
-        super.bindView(view);
+    public void bindDisplay(CityDetailDisplay display) {
+        super.bindDisplay(display);
 
-        view.setTitle(R.string.city_details__title_loading);
+        display.setTitle(R.string.city_details__title_loading);
 
         if (mCity != null) {
-            view.setTitle(R.string.city_details__title, mCity.getName());
+            display.setTitle(R.string.city_details__title, mCity.getName());
+            return;
         }
 
         if (mTaskExecutor.isRunning(mGetCityTask)) {
             return;
         }
 
-        view.displayLoading(true);
+        display.displayLoading(true);
         mGetCityTask = new GetCityTask(mCityRepository, mCityId);
         mTaskExecutor.execute(mGetCityTask, new DisplayErrorTaskCallback<City>(this) {
             @Override
             public void onSuccess(City city) {
                 mCity = city;
-                CityDetailView view = getView();
-                if (view != null) {
-                    view.displayLoading(false);
-                    view.setTitle(R.string.city_details__title, city.getName());
+                CityDetailDisplay display = getDisplay();
+                if (display != null) {
+                    display.displayLoading(false);
+                    display.setTitle(R.string.city_details__title, city.getName());
                 }
             }
         });

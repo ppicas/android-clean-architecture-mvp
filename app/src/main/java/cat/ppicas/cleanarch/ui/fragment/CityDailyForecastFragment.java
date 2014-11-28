@@ -13,12 +13,12 @@ import android.widget.Toast;
 import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.app.ServiceContainer;
 import cat.ppicas.cleanarch.app.ServiceContainerProvider;
+import cat.ppicas.cleanarch.ui.display.CityDailyForecastDisplay;
 import cat.ppicas.cleanarch.ui.presenter.CityDailyForecastPresenter;
 import cat.ppicas.cleanarch.ui.presenter.PresenterFactory;
 import cat.ppicas.cleanarch.ui.presenter.PresenterHolder;
-import cat.ppicas.cleanarch.ui.view.CityDailyForecastView;
 
-public class CityDailyForecastFragment extends Fragment implements CityDailyForecastView,
+public class CityDailyForecastFragment extends Fragment implements CityDailyForecastDisplay,
         PresenterFactory<CityDailyForecastPresenter> {
 
     private static final String ARG_CITY_ID = "cityId";
@@ -65,13 +65,13 @@ public class CityDailyForecastFragment extends Fragment implements CityDailyFore
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mPresenter.bindView(this);
+        mPresenter.bindDisplay(this);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mPresenter.unbindView();
+        mPresenter.unbindDisplay();
     }
 
     @Override
