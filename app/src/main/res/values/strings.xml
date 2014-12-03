@@ -20,6 +20,11 @@
     <string name="city_weather__humidity">Humidity</string>
     <string name="city_weather__wind_speed">Wind speed</string>
 
-    <string name="daily_forecast__label">Forecast:</string>
+    <string name="daily_forecast__description">Forecast:</string>
+    <string name="daily_forecast__temp">Temperature:</string>
+    <string name="daily_forecast__max_temp">Max temperature:</string>
+    <string name="daily_forecast__min_temp">Min temperature:</string>
+    <string name="daily_forecast__humidity">Humidity:</string>
+    <string name="daily_forecast__wind_speed">Wind speed:</string>
 
 </resources>

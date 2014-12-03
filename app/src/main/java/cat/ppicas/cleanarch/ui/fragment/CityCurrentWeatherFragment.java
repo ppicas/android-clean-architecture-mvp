@@ -81,17 +81,17 @@ public class CityCurrentWeatherFragment extends Fragment implements CityCurrentW
 
     @Override
     public void setCurrentTemp(double temp) {
-        mCurrent.setText(NumberFormat.formatDecimal(temp) + "º");
+        mCurrent.setText(NumberFormat.formatTemperature(temp));
     }
 
     @Override
     public void setHumidity(int humidity) {
-        mHumidity.setText(humidity + "%");
+        mHumidity.setText(NumberFormat.formatHumidity(humidity));
     }
 
     @Override
     public void setWindSpeed(double windSpeed) {
-        mWindSpeed.setText(NumberFormat.formatDecimal(windSpeed) + " m/s");
+        mWindSpeed.setText(NumberFormat.formatWindSpeed(windSpeed));
     }
 
     @Override

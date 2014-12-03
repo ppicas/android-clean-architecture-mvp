@@ -13,6 +13,7 @@ import android.widget.Toast;
 import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.app.ServiceContainer;
 import cat.ppicas.cleanarch.app.ServiceContainerProvider;
+import cat.ppicas.cleanarch.text.NumberFormat;
 import cat.ppicas.cleanarch.ui.display.CityDailyForecastDisplay;
 import cat.ppicas.cleanarch.ui.presenter.CityDailyForecastPresenter;
 import cat.ppicas.cleanarch.ui.presenter.PresenterFactory;
@@ -29,6 +30,11 @@ public class CityDailyForecastFragment extends Fragment implements CityDailyFore
     private CityDailyForecastPresenter mPresenter;
 
     private TextView mDescription;
+    private TextView mDayTemp;
+    private TextView mMinTemp;
+    private TextView mMaxTemp;
+    private TextView mHumidity;
+    private TextView mWindSpeed;
     private View mLoading;
 
     public static CityDailyForecastFragment newInstance(String cityId, int daysFromToday) {
@@ -57,6 +63,11 @@ public class CityDailyForecastFragment extends Fragment implements CityDailyFore
         View view = inflater.inflate(R.layout.fragment_city_daily_forecast, container, false);
 
         mDescription = (TextView) view.findViewById(R.id.daily_forecast__description);
+        mDayTemp = (TextView) view.findViewById(R.id.daily_forecast__day_temp);
+        mMinTemp = (TextView) view.findViewById(R.id.daily_forecast__min_temp);
+        mMaxTemp = (TextView) view.findViewById(R.id.daily_forecast__max_temp);
+        mHumidity = (TextView) view.findViewById(R.id.daily_forecast__humidity);
+        mWindSpeed = (TextView) view.findViewById(R.id.daily_forecast__wind_speed);
         mLoading = view.findViewById(R.id.daily_forecast__loading);
 
         return view;
@@ -81,27 +92,27 @@ public class CityDailyForecastFragment extends Fragment implements CityDailyFore
 
     @Override
     public void setDayTemp(double temp) {
-
+        mDayTemp.setText(NumberFormat.formatTemperature(temp));
     }
 
     @Override
     public void setMinTemp(double temp) {
-
+        mMinTemp.setText(NumberFormat.formatTemperature(temp));
     }
 
     @Override
     public void setMaxTemp(double temp) {
-
+        mMaxTemp.setText(NumberFormat.formatTemperature(temp));
     }
 
     @Override
     public void setHumidity(double humidity) {
-
+        mHumidity.setText(NumberFormat.formatHumidity(humidity));
     }
 
     @Override
     public void setWindSpeed(double windSpeed) {
-
+        mWindSpeed.setText(NumberFormat.formatWindSpeed(windSpeed));
     }
 
     @Override

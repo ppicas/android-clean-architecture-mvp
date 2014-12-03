@@ -8,8 +8,8 @@ import cat.ppicas.cleanarch.text.NumberFormat;
 import cat.ppicas.cleanarch.ui.display.CityListItemDisplay;
 
 /**
- * Class to provide an adapter for {@link cat.ppicas.cleanarch.ui.display.CityListItemDisplay} interface from a {@link View}
- * inflated using layout {@link R.layout#view_city_list_item}.
+ * Class to provide an adapter for {@link cat.ppicas.cleanarch.ui.display.CityListItemDisplay}
+ * interface from a {@link View} inflated using layout {@link R.layout#view_city_list_item}.
  */
 public class CityListItemDisplayAdapter implements CityListItemDisplay {
 
@@ -41,7 +41,7 @@ public class CityListItemDisplayAdapter implements CityListItemDisplay {
 
     @Override
     public void setCurrentTemp(Double temp) {
-        mTempView.setText(NumberFormat.formatDecimal(temp) + "º");
+        mTempView.setText(NumberFormat.formatTemperature(temp));
     }
 
     private void updateNameView() {
