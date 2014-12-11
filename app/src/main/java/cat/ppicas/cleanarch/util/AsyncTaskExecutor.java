@@ -11,6 +11,11 @@ import java.util.concurrent.Executors;
 
 import cat.ppicas.cleanarch.task.Task;
 
+/**
+ * A {@link TaskExecutor} implementation that executes tasks on another thread. This class
+ * will not execute various {@link Task} concurrently. Instead the tasks will be added to the
+ * queue and execute one by one respecting the execution order.
+ */
 public class AsyncTaskExecutor implements TaskExecutor {
 
     private final Executor mExecutor = Executors.newSingleThreadExecutor();

@@ -1,14 +1,27 @@
 package cat.ppicas.cleanarch.util;
 
 import cat.ppicas.cleanarch.R;
+import cat.ppicas.cleanarch.task.Task;
 import cat.ppicas.cleanarch.task.TaskCancelledException;
 import cat.ppicas.cleanarch.ui.display.TaskResultDisplay;
 import cat.ppicas.cleanarch.ui.presenter.Presenter;
 
+/**
+ * A {@link TaskCallback} implementation that handles {@link Task} execution errors automatically.
+ * This class will stop the loader and call {@link TaskResultDisplay#displayError} when
+ * an error is thrown during {@code Task} execution.
+ */
 public abstract class DisplayErrorTaskCallback<T> implements TaskCallback<T> {
 
     private final Presenter<? extends TaskResultDisplay> mPresenter;
 
+    /**
+     * Constructs an instance of {@link DisplayErrorTaskCallback} that will use
+     * the specified {@link Presenter} to display the errors. To display the errors
+     * this class expects a {@link Presenter} with a parameter extending {@link TaskResultDisplay}.
+     *
+     * @param presenter a {@link Presenter} with a parameter extending {@link TaskResultDisplay}
+     */
     public DisplayErrorTaskCallback(Presenter<? extends TaskResultDisplay> presenter) {
         mPresenter = presenter;
     }
