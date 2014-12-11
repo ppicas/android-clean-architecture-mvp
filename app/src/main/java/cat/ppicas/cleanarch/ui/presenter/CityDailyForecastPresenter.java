@@ -6,6 +6,7 @@ import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.domain.DailyForecast;
 import cat.ppicas.cleanarch.repository.DailyForecastRepository;
 import cat.ppicas.cleanarch.task.GetDailyForecastsTask;
+import cat.ppicas.cleanarch.text.NumberFormat;
 import cat.ppicas.cleanarch.ui.display.CityDailyForecastDisplay;
 import cat.ppicas.cleanarch.util.DisplayErrorTaskCallback;
 import cat.ppicas.cleanarch.util.TaskExecutor;
@@ -69,11 +70,11 @@ public class CityDailyForecastPresenter extends Presenter<CityDailyForecastDispl
     private void updateDisplay(CityDailyForecastDisplay display, DailyForecast df) {
         display.setForecastDescription(capitalizeFirstLetter(
                 df.getDescription()));
-        display.setDayTemp(df.getDayTemp());
-        display.setMinTemp(df.getMinTemp());
-        display.setMaxTemp(df.getMaxTemp());
-        display.setHumidity(df.getHumidity());
-        display.setWindSpeed(df.getWindSpeed());
+        display.setDayTemp(NumberFormat.formatTemperature(df.getDayTemp()));
+        display.setMinTemp(NumberFormat.formatTemperature(df.getMinTemp()));
+        display.setMaxTemp(NumberFormat.formatTemperature(df.getMaxTemp()));
+        display.setHumidity(NumberFormat.formatHumidity(df.getHumidity()));
+        display.setWindSpeed(NumberFormat.formatWindSpeed(df.getWindSpeed()));
     }
 
     private String capitalizeFirstLetter(String text) {

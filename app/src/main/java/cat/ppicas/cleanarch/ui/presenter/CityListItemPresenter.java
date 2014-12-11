@@ -1,6 +1,7 @@
 package cat.ppicas.cleanarch.ui.presenter;
 
 import cat.ppicas.cleanarch.domain.City;
+import cat.ppicas.cleanarch.text.NumberFormat;
 import cat.ppicas.cleanarch.ui.display.CityListItemDisplay;
 
 public class CityListItemPresenter extends Presenter<CityListItemDisplay> {
@@ -34,6 +35,7 @@ public class CityListItemPresenter extends Presenter<CityListItemDisplay> {
 
         display.setCityName(mCity.getName());
         display.setCountry(mCity.getCountry());
-        display.setCurrentTemp(mCity.getCurrentWeatherPreview().getCurrentTemp());
+        double temp = mCity.getCurrentWeatherPreview().getCurrentTemp();
+        display.setCurrentTemp(NumberFormat.formatTemperature(temp));
     }
 }

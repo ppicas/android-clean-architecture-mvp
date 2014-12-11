@@ -4,7 +4,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import cat.ppicas.cleanarch.R;
-import cat.ppicas.cleanarch.text.NumberFormat;
 import cat.ppicas.cleanarch.ui.display.CityListItemDisplay;
 
 /**
@@ -40,8 +39,8 @@ public class CityListItemDisplayAdapter implements CityListItemDisplay {
     }
 
     @Override
-    public void setCurrentTemp(Double temp) {
-        mTempView.setText(NumberFormat.formatTemperature(temp));
+    public void setCurrentTemp(String temp) {
+        mTempView.setText(temp);
     }
 
     private void updateNameView() {

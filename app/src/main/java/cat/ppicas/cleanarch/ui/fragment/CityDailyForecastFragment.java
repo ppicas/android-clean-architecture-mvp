@@ -13,7 +13,6 @@ import android.widget.Toast;
 import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.app.ServiceContainer;
 import cat.ppicas.cleanarch.app.ServiceContainerProvider;
-import cat.ppicas.cleanarch.text.NumberFormat;
 import cat.ppicas.cleanarch.ui.display.CityDailyForecastDisplay;
 import cat.ppicas.cleanarch.ui.presenter.CityDailyForecastPresenter;
 import cat.ppicas.cleanarch.ui.presenter.PresenterFactory;
@@ -91,28 +90,28 @@ public class CityDailyForecastFragment extends Fragment implements CityDailyFore
     }
 
     @Override
-    public void setDayTemp(double temp) {
-        mDayTemp.setText(NumberFormat.formatTemperature(temp));
+    public void setDayTemp(String temp) {
+        mDayTemp.setText(temp);
     }
 
     @Override
-    public void setMinTemp(double temp) {
-        mMinTemp.setText(NumberFormat.formatTemperature(temp));
+    public void setMinTemp(String temp) {
+        mMinTemp.setText(temp);
     }
 
     @Override
-    public void setMaxTemp(double temp) {
-        mMaxTemp.setText(NumberFormat.formatTemperature(temp));
+    public void setMaxTemp(String temp) {
+        mMaxTemp.setText(temp);
     }
 
     @Override
-    public void setHumidity(double humidity) {
-        mHumidity.setText(NumberFormat.formatHumidity(humidity));
+    public void setHumidity(String humidity) {
+        mHumidity.setText(humidity);
     }
 
     @Override
-    public void setWindSpeed(double windSpeed) {
-        mWindSpeed.setText(NumberFormat.formatWindSpeed(windSpeed));
+    public void setWindSpeed(String windSpeed) {
+        mWindSpeed.setText(windSpeed);
     }
 
     @Override

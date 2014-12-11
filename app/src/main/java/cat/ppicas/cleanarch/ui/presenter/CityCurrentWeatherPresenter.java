@@ -3,6 +3,7 @@ package cat.ppicas.cleanarch.ui.presenter;
 import cat.ppicas.cleanarch.domain.CurrentWeather;
 import cat.ppicas.cleanarch.repository.CurrentWeatherRepository;
 import cat.ppicas.cleanarch.task.GetCurrentWeatherTask;
+import cat.ppicas.cleanarch.text.NumberFormat;
 import cat.ppicas.cleanarch.ui.display.CityCurrentWeatherDisplay;
 import cat.ppicas.cleanarch.util.DisplayErrorTaskCallback;
 import cat.ppicas.cleanarch.util.TaskExecutor;
@@ -52,9 +53,9 @@ public class CityCurrentWeatherPresenter extends Presenter<CityCurrentWeatherDis
         CityCurrentWeatherDisplay display = getDisplay();
         if (display != null) {
             display.displayLoading(false);
-            display.setCurrentTemp(cw.getCurrentTemp());
-            display.setHumidity(cw.getHumidity());
-            display.setWindSpeed(cw.getWindSpeed());
+            display.setCurrentTemp(NumberFormat.formatTemperature(cw.getCurrentTemp()));
+            display.setHumidity(NumberFormat.formatHumidity(cw.getHumidity()));
+            display.setWindSpeed(NumberFormat.formatWindSpeed(cw.getWindSpeed()));
         }
     }
 }

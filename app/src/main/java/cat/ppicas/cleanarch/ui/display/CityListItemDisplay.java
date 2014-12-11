@@ -6,6 +6,6 @@ public interface CityListItemDisplay extends Display {
 
     public void setCountry(String country);
 
-    public void setCurrentTemp(Double temp);
+    public void setCurrentTemp(String temp);
 
 }

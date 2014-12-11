@@ -2,10 +2,10 @@ package cat.ppicas.cleanarch.ui.display;
 
 public interface CityCurrentWeatherDisplay extends TaskResultDisplay {
 
-    public void setCurrentTemp(double temp);
+    public void setCurrentTemp(String temp);
 
-    public void setHumidity(int humidity);
+    public void setHumidity(String humidity);
 
-    public void setWindSpeed(double windSpeed);
+    public void setWindSpeed(String windSpeed);
 
 }
