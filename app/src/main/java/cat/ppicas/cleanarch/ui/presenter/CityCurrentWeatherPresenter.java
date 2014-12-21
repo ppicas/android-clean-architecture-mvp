@@ -29,33 +29,33 @@ public class CityCurrentWeatherPresenter extends Presenter<CityCurrentWeatherDis
         super.bindDisplay(display);
 
         if (mLastCurrentWeather != null) {
-            updateDisplay(mLastCurrentWeather);
-            return;
-        }
-
-        if (mTaskExecutor.isRunning(mGetCurrentWeatherTask)) {
+            updateDisplay(display, mLastCurrentWeather);
             return;
         }
 
         display.displayLoading(true);
+
+        if (mTaskExecutor.isRunning(mGetCurrentWeatherTask)) {
+            return;
+        }
         mGetCurrentWeatherTask = new GetCurrentWeatherTask(mRepository, mCityId);
         mTaskExecutor.execute(mGetCurrentWeatherTask,
                 new DisplayErrorTaskCallback<CurrentWeather>(this) {
                     @Override
                     public void onSuccess(CurrentWeather cw) {
                         mLastCurrentWeather = cw;
-                        updateDisplay(cw);
+                        CityCurrentWeatherDisplay display = getDisplay();
+                        if (display != null) {
+                            display.displayLoading(false);
+                            updateDisplay(display, cw);
+                        }
                     }
                 });
     }
 
-    private void updateDisplay(CurrentWeather cw) {
-        CityCurrentWeatherDisplay display = getDisplay();
-        if (display != null) {
-            display.displayLoading(false);
-            display.setCurrentTemp(NumberFormat.formatTemperature(cw.getCurrentTemp()));
-            display.setHumidity(NumberFormat.formatHumidity(cw.getHumidity()));
-            display.setWindSpeed(NumberFormat.formatWindSpeed(cw.getWindSpeed()));
-        }
+    private void updateDisplay(CityCurrentWeatherDisplay display, CurrentWeather cw) {
+        display.setCurrentTemp(NumberFormat.formatTemperature(cw.getCurrentTemp()));
+        display.setHumidity(NumberFormat.formatHumidity(cw.getHumidity()));
+        display.setWindSpeed(NumberFormat.formatWindSpeed(cw.getWindSpeed()));
     }
 }

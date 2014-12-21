@@ -44,11 +44,11 @@ public class CityDetailPresenter extends Presenter<CityDetailDisplay> {
             return;
         }
 
+        display.displayLoading(true);
+
         if (mTaskExecutor.isRunning(mGetCityTask)) {
             return;
         }
-
-        display.displayLoading(true);
         mGetCityTask = new GetCityTask(mCityRepository, mCityId);
         mTaskExecutor.execute(mGetCityTask, new DisplayErrorTaskCallback<City>(this) {
             @Override

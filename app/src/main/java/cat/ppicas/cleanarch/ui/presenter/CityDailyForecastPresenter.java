@@ -38,10 +38,11 @@ public class CityDailyForecastPresenter extends Presenter<CityDailyForecastDispl
             return;
         }
 
+        display.displayLoading(true);
+
         if (mTaskExecutor.isRunning(mGetDailyForecastsTask)) {
             return;
         }
-
         mGetDailyForecastsTask = new GetDailyForecastsTask(mRepository, mCityId);
         mTaskExecutor.execute(mGetDailyForecastsTask,
                 new DisplayErrorTaskCallback<List<DailyForecast>>(this) {

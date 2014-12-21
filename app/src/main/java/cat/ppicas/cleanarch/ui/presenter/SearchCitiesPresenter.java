@@ -39,6 +39,10 @@ public class SearchCitiesPresenter extends Presenter<SearchCitiesDisplay> {
 
         display.setTitle(R.string.search_cities__title);
 
+        if (mTaskExecutor.isRunning(mFindCityTask)) {
+            display.displayLoading(true);
+        }
+
         if (mLastResults != null) {
             display.setCities(mLastResults);
         } else if (!TextUtils.isEmpty(mLastSearch) && !mTaskExecutor.isRunning(mFindCityTask)) {
@@ -47,8 +51,10 @@ public class SearchCitiesPresenter extends Presenter<SearchCitiesDisplay> {
     }
 
     public void onCitySearch(String cityName) {
-        getDisplay().displayLoading(true);
+        cityName = cityName.trim().toLowerCase();
         mLastSearch = cityName;
+
+        getDisplay().displayLoading(true);
 
         if (mFindCityTask != null) {
             mFindCityTask.cancel();
