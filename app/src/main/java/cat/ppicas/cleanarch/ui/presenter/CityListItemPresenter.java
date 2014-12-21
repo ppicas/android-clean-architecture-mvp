@@ -18,10 +18,6 @@ public class CityListItemPresenter extends Presenter<CityListItemDisplay> {
         updateDisplay();
     }
 
-    public String getCityId() {
-        return (mCity != null) ? mCity.getId() : null;
-    }
-
     public void setCity(City city) {
         mCity = city;
         updateDisplay();

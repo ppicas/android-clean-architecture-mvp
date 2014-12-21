@@ -73,6 +73,7 @@ class DefaultServiceContainer implements ServiceContainer {
             mRestAdapter = new RestAdapter.Builder()
                     .setEndpoint("http://api.openweathermap.org")
                     .setClient(new OkClient(getOkHttpClient()))
+                    .setLogLevel(RestAdapter.LogLevel.NONE)
                     .build();
         }
 

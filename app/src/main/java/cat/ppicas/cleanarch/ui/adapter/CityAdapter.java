@@ -41,7 +41,7 @@ public class CityAdapter extends ArrayAdapter<City> {
             presenter = new CityListItemPresenter(city);
             presenter.bindDisplay(displayAdapter);
             view.setTag(R.id.global__view_presenter, presenter);
-        } else if (!presenter.getCityId().equals(city.getId())) {
+        } else {
             presenter.setCity(city);
         }
 
