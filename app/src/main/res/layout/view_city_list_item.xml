@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:padding="16dp">
+<cat.ppicas.cleanarch.ui.view.CityListItemView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/city_list_item__name"
@@ -19,4 +20,4 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-thin"
         android:textSize="40sp"/>
-</LinearLayout>
+</cat.ppicas.cleanarch.ui.view.CityListItemView>

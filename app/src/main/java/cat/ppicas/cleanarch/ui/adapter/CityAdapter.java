@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 
 import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.domain.City;
-import cat.ppicas.cleanarch.ui.adapter.display.CityListItemDisplayAdapter;
+import cat.ppicas.cleanarch.ui.display.CityListItemDisplay;
 import cat.ppicas.cleanarch.ui.presenter.CityListItemPresenter;
 
 public class CityAdapter extends ArrayAdapter<City> {
@@ -22,25 +22,19 @@ public class CityAdapter extends ArrayAdapter<City> {
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-        // Initialize the class to adapt the View to CityListItemDisplay interface
-        CityListItemDisplayAdapter displayAdapter;
         if (view == null) {
             view = mInflater.inflate(R.layout.view_city_list_item, parent, false);
-            displayAdapter = new CityListItemDisplayAdapter(view);
-            view.setTag(R.id.global__view_adapter, displayAdapter);
-        } else {
-            displayAdapter = (CityListItemDisplayAdapter) view.getTag(R.id.global__view_adapter);
         }
+        CityListItemDisplay display = (CityListItemDisplay) view;
 
         City city = getItem(position);
 
         // Initialize or reconfigures a Presenter for CityListItemView
-        CityListItemPresenter presenter = (CityListItemPresenter) view.getTag(
-                R.id.global__view_presenter);
+        CityListItemPresenter presenter = (CityListItemPresenter) view.getTag();
         if (presenter == null) {
             presenter = new CityListItemPresenter(city);
-            presenter.bindDisplay(displayAdapter);
-            view.setTag(R.id.global__view_presenter, presenter);
+            presenter.bindDisplay(display);
+            view.setTag(presenter);
         } else {
             presenter.setCity(city);
         }
