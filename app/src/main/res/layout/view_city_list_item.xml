@@ -3,21 +3,38 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center_vertical"
     android:padding="16dp">
 
     <TextView
         android:id="@+id/city_list_item__name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:fontFamily="sans-serif-medium"
         android:textSize="22sp"/>
 
-    <TextView
-        android:id="@+id/city_list_item__temp"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-thin"
-        android:textSize="40sp"/>
+        android:gravity="end"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/city_list_item__temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:textSize="40sp"/>
+
+        <TextView
+            android:id="@+id/city_list_item__elevation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20sp"
+            android:layout_marginEnd="20sp"
+            android:textStyle="bold|italic"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
 </cat.ppicas.cleanarch.ui.view.CityListItemView>

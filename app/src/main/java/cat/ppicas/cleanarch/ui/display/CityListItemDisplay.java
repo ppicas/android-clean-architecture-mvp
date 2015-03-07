@@ -8,4 +8,8 @@ public interface CityListItemDisplay extends Display {
 
     public void setCurrentTemp(String temp);
 
+    public void setLoadingElevation(boolean loading);
+
+    public void setElevation(int elevation);
+
 }

@@ -27,4 +27,6 @@
     <string name="daily_forecast__humidity">Humidity:</string>
     <string name="daily_forecast__wind_speed">Wind speed:</string>
 
+    <string name="city_list_item__elevation">elevation...</string>
+
 </resources>

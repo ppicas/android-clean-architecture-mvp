@@ -25,6 +25,10 @@ public class NumberFormat {
         return DECIMAL_FORMATTER.format(windSpeed) + " m/s";
     }
 
+    public static String formatElevation(int elevation) {
+        return elevation + "m";
+    }
+
     private NumberFormat() {
         throw new RuntimeException("Instances are not allowed for this class");
     }

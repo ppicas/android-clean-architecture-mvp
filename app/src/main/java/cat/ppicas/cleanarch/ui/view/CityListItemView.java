@@ -2,10 +2,12 @@ package cat.ppicas.cleanarch.ui.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import cat.ppicas.cleanarch.R;
+import cat.ppicas.cleanarch.text.NumberFormat;
 import cat.ppicas.cleanarch.ui.display.CityListItemDisplay;
 
 /**
@@ -18,6 +20,7 @@ public class CityListItemView extends LinearLayout implements CityListItemDispla
 
     private TextView mNameView;
     private TextView mTempView;
+    private TextView mElevationView;
 
     public CityListItemView(Context context) {
         super(context);
@@ -35,6 +38,7 @@ public class CityListItemView extends LinearLayout implements CityListItemDispla
     protected void onFinishInflate() {
         mNameView = (TextView) findViewById(R.id.city_list_item__name);
         mTempView = (TextView) findViewById(R.id.city_list_item__temp);
+        mElevationView = (TextView) findViewById(R.id.city_list_item__elevation);
     }
 
     @Override
@@ -52,6 +56,23 @@ public class CityListItemView extends LinearLayout implements CityListItemDispla
     @Override
     public void setCurrentTemp(String temp) {
         mTempView.setText(temp);
+    }
+
+    @Override
+    public void setLoadingElevation(boolean loading) {
+        String elevation = getContext().getString(R.string.city_list_item__elevation);
+        if (loading) {
+            mElevationView.setText(elevation);
+        } else {
+            if (mElevationView.getText().equals(elevation)) {
+                mElevationView.setText("");
+            }
+        }
+    }
+
+    @Override
+    public void setElevation(int elevation) {
+        mElevationView.setText(NumberFormat.formatElevation(elevation));
     }
 
     private void updateNameView() {
