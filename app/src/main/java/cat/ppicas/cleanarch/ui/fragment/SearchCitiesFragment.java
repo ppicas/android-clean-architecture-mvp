@@ -16,7 +16,6 @@
 
 package cat.ppicas.cleanarch.ui.fragment;
 
-import android.app.Application;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -35,7 +34,7 @@ import java.util.List;
 
 import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.app.ServiceContainer;
-import cat.ppicas.cleanarch.app.ServiceContainerProvider;
+import cat.ppicas.cleanarch.app.ServiceContainers;
 import cat.ppicas.cleanarch.domain.City;
 import cat.ppicas.cleanarch.ui.activity.ActivityNavigator;
 import cat.ppicas.cleanarch.ui.activity.ActivityNavigatorImpl;
@@ -171,11 +170,8 @@ public class SearchCitiesFragment extends Fragment implements SearchCitiesDispla
 
     @Override
     public SearchCitiesPresenter createPresenter() {
-        Application app = getActivity().getApplication();
-        ServiceContainer sc = ((ServiceContainerProvider) app).getServiceContainer();
-
+        ServiceContainer sc = ServiceContainers.getFromApp(getActivity());
         ActivityNavigator activityNavigator =  new ActivityNavigatorImpl(getActivity());
-
         return new SearchCitiesPresenter(sc.getTaskExecutor(), activityNavigator,
                 sc.getCityRepository());
     }

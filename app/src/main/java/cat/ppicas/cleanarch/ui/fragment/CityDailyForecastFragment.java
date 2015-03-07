@@ -16,7 +16,6 @@
 
 package cat.ppicas.cleanarch.ui.fragment;
 
-import android.app.Application;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -28,7 +27,7 @@ import android.widget.Toast;
 
 import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.app.ServiceContainer;
-import cat.ppicas.cleanarch.app.ServiceContainerProvider;
+import cat.ppicas.cleanarch.app.ServiceContainers;
 import cat.ppicas.cleanarch.ui.display.CityDailyForecastDisplay;
 import cat.ppicas.cleanarch.ui.presenter.CityDailyForecastPresenter;
 import cat.ppicas.cleanarch.ui.presenter.PresenterFactory;
@@ -142,8 +141,7 @@ public class CityDailyForecastFragment extends Fragment implements CityDailyFore
 
     @Override
     public CityDailyForecastPresenter createPresenter() {
-        Application app = getActivity().getApplication();
-        ServiceContainer sc = ((ServiceContainerProvider) app).getServiceContainer();
+        ServiceContainer sc = ServiceContainers.getFromApp(getActivity());
         return new CityDailyForecastPresenter(sc.getTaskExecutor(), sc.getDailyForecastRepository(),
                 mCityId, mDaysFromToday);
     }

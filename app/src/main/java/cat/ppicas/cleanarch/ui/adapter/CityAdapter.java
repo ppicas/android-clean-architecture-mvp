@@ -23,7 +23,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import cat.ppicas.cleanarch.R;
-import cat.ppicas.cleanarch.app.ServiceContainerProvider;
+import cat.ppicas.cleanarch.app.ServiceContainers;
 import cat.ppicas.cleanarch.domain.City;
 import cat.ppicas.cleanarch.ui.display.CityListItemDisplay;
 import cat.ppicas.cleanarch.ui.presenter.CityListItemPresenter;
@@ -38,9 +38,7 @@ public class CityAdapter extends ArrayAdapter<City> {
         super(context, android.R.layout.simple_list_item_1);
         mInflater = LayoutInflater.from(context);
 
-        Context app = getContext().getApplicationContext();
-        ServiceContainerProvider provider = (ServiceContainerProvider) app;
-        mTaskExecutor = provider.getServiceContainer().getTaskExecutor();
+        mTaskExecutor = ServiceContainers.getFromApp(context).getTaskExecutor();
     }
 
     @Override
