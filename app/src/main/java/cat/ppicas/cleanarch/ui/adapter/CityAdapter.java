@@ -42,7 +42,7 @@ public class CityAdapter extends ArrayAdapter<City> {
             presenter = new CityListItemPresenter(mTaskExecutor, city);
             presenter.bindDisplay(display);
             view.setTag(presenter);
-            //view.addOnAttachStateChangeListener(new AdapterViewUnbinder(presenter));
+            view.addOnAttachStateChangeListener(new AdapterViewUnbinder(presenter));
         } else {
             presenter.setCity(city);
         }

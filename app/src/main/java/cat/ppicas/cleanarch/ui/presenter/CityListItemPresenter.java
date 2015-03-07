@@ -37,7 +37,18 @@ public class CityListItemPresenter extends Presenter<CityListItemDisplay> {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        if (mTaskExecutor.isRunning(mGetElevationTask)) {
+            mGetElevationTask.cancel();
+        }
+    }
+
     public void setCity(City city) {
+        if (mCity.getId().equals(city.getId()) && mCity.getName().equals(city.getName())) {
+            return;
+        }
+
         mCity = city;
         updateDisplay();
 
@@ -76,7 +87,9 @@ public class CityListItemPresenter extends Presenter<CityListItemDisplay> {
 
         @Override
         public void onError(Exception error) {
-            getDisplay().setLoadingElevation(false);
+            if (getDisplay() != null) {
+                getDisplay().setLoadingElevation(false);
+            }
         }
     }
 }

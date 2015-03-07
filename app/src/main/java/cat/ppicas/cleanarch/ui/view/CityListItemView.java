@@ -2,7 +2,6 @@ package cat.ppicas.cleanarch.ui.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -60,13 +59,8 @@ public class CityListItemView extends LinearLayout implements CityListItemDispla
 
     @Override
     public void setLoadingElevation(boolean loading) {
-        String elevation = getContext().getString(R.string.city_list_item__elevation);
         if (loading) {
-            mElevationView.setText(elevation);
-        } else {
-            if (mElevationView.getText().equals(elevation)) {
-                mElevationView.setText("");
-            }
+            mElevationView.setText(getContext().getString(R.string.city_list_item__elevation));
         }
     }
 

@@ -2,7 +2,6 @@ package cat.ppicas.cleanarch.ui.adapter;
 
 import android.view.View;
 
-import cat.ppicas.cleanarch.ui.presenter.CityListItemPresenter;
 import cat.ppicas.cleanarch.ui.presenter.Presenter;
 
 public class AdapterViewUnbinder implements View.OnAttachStateChangeListener {
@@ -20,5 +19,6 @@ public class AdapterViewUnbinder implements View.OnAttachStateChangeListener {
     @Override
     public void onViewDetachedFromWindow(View v) {
         mPresenter.unbindDisplay();
+        mPresenter.onDestroy();
     }
 }
