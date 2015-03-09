@@ -24,7 +24,7 @@
     <application
         android:name=".app.App"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/global__app_name"
         android:theme="@style/AppTheme">
 
