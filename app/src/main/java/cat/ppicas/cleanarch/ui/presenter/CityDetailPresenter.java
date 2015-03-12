@@ -25,11 +25,11 @@ import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.domain.City;
 import cat.ppicas.cleanarch.repository.CityRepository;
 import cat.ppicas.cleanarch.task.GetCityTask;
-import cat.ppicas.cleanarch.ui.display.CityDetailDisplay;
+import cat.ppicas.cleanarch.ui.vista.CityDetailVista;
 import cat.ppicas.cleanarch.util.DisplayErrorTaskCallback;
 import cat.ppicas.cleanarch.util.TaskExecutor;
 
-public class CityDetailPresenter extends Presenter<CityDetailDisplay> {
+public class CityDetailPresenter extends Presenter<CityDetailVista> {
 
     private static final String DAY_OF_WEEK_DATE_FORMAT_PATTERN = "cccc";
 
@@ -50,17 +50,17 @@ public class CityDetailPresenter extends Presenter<CityDetailDisplay> {
     }
 
     @Override
-    public void bindDisplay(CityDetailDisplay display) {
-        super.bindDisplay(display);
+    public void bindVista(CityDetailVista vista) {
+        super.bindVista(vista);
 
-        display.setTitle(R.string.city_details__title_loading);
+        vista.setTitle(R.string.city_details__title_loading);
 
         if (mCity != null) {
-            display.setTitle(R.string.city_details__title, mCity.getName());
+            vista.setTitle(R.string.city_details__title, mCity.getName());
             return;
         }
 
-        display.displayLoading(true);
+        vista.displayLoading(true);
 
         if (mTaskExecutor.isRunning(mGetCityTask)) {
             return;
@@ -70,10 +70,10 @@ public class CityDetailPresenter extends Presenter<CityDetailDisplay> {
             @Override
             public void onSuccess(City city) {
                 mCity = city;
-                CityDetailDisplay display = getDisplay();
-                if (display != null) {
-                    display.displayLoading(false);
-                    display.setTitle(R.string.city_details__title, city.getName());
+                CityDetailVista vista = getVista();
+                if (vista != null) {
+                    vista.displayLoading(false);
+                    vista.setTitle(R.string.city_details__title, city.getName());
                 }
             }
         });

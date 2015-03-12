@@ -34,7 +34,7 @@ public class AdapterViewUnbinder implements View.OnAttachStateChangeListener {
 
     @Override
     public void onViewDetachedFromWindow(View v) {
-        mPresenter.unbindDisplay();
+        mPresenter.unbindVista();
         mPresenter.onDestroy();
     }
 }

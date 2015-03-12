@@ -14,7 +14,10 @@
  * the License.
  */
 
-package cat.ppicas.cleanarch.ui.display;
+package cat.ppicas.cleanarch.ui.vista;
 
-public interface Display {
+public interface CityDetailVista extends TaskResultVista {
+
+    public void setTitle(int stringResId, Object... args);
+
 }

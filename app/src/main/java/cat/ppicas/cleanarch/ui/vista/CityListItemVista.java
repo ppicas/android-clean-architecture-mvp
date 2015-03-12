@@ -14,9 +14,9 @@
  * the License.
  */
 
-package cat.ppicas.cleanarch.ui.display;
+package cat.ppicas.cleanarch.ui.vista;
 
-public interface CityListItemDisplay extends Display {
+public interface CityListItemVista extends Vista {
 
     public void setCityName(String name);
 

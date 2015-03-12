@@ -14,20 +14,12 @@
  * the License.
  */
 
-package cat.ppicas.cleanarch.ui.display;
+package cat.ppicas.cleanarch.ui.vista;
 
-public interface CityDailyForecastDisplay extends TaskResultDisplay {
+public interface TaskResultVista extends Vista {
 
-    public void setForecastDescription(String description);
+    public void displayLoading(boolean display);
 
-    public void setDayTemp(String temp);
-
-    public void setMinTemp(String temp);
-
-    public void setMaxTemp(String temp);
-
-    public void setHumidity(String humidity);
-
-    public void setWindSpeed(String windSpeed);
+    public void displayError(int stringResId, Object... args);
 
 }

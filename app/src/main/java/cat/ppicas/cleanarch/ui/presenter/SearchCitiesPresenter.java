@@ -26,11 +26,11 @@ import cat.ppicas.cleanarch.domain.City;
 import cat.ppicas.cleanarch.repository.CityRepository;
 import cat.ppicas.cleanarch.task.FindCityTask;
 import cat.ppicas.cleanarch.ui.activity.ActivityNavigator;
-import cat.ppicas.cleanarch.ui.display.SearchCitiesDisplay;
+import cat.ppicas.cleanarch.ui.vista.SearchCitiesVista;
 import cat.ppicas.cleanarch.util.DisplayErrorTaskCallback;
 import cat.ppicas.cleanarch.util.TaskExecutor;
 
-public class SearchCitiesPresenter extends Presenter<SearchCitiesDisplay> {
+public class SearchCitiesPresenter extends Presenter<SearchCitiesVista> {
 
     private static final String STATE_LAST_SEARCH = "lastSearch";
 
@@ -50,17 +50,17 @@ public class SearchCitiesPresenter extends Presenter<SearchCitiesDisplay> {
     }
 
     @Override
-    public void bindDisplay(SearchCitiesDisplay display) {
-        super.bindDisplay(display);
+    public void bindVista(SearchCitiesVista vista) {
+        super.bindVista(vista);
 
-        display.setTitle(R.string.search_cities__title);
+        vista.setTitle(R.string.search_cities__title);
 
         if (mTaskExecutor.isRunning(mFindCityTask)) {
-            display.displayLoading(true);
+            vista.displayLoading(true);
         }
 
         if (mLastResults != null) {
-            display.setCities(mLastResults);
+            vista.setCities(mLastResults);
         } else if (!TextUtils.isEmpty(mLastSearch) && !mTaskExecutor.isRunning(mFindCityTask)) {
             onCitySearch(mLastSearch);
         }
@@ -70,7 +70,7 @@ public class SearchCitiesPresenter extends Presenter<SearchCitiesDisplay> {
         cityName = cityName.trim().toLowerCase();
         mLastSearch = cityName;
 
-        getDisplay().displayLoading(true);
+        getVista().displayLoading(true);
 
         if (mFindCityTask != null) {
             mFindCityTask.cancel();
@@ -80,13 +80,13 @@ public class SearchCitiesPresenter extends Presenter<SearchCitiesDisplay> {
             @Override
             public void onSuccess(List<City> result) {
                 mLastResults = result;
-                SearchCitiesDisplay display = getDisplay();
-                if (display != null) {
-                    display.displayLoading(false);
+                SearchCitiesVista vista = getVista();
+                if (vista != null) {
+                    vista.displayLoading(false);
                     if (result.isEmpty()) {
-                        display.displayCitiesNotFound();
+                        vista.displayCitiesNotFound();
                     } else {
-                        display.setCities(result);
+                        vista.setCities(result);
                     }
                 }
             }

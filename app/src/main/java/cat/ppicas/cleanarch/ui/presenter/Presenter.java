@@ -17,23 +17,25 @@
 package cat.ppicas.cleanarch.ui.presenter;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 
-import cat.ppicas.cleanarch.ui.display.Display;
+import cat.ppicas.cleanarch.ui.vista.Vista;
 
-public abstract class Presenter<T extends Display> {
+public abstract class Presenter<T extends Vista> {
 
-    private T mDisplay;
+    private T mVista;
 
-    public T getDisplay() {
-        return mDisplay;
+    @Nullable
+    public T getVista() {
+        return mVista;
     }
 
-    public void bindDisplay(T display) {
-        mDisplay = display;
+    public void bindVista(T vista) {
+        mVista = vista;
     }
 
-    public void unbindDisplay() {
-        mDisplay = null;
+    public void unbindVista() {
+        mVista = null;
     }
 
     public void saveState(Bundle state) {

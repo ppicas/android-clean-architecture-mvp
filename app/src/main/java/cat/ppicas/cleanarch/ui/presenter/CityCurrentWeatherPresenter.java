@@ -20,11 +20,11 @@ import cat.ppicas.cleanarch.domain.CurrentWeather;
 import cat.ppicas.cleanarch.repository.CurrentWeatherRepository;
 import cat.ppicas.cleanarch.task.GetCurrentWeatherTask;
 import cat.ppicas.cleanarch.text.NumberFormat;
-import cat.ppicas.cleanarch.ui.display.CityCurrentWeatherDisplay;
+import cat.ppicas.cleanarch.ui.vista.CityCurrentWeatherVista;
 import cat.ppicas.cleanarch.util.DisplayErrorTaskCallback;
 import cat.ppicas.cleanarch.util.TaskExecutor;
 
-public class CityCurrentWeatherPresenter extends Presenter<CityCurrentWeatherDisplay> {
+public class CityCurrentWeatherPresenter extends Presenter<CityCurrentWeatherVista> {
 
     private TaskExecutor mTaskExecutor;
     private CurrentWeatherRepository mRepository;
@@ -41,15 +41,15 @@ public class CityCurrentWeatherPresenter extends Presenter<CityCurrentWeatherDis
     }
 
     @Override
-    public void bindDisplay(CityCurrentWeatherDisplay display) {
-        super.bindDisplay(display);
+    public void bindVista(CityCurrentWeatherVista vista) {
+        super.bindVista(vista);
 
         if (mLastCurrentWeather != null) {
-            updateDisplay(display, mLastCurrentWeather);
+            updateVista(vista, mLastCurrentWeather);
             return;
         }
 
-        display.displayLoading(true);
+        vista.displayLoading(true);
 
         if (mTaskExecutor.isRunning(mGetCurrentWeatherTask)) {
             return;
@@ -60,18 +60,18 @@ public class CityCurrentWeatherPresenter extends Presenter<CityCurrentWeatherDis
                     @Override
                     public void onSuccess(CurrentWeather cw) {
                         mLastCurrentWeather = cw;
-                        CityCurrentWeatherDisplay display = getDisplay();
-                        if (display != null) {
-                            display.displayLoading(false);
-                            updateDisplay(display, cw);
+                        CityCurrentWeatherVista vista = getVista();
+                        if (vista != null) {
+                            vista.displayLoading(false);
+                            updateVista(vista, cw);
                         }
                     }
                 });
     }
 
-    private void updateDisplay(CityCurrentWeatherDisplay display, CurrentWeather cw) {
-        display.setCurrentTemp(NumberFormat.formatTemperature(cw.getCurrentTemp()));
-        display.setHumidity(NumberFormat.formatHumidity(cw.getHumidity()));
-        display.setWindSpeed(NumberFormat.formatWindSpeed(cw.getWindSpeed()));
+    private void updateVista(CityCurrentWeatherVista vista, CurrentWeather cw) {
+        vista.setCurrentTemp(NumberFormat.formatTemperature(cw.getCurrentTemp()));
+        vista.setHumidity(NumberFormat.formatHumidity(cw.getHumidity()));
+        vista.setWindSpeed(NumberFormat.formatWindSpeed(cw.getWindSpeed()));
     }
 }

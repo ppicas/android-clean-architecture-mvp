@@ -25,7 +25,7 @@ import android.widget.ArrayAdapter;
 import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.app.ServiceContainers;
 import cat.ppicas.cleanarch.domain.City;
-import cat.ppicas.cleanarch.ui.display.CityListItemDisplay;
+import cat.ppicas.cleanarch.ui.vista.CityListItemVista;
 import cat.ppicas.cleanarch.ui.presenter.CityListItemPresenter;
 import cat.ppicas.cleanarch.util.TaskExecutor;
 
@@ -46,7 +46,7 @@ public class CityAdapter extends ArrayAdapter<City> {
         if (view == null) {
             view = mInflater.inflate(R.layout.view_city_list_item, parent, false);
         }
-        CityListItemDisplay display = (CityListItemDisplay) view;
+        CityListItemVista vista = (CityListItemVista) view;
 
         City city = getItem(position);
 
@@ -54,7 +54,7 @@ public class CityAdapter extends ArrayAdapter<City> {
         CityListItemPresenter presenter = (CityListItemPresenter) view.getTag();
         if (presenter == null) {
             presenter = new CityListItemPresenter(mTaskExecutor, city);
-            presenter.bindDisplay(display);
+            presenter.bindVista(vista);
             view.setTag(presenter);
             view.addOnAttachStateChangeListener(new AdapterViewUnbinder(presenter));
         } else {

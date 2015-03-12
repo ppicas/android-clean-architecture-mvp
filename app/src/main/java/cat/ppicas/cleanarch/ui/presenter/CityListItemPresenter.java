@@ -19,11 +19,11 @@ package cat.ppicas.cleanarch.ui.presenter;
 import cat.ppicas.cleanarch.domain.City;
 import cat.ppicas.cleanarch.task.GetElevationTask;
 import cat.ppicas.cleanarch.text.NumberFormat;
-import cat.ppicas.cleanarch.ui.display.CityListItemDisplay;
+import cat.ppicas.cleanarch.ui.vista.CityListItemVista;
 import cat.ppicas.cleanarch.util.TaskCallback;
 import cat.ppicas.cleanarch.util.TaskExecutor;
 
-public class CityListItemPresenter extends Presenter<CityListItemDisplay> {
+public class CityListItemPresenter extends Presenter<CityListItemVista> {
 
     private TaskExecutor mTaskExecutor;
     private City mCity;
@@ -37,15 +37,15 @@ public class CityListItemPresenter extends Presenter<CityListItemDisplay> {
     }
 
     @Override
-    public void bindDisplay(CityListItemDisplay display) {
-        super.bindDisplay(display);
-        updateDisplay();
+    public void bindVista(CityListItemVista vista) {
+        super.bindVista(vista);
+        updateVista();
 
         if (mElevation > -1) {
-            display.setElevation(mElevation);
-            display.setLoadingElevation(false);
+            vista.setElevation(mElevation);
+            vista.setLoadingElevation(false);
         } else {
-            display.setLoadingElevation(true);
+            vista.setLoadingElevation(true);
             if (!mTaskExecutor.isRunning(mGetElevationTask)) {
                 mGetElevationTask = new GetElevationTask(mCity);
                 mTaskExecutor.execute(mGetElevationTask, new GetElevationTaskCallback());
@@ -66,45 +66,45 @@ public class CityListItemPresenter extends Presenter<CityListItemDisplay> {
         }
 
         mCity = city;
-        updateDisplay();
+        updateVista();
 
         if (mTaskExecutor.isRunning(mGetElevationTask)) {
             mGetElevationTask.cancel();
         }
-        if (getDisplay() != null) {
-            getDisplay().setLoadingElevation(true);
+        if (getVista() != null) {
+            getVista().setLoadingElevation(true);
         }
         mElevation = -1;
         mGetElevationTask = new GetElevationTask(city);
         mTaskExecutor.execute(mGetElevationTask, new GetElevationTaskCallback());
     }
 
-    private void updateDisplay() {
-        CityListItemDisplay display = getDisplay();
-        if (display == null) {
+    private void updateVista() {
+        CityListItemVista vista = getVista();
+        if (vista == null) {
             return;
         }
 
-        display.setCityName(mCity.getName());
-        display.setCountry(mCity.getCountry());
+        vista.setCityName(mCity.getName());
+        vista.setCountry(mCity.getCountry());
         double temp = mCity.getCurrentWeatherPreview().getCurrentTemp();
-        display.setCurrentTemp(NumberFormat.formatTemperature(temp));
+        vista.setCurrentTemp(NumberFormat.formatTemperature(temp));
     }
 
     private class GetElevationTaskCallback implements TaskCallback<Integer> {
         @Override
         public void onSuccess(Integer elevation) {
-            if (getDisplay() != null) {
+            if (getVista() != null) {
                 mElevation = elevation;
-                getDisplay().setElevation(elevation);
-                getDisplay().setLoadingElevation(false);
+                getVista().setElevation(elevation);
+                getVista().setLoadingElevation(false);
             }
         }
 
         @Override
         public void onError(Exception error) {
-            if (getDisplay() != null) {
-                getDisplay().setLoadingElevation(false);
+            if (getVista() != null) {
+                getVista().setLoadingElevation(false);
             }
         }
     }

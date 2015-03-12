@@ -23,12 +23,12 @@ import android.widget.TextView;
 
 import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.text.NumberFormat;
-import cat.ppicas.cleanarch.ui.display.CityListItemDisplay;
+import cat.ppicas.cleanarch.ui.vista.CityListItemVista;
 
 /**
- * A {@link LinearLayout} extension that implements {@link CityListItemDisplay}.
+ * A {@link LinearLayout} extension that implements {@link CityListItemVista}.
  */
-public class CityListItemView extends LinearLayout implements CityListItemDisplay {
+public class CityListItemView extends LinearLayout implements CityListItemVista {
 
     private String mName;
     private String mCountry;

@@ -14,14 +14,18 @@
  * the License.
  */
 
-package cat.ppicas.cleanarch.ui.display;
+package cat.ppicas.cleanarch.ui.vista;
 
-public interface CityCurrentWeatherDisplay extends TaskResultDisplay {
+import java.util.List;
 
-    public void setCurrentTemp(String temp);
+import cat.ppicas.cleanarch.domain.City;
 
-    public void setHumidity(String humidity);
+public interface SearchCitiesVista extends TaskResultVista {
 
-    public void setWindSpeed(String windSpeed);
+    public void setTitle(int stringResId, Object... args);
+
+    public void setCities(List<City> cities);
+
+    public void displayCitiesNotFound();
 
 }

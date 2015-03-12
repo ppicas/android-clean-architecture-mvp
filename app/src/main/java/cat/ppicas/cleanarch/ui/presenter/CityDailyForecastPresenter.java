@@ -23,11 +23,11 @@ import cat.ppicas.cleanarch.domain.DailyForecast;
 import cat.ppicas.cleanarch.repository.DailyForecastRepository;
 import cat.ppicas.cleanarch.task.GetDailyForecastsTask;
 import cat.ppicas.cleanarch.text.NumberFormat;
-import cat.ppicas.cleanarch.ui.display.CityDailyForecastDisplay;
+import cat.ppicas.cleanarch.ui.vista.CityDailyForecastVista;
 import cat.ppicas.cleanarch.util.DisplayErrorTaskCallback;
 import cat.ppicas.cleanarch.util.TaskExecutor;
 
-public class CityDailyForecastPresenter extends Presenter<CityDailyForecastDisplay> {
+public class CityDailyForecastPresenter extends Presenter<CityDailyForecastVista> {
 
     private TaskExecutor mTaskExecutor;
     private DailyForecastRepository mRepository;
@@ -46,15 +46,15 @@ public class CityDailyForecastPresenter extends Presenter<CityDailyForecastDispl
     }
 
     @Override
-    public void bindDisplay(CityDailyForecastDisplay display) {
-        super.bindDisplay(display);
+    public void bindVista(CityDailyForecastVista vista) {
+        super.bindVista(vista);
 
         if (mLastDailyForecast != null) {
-            updateDisplay(display, mLastDailyForecast);
+            updateVista(vista, mLastDailyForecast);
             return;
         }
 
-        display.displayLoading(true);
+        vista.displayLoading(true);
 
         if (mTaskExecutor.isRunning(mGetDailyForecastsTask)) {
             return;
@@ -71,27 +71,27 @@ public class CityDailyForecastPresenter extends Presenter<CityDailyForecastDispl
 
                         mLastDailyForecast = dailyForecast;
 
-                        CityDailyForecastDisplay display = getDisplay();
-                        if (display != null) {
-                            display.displayLoading(false);
+                        CityDailyForecastVista vista = getVista();
+                        if (vista != null) {
+                            vista.displayLoading(false);
                             if (dailyForecast != null) {
-                                updateDisplay(display, dailyForecast);
+                                updateVista(vista, dailyForecast);
                             } else {
-                                display.displayError(R.string.error__connection);
+                                vista.displayError(R.string.error__connection);
                             }
                         }
                     }
                 });
     }
 
-    private void updateDisplay(CityDailyForecastDisplay display, DailyForecast df) {
-        display.setForecastDescription(capitalizeFirstLetter(
+    private void updateVista(CityDailyForecastVista vista, DailyForecast df) {
+        vista.setForecastDescription(capitalizeFirstLetter(
                 df.getDescription()));
-        display.setDayTemp(NumberFormat.formatTemperature(df.getDayTemp()));
-        display.setMinTemp(NumberFormat.formatTemperature(df.getMinTemp()));
-        display.setMaxTemp(NumberFormat.formatTemperature(df.getMaxTemp()));
-        display.setHumidity(NumberFormat.formatHumidity(df.getHumidity()));
-        display.setWindSpeed(NumberFormat.formatWindSpeed(df.getWindSpeed()));
+        vista.setDayTemp(NumberFormat.formatTemperature(df.getDayTemp()));
+        vista.setMinTemp(NumberFormat.formatTemperature(df.getMinTemp()));
+        vista.setMaxTemp(NumberFormat.formatTemperature(df.getMaxTemp()));
+        vista.setHumidity(NumberFormat.formatHumidity(df.getHumidity()));
+        vista.setWindSpeed(NumberFormat.formatWindSpeed(df.getWindSpeed()));
     }
 
     private String capitalizeFirstLetter(String text) {
