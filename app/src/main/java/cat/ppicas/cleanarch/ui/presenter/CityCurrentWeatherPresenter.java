@@ -26,9 +26,9 @@ import cat.ppicas.cleanarch.util.TaskExecutor;
 
 public class CityCurrentWeatherPresenter extends Presenter<CityCurrentWeatherVista> {
 
-    private TaskExecutor mTaskExecutor;
-    private CurrentWeatherRepository mRepository;
-    private String mCityId;
+    private final TaskExecutor mTaskExecutor;
+    private final CurrentWeatherRepository mRepository;
+    private final String mCityId;
 
     private GetCurrentWeatherTask mGetCurrentWeatherTask;
     private CurrentWeather mLastCurrentWeather;
@@ -46,32 +46,34 @@ public class CityCurrentWeatherPresenter extends Presenter<CityCurrentWeatherVis
 
         if (mLastCurrentWeather != null) {
             updateVista(vista, mLastCurrentWeather);
-            return;
+        } else {
+            vista.displayLoading(true);
+            if (!mTaskExecutor.isRunning(mGetCurrentWeatherTask)) {
+                mGetCurrentWeatherTask = new GetCurrentWeatherTask(mRepository, mCityId);
+                mTaskExecutor.execute(mGetCurrentWeatherTask, new GetCurrentWeatherTaskCallback());
+            }
         }
-
-        vista.displayLoading(true);
-
-        if (mTaskExecutor.isRunning(mGetCurrentWeatherTask)) {
-            return;
-        }
-        mGetCurrentWeatherTask = new GetCurrentWeatherTask(mRepository, mCityId);
-        mTaskExecutor.execute(mGetCurrentWeatherTask,
-                new DisplayErrorTaskCallback<CurrentWeather>(this) {
-                    @Override
-                    public void onSuccess(CurrentWeather cw) {
-                        mLastCurrentWeather = cw;
-                        CityCurrentWeatherVista vista = getVista();
-                        if (vista != null) {
-                            vista.displayLoading(false);
-                            updateVista(vista, cw);
-                        }
-                    }
-                });
     }
 
     private void updateVista(CityCurrentWeatherVista vista, CurrentWeather cw) {
         vista.setCurrentTemp(NumberFormat.formatTemperature(cw.getCurrentTemp()));
         vista.setHumidity(NumberFormat.formatHumidity(cw.getHumidity()));
         vista.setWindSpeed(NumberFormat.formatWindSpeed(cw.getWindSpeed()));
+    }
+
+    private class GetCurrentWeatherTaskCallback extends DisplayErrorTaskCallback<CurrentWeather> {
+        public GetCurrentWeatherTaskCallback() {
+            super(CityCurrentWeatherPresenter.this);
+        }
+
+        @Override
+        public void onSuccess(CurrentWeather cw) {
+            mLastCurrentWeather = cw;
+            CityCurrentWeatherVista vista = getVista();
+            if (vista != null) {
+                vista.displayLoading(false);
+                updateVista(vista, cw);
+            }
+        }
     }
 }

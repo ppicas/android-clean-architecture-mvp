@@ -29,8 +29,8 @@ import cat.ppicas.cleanarch.util.TaskExecutor;
 
 public class CityDailyForecastPresenter extends Presenter<CityDailyForecastVista> {
 
-    private TaskExecutor mTaskExecutor;
-    private DailyForecastRepository mRepository;
+    private final TaskExecutor mTaskExecutor;
+    private final DailyForecastRepository mRepository;
     private final String mCityId;
     private final int mDaysFromToday;
 
@@ -51,37 +51,13 @@ public class CityDailyForecastPresenter extends Presenter<CityDailyForecastVista
 
         if (mLastDailyForecast != null) {
             updateVista(vista, mLastDailyForecast);
-            return;
+        } else {
+            vista.displayLoading(true);
+            if (!mTaskExecutor.isRunning(mGetDailyForecastsTask)) {
+                mGetDailyForecastsTask = new GetDailyForecastsTask(mRepository, mCityId);
+                mTaskExecutor.execute(mGetDailyForecastsTask, new GetDailyForecastTaskCallback());
+            }
         }
-
-        vista.displayLoading(true);
-
-        if (mTaskExecutor.isRunning(mGetDailyForecastsTask)) {
-            return;
-        }
-        mGetDailyForecastsTask = new GetDailyForecastsTask(mRepository, mCityId);
-        mTaskExecutor.execute(mGetDailyForecastsTask,
-                new DisplayErrorTaskCallback<List<DailyForecast>>(this) {
-                    @Override
-                    public void onSuccess(List<DailyForecast> list) {
-                        DailyForecast dailyForecast = null;
-                        if (list.size() >= mDaysFromToday + 1) {
-                            dailyForecast = list.get(mDaysFromToday);
-                        }
-
-                        mLastDailyForecast = dailyForecast;
-
-                        CityDailyForecastVista vista = getVista();
-                        if (vista != null) {
-                            vista.displayLoading(false);
-                            if (dailyForecast != null) {
-                                updateVista(vista, dailyForecast);
-                            } else {
-                                vista.displayError(R.string.error__connection);
-                            }
-                        }
-                    }
-                });
     }
 
     private void updateVista(CityDailyForecastVista vista, DailyForecast df) {
@@ -96,5 +72,31 @@ public class CityDailyForecastPresenter extends Presenter<CityDailyForecastVista
 
     private String capitalizeFirstLetter(String text) {
         return text.substring(0, 1).toUpperCase() + text.substring(1);
+    }
+
+    private class GetDailyForecastTaskCallback extends DisplayErrorTaskCallback<List<DailyForecast>> {
+        public GetDailyForecastTaskCallback() {
+            super(CityDailyForecastPresenter.this);
+        }
+
+        @Override
+        public void onSuccess(List<DailyForecast> list) {
+            DailyForecast dailyForecast = null;
+            if (list.size() >= mDaysFromToday + 1) {
+                dailyForecast = list.get(mDaysFromToday);
+            }
+
+            mLastDailyForecast = dailyForecast;
+
+            CityDailyForecastVista vista = getVista();
+            if (vista != null) {
+                vista.displayLoading(false);
+                if (dailyForecast != null) {
+                    updateVista(vista, dailyForecast);
+                } else {
+                    vista.displayError(R.string.error__connection);
+                }
+            }
+        }
     }
 }

@@ -33,10 +33,10 @@ public class CityDetailPresenter extends Presenter<CityDetailVista> {
 
     private static final String DAY_OF_WEEK_DATE_FORMAT_PATTERN = "cccc";
 
-    private TaskExecutor mTaskExecutor;
-    private CityRepository mCityRepository;
-    private Resources mResources;
-    private String mCityId;
+    private final TaskExecutor mTaskExecutor;
+    private final CityRepository mCityRepository;
+    private final Resources mResources;
+    private final String mCityId;
 
     private GetCityTask mGetCityTask;
     private City mCity;
@@ -57,26 +57,13 @@ public class CityDetailPresenter extends Presenter<CityDetailVista> {
 
         if (mCity != null) {
             vista.setTitle(R.string.city_details__title, mCity.getName());
-            return;
-        }
-
-        vista.displayLoading(true);
-
-        if (mTaskExecutor.isRunning(mGetCityTask)) {
-            return;
-        }
-        mGetCityTask = new GetCityTask(mCityRepository, mCityId);
-        mTaskExecutor.execute(mGetCityTask, new DisplayErrorTaskCallback<City>(this) {
-            @Override
-            public void onSuccess(City city) {
-                mCity = city;
-                CityDetailVista vista = getVista();
-                if (vista != null) {
-                    vista.displayLoading(false);
-                    vista.setTitle(R.string.city_details__title, city.getName());
-                }
+        } else {
+            vista.displayLoading(true);
+            if (!mTaskExecutor.isRunning(mGetCityTask)) {
+                mGetCityTask = new GetCityTask(mCityRepository, mCityId);
+                mTaskExecutor.execute(mGetCityTask, new GetCityTaskCallback());
             }
-        });
+        }
     }
 
     public String getForecastPageTitle(int daysFromToday) {
@@ -91,6 +78,22 @@ public class CityDetailPresenter extends Presenter<CityDetailVista> {
             cal.add(Calendar.DAY_OF_MONTH, daysFromToday);
             return mResources.getString(R.string.city_details__tab_forecast,
                     DateFormat.format(DAY_OF_WEEK_DATE_FORMAT_PATTERN, cal));
+        }
+    }
+
+    private class GetCityTaskCallback extends DisplayErrorTaskCallback<City> {
+        public GetCityTaskCallback() {
+            super(CityDetailPresenter.this);
+        }
+
+        @Override
+        public void onSuccess(City city) {
+            mCity = city;
+            CityDetailVista vista = getVista();
+            if (vista != null) {
+                vista.displayLoading(false);
+                vista.setTitle(R.string.city_details__title, city.getName());
+            }
         }
     }
 }

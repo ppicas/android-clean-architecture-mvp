@@ -67,6 +67,10 @@ public class SearchCitiesPresenter extends Presenter<SearchCitiesVista> {
     }
 
     public void onCitySearch(String cityName) {
+        if (getVista() == null) {
+            return;
+        }
+
         cityName = cityName.trim().toLowerCase();
         mLastSearch = cityName;
 
