@@ -50,9 +50,7 @@ public class SearchCitiesPresenter extends Presenter<SearchCitiesVista> {
     }
 
     @Override
-    public void bindVista(SearchCitiesVista vista) {
-        super.bindVista(vista);
-
+    public void onStart(SearchCitiesVista vista) {
         vista.setTitle(R.string.search_cities__title);
 
         if (mTaskExecutor.isRunning(mFindCityTask)) {

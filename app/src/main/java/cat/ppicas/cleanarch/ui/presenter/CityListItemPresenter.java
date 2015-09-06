@@ -37,8 +37,7 @@ public class CityListItemPresenter extends Presenter<CityListItemVista> {
     }
 
     @Override
-    public void bindVista(CityListItemVista vista) {
-        super.bindVista(vista);
+    public void onStart(CityListItemVista vista) {
         updateVista();
 
         if (mElevation > -1) {

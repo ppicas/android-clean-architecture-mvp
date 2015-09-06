@@ -51,6 +51,7 @@ public class CityListItemView extends LinearLayout implements CityListItemVista 
 
     @Override
     protected void onFinishInflate() {
+        super.onFinishInflate();
         mNameView = (TextView) findViewById(R.id.city_list_item__name);
         mTempView = (TextView) findViewById(R.id.city_list_item__temp);
         mElevationView = (TextView) findViewById(R.id.city_list_item__elevation);

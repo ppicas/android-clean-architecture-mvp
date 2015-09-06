@@ -41,9 +41,7 @@ public class CityCurrentWeatherPresenter extends Presenter<CityCurrentWeatherVis
     }
 
     @Override
-    public void bindVista(CityCurrentWeatherVista vista) {
-        super.bindVista(vista);
-
+    public void onStart(CityCurrentWeatherVista vista) {
         if (mLastCurrentWeather != null) {
             updateVista(vista, mLastCurrentWeather);
         } else {

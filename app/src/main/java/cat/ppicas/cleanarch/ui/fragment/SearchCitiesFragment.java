@@ -110,15 +110,15 @@ public class SearchCitiesFragment extends Fragment implements SearchCitiesVista,
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mPresenter.bindVista(this);
+    public void onStart() {
+        super.onStart();
+        mPresenter.start(this);
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mPresenter.unbindVista();
+    public void onStop() {
+        super.onStop();
+        mPresenter.stop();
     }
 
     @Override

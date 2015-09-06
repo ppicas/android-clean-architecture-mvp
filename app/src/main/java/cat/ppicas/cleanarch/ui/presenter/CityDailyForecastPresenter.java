@@ -46,9 +46,7 @@ public class CityDailyForecastPresenter extends Presenter<CityDailyForecastVista
     }
 
     @Override
-    public void bindVista(CityDailyForecastVista vista) {
-        super.bindVista(vista);
-
+    public void onStart(CityDailyForecastVista vista) {
         if (mLastDailyForecast != null) {
             updateVista(vista, mLastDailyForecast);
         } else {

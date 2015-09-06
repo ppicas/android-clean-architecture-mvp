@@ -50,9 +50,7 @@ public class CityDetailPresenter extends Presenter<CityDetailVista> {
     }
 
     @Override
-    public void bindVista(CityDetailVista vista) {
-        super.bindVista(vista);
-
+    public void onStart(CityDetailVista vista) {
         vista.setTitle(R.string.city_details__title_loading);
 
         if (mCity != null) {
