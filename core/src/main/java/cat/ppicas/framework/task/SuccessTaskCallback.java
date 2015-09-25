@@ -14,11 +14,16 @@
  * the License.
  */
 
-package cat.ppicas.cleanarch.task;
+package cat.ppicas.framework.task;
 
-public interface Task<T> {
+/**
+ * @author Pau Picas
+ */
+public abstract class SuccessTaskCallback<R> implements TaskCallback<R, RuntimeException> {
 
-    public T execute() throws Exception;
+    @Override
+    public void onError(RuntimeException error) {
+        throw error;
+    }
 
-    public void cancel();
 }

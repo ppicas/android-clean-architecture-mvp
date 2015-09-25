@@ -16,15 +16,21 @@
 
 package cat.ppicas.cleanarch.task;
 
+import java.io.IOException;
 import java.util.List;
 
 import cat.ppicas.cleanarch.domain.City;
 import cat.ppicas.cleanarch.repository.CityRepository;
+import cat.ppicas.framework.task.Task;
+import cat.ppicas.framework.task.TaskResult;
+import retrofit.RetrofitError;
 
-public class FindCityTask extends CancellableTask<List<City>> {
+public class FindCityTask implements Task<List<City>, IOException> {
 
     private String mCityName;
     private CityRepository mRepository;
+
+    private boolean mCanceled;
 
     public FindCityTask(String cityName, CityRepository repository) {
         mCityName = cityName;
@@ -32,7 +38,20 @@ public class FindCityTask extends CancellableTask<List<City>> {
     }
 
     @Override
-    protected List<City> doExecute() throws Exception {
-        return mRepository.findCity(mCityName);
+    public TaskResult<List<City>, IOException> execute() {
+        try {
+            List<City> city = mRepository.findCity(mCityName);
+            if (mCanceled) {
+                return TaskResult.newCanceledResult();
+            } else {
+                return TaskResult.newSuccessResult(city);
+            }
+        } catch (RetrofitError e) {
+            return TaskResult.newErrorResult(new IOException(e));
+        }
+    }
+
+    public void cancel() {
+        mCanceled = true;
     }
 }

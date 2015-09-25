@@ -27,7 +27,7 @@ import cat.ppicas.cleanarch.app.ServiceContainers;
 import cat.ppicas.cleanarch.domain.City;
 import cat.ppicas.cleanarch.ui.vista.CityListItemVista;
 import cat.ppicas.cleanarch.ui.presenter.CityListItemPresenter;
-import cat.ppicas.cleanarch.util.TaskExecutor;
+import cat.ppicas.framework.task.TaskExecutor;
 
 public class CityAdapter extends ArrayAdapter<City> {
 

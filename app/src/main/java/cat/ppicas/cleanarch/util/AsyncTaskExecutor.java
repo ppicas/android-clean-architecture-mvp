@@ -25,7 +25,10 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import cat.ppicas.cleanarch.task.Task;
+import cat.ppicas.framework.task.Task;
+import cat.ppicas.framework.task.TaskCallback;
+import cat.ppicas.framework.task.TaskExecutor;
+import cat.ppicas.framework.task.TaskResult;
 
 /**
  * A {@link TaskExecutor} implementation that executes tasks on another thread. This class
@@ -38,29 +41,43 @@ public class AsyncTaskExecutor implements TaskExecutor {
 
     private final Handler mHandler = new Handler();
 
-    private final List<WeakReference<Task<?>>> mRunningTasks
-            = new ArrayList<WeakReference<Task<?>>>();
+    private final List<WeakReference<?>> mRunningTasks = new ArrayList<>();
 
     @Override
-    public <T> void execute(final Task<T> task, final TaskCallback<T> callback) {
+    public <R, E extends Exception> void execute(
+            final Task<R, E> task, final TaskCallback<R, E> callback) {
+
         addRunningTask(task);
         mExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                try {
-                    T result = task.execute();
-                    onResult(callback, result);
-                } catch (Exception e) {
-                    onError(callback, e);
-                }
+                final TaskResult<R, E> result = task.execute();
                 removeRunningTask(task);
+
+                if (!result.isCanceled()) {
+                    if (result.isSuccess()) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                callback.onSuccess(result.getResult());
+                            }
+                        });
+                    } else {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                callback.onError(result.getError());
+                            }
+                        });
+                    }
+                }
             }
         });
     }
 
     @Override
-    public synchronized boolean isRunning(Task<?> task) {
-        for (WeakReference<Task<?>> rt : mRunningTasks) {
+    public synchronized boolean isRunning(Task<?, ?> task) {
+        for (WeakReference<?> rt : mRunningTasks) {
             if (rt.get() == task) {
                 return true;
             }
@@ -69,35 +86,17 @@ public class AsyncTaskExecutor implements TaskExecutor {
         return false;
     }
 
-    private synchronized  <T> void addRunningTask(Task<T> task) {
-        mRunningTasks.add(new WeakReference<Task<?>>(task));
+    private synchronized void addRunningTask(Task<?, ?> task) {
+        mRunningTasks.add(new WeakReference<>(task));
     }
 
-    private synchronized <T> void removeRunningTask(Task<T> task) {
-        Iterator<WeakReference<Task<?>>> iterator = mRunningTasks.iterator();
+    private synchronized void removeRunningTask(Task<?, ?> task) {
+        Iterator<WeakReference<?>> iterator = mRunningTasks.iterator();
         while (iterator.hasNext()) {
-            WeakReference<Task<?>> rt = iterator.next();
-            if (rt.get() == task || rt.get() == null) {
+            WeakReference<?> reference = iterator.next();
+            if (reference.get() == task || reference.get() == null) {
                 iterator.remove();
             }
         }
-    }
-
-    private <T> void onResult(final TaskCallback<T> callback, final T result) {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                callback.onSuccess(result);
-            }
-        });
-    }
-
-    private <T> void onError(final TaskCallback<T> callback, final Exception e) {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                callback.onError(e);
-            }
-        });
     }
 }

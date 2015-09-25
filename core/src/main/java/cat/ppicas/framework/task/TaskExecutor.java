@@ -14,7 +14,12 @@
  * the License.
  */
 
-package cat.ppicas.cleanarch.task;
+package cat.ppicas.framework.task;
 
-public class TaskCancelledException extends Exception {
+public interface TaskExecutor {
+
+    <R, E extends Exception> void execute(Task<R, E> task, TaskCallback<R, E> callback);
+
+    boolean isRunning(Task<?, ?> task);
+
 }

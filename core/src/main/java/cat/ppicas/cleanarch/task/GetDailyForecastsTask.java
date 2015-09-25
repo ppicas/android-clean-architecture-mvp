@@ -16,12 +16,16 @@
 
 package cat.ppicas.cleanarch.task;
 
+import java.io.IOException;
 import java.util.List;
 
 import cat.ppicas.cleanarch.domain.DailyForecast;
 import cat.ppicas.cleanarch.repository.DailyForecastRepository;
+import cat.ppicas.framework.task.Task;
+import cat.ppicas.framework.task.TaskResult;
+import retrofit.RetrofitError;
 
-public class GetDailyForecastsTask extends CancellableTask<List<DailyForecast>> {
+public class GetDailyForecastsTask implements Task<List<DailyForecast>, IOException> {
 
     private DailyForecastRepository mRepository;
 
@@ -33,7 +37,11 @@ public class GetDailyForecastsTask extends CancellableTask<List<DailyForecast>> 
     }
 
     @Override
-    protected List<DailyForecast> doExecute() throws Exception {
-        return mRepository.getDailyForecasts(mCityId);
+    public TaskResult<List<DailyForecast>, IOException> execute() {
+        try {
+            return TaskResult.newSuccessResult(mRepository.getDailyForecasts(mCityId));
+        } catch (RetrofitError e) {
+            return TaskResult.newErrorResult(new IOException(e));
+        }
     }
 }

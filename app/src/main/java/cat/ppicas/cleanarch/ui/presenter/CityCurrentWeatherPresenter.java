@@ -22,7 +22,7 @@ import cat.ppicas.cleanarch.task.GetCurrentWeatherTask;
 import cat.ppicas.cleanarch.text.NumberFormat;
 import cat.ppicas.cleanarch.ui.vista.CityCurrentWeatherVista;
 import cat.ppicas.cleanarch.util.DisplayErrorTaskCallback;
-import cat.ppicas.cleanarch.util.TaskExecutor;
+import cat.ppicas.framework.task.TaskExecutor;
 
 public class CityCurrentWeatherPresenter extends Presenter<CityCurrentWeatherVista> {
 

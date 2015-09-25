@@ -19,6 +19,7 @@ package cat.ppicas.cleanarch.ui.presenter;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import java.io.IOException;
 import java.util.List;
 
 import cat.ppicas.cleanarch.R;
@@ -28,7 +29,7 @@ import cat.ppicas.cleanarch.task.FindCityTask;
 import cat.ppicas.cleanarch.ui.activity.ActivityNavigator;
 import cat.ppicas.cleanarch.ui.vista.SearchCitiesVista;
 import cat.ppicas.cleanarch.util.DisplayErrorTaskCallback;
-import cat.ppicas.cleanarch.util.TaskExecutor;
+import cat.ppicas.framework.task.TaskExecutor;
 
 public class SearchCitiesPresenter extends Presenter<SearchCitiesVista> {
 
@@ -74,7 +75,7 @@ public class SearchCitiesPresenter extends Presenter<SearchCitiesVista> {
 
         getVista().displayLoading(true);
 
-        if (mFindCityTask != null) {
+        if (mTaskExecutor.isRunning(mFindCityTask)) {
             mFindCityTask.cancel();
         }
         mFindCityTask = new FindCityTask(cityName, mCityRepository);
@@ -93,8 +94,9 @@ public class SearchCitiesPresenter extends Presenter<SearchCitiesVista> {
                 }
             }
 
+
             @Override
-            public void onError(Exception error) {
+            public void onError(IOException error) {
                 super.onError(error);
                 mLastSearch = null;
             }
@@ -117,7 +119,7 @@ public class SearchCitiesPresenter extends Presenter<SearchCitiesVista> {
 
     @Override
     public void onDestroy() {
-        if (mFindCityTask != null) {
+        if (mTaskExecutor.isRunning(mFindCityTask)) {
             mFindCityTask.cancel();
         }
     }

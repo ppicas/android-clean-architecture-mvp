@@ -22,8 +22,8 @@ import cat.ppicas.cleanarch.domain.City;
 
 public interface CityRepository {
 
-    public City getCity(String cityId);
+    City getCity(String cityId);
 
-    public List<City> findCity(String name);
+    List<City> findCity(String name);
 
 }

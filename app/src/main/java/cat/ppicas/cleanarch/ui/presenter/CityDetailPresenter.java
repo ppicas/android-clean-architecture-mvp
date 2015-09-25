@@ -27,7 +27,7 @@ import cat.ppicas.cleanarch.repository.CityRepository;
 import cat.ppicas.cleanarch.task.GetCityTask;
 import cat.ppicas.cleanarch.ui.vista.CityDetailVista;
 import cat.ppicas.cleanarch.util.DisplayErrorTaskCallback;
-import cat.ppicas.cleanarch.util.TaskExecutor;
+import cat.ppicas.framework.task.TaskExecutor;
 
 public class CityDetailPresenter extends Presenter<CityDetailVista> {
 
@@ -80,6 +80,7 @@ public class CityDetailPresenter extends Presenter<CityDetailVista> {
     }
 
     private class GetCityTaskCallback extends DisplayErrorTaskCallback<City> {
+
         public GetCityTaskCallback() {
             super(CityDetailPresenter.this);
         }

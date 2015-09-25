@@ -22,6 +22,6 @@ import cat.ppicas.cleanarch.domain.DailyForecast;
 
 public interface DailyForecastRepository {
 
-    public List<DailyForecast> getDailyForecasts(String cityId);
+    List<DailyForecast> getDailyForecasts(String cityId);
 
 }

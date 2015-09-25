@@ -20,8 +20,8 @@ import cat.ppicas.cleanarch.domain.City;
 import cat.ppicas.cleanarch.task.GetElevationTask;
 import cat.ppicas.cleanarch.text.NumberFormat;
 import cat.ppicas.cleanarch.ui.vista.CityListItemVista;
-import cat.ppicas.cleanarch.util.TaskCallback;
-import cat.ppicas.cleanarch.util.TaskExecutor;
+import cat.ppicas.framework.task.SuccessTaskCallback;
+import cat.ppicas.framework.task.TaskExecutor;
 
 public class CityListItemPresenter extends Presenter<CityListItemVista> {
 
@@ -41,8 +41,8 @@ public class CityListItemPresenter extends Presenter<CityListItemVista> {
         updateVista();
 
         if (mElevation > -1) {
-            vista.setElevation(mElevation);
             vista.setLoadingElevation(false);
+            vista.setElevation(mElevation);
         } else {
             vista.setLoadingElevation(true);
             if (!mTaskExecutor.isRunning(mGetElevationTask)) {
@@ -90,19 +90,12 @@ public class CityListItemPresenter extends Presenter<CityListItemVista> {
         vista.setCurrentTemp(NumberFormat.formatTemperature(temp));
     }
 
-    private class GetElevationTaskCallback implements TaskCallback<Integer> {
+    private class GetElevationTaskCallback extends SuccessTaskCallback<Integer> {
         @Override
         public void onSuccess(Integer elevation) {
+            mElevation = elevation;
             if (getVista() != null) {
-                mElevation = elevation;
                 getVista().setElevation(elevation);
-                getVista().setLoadingElevation(false);
-            }
-        }
-
-        @Override
-        public void onError(Exception error) {
-            if (getVista() != null) {
                 getVista().setLoadingElevation(false);
             }
         }

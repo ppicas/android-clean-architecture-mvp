@@ -16,40 +16,39 @@
 
 package cat.ppicas.cleanarch.util;
 
+import java.io.IOException;
+
 import cat.ppicas.cleanarch.R;
-import cat.ppicas.cleanarch.task.Task;
-import cat.ppicas.cleanarch.task.TaskCancelledException;
-import cat.ppicas.cleanarch.ui.vista.TaskResultVista;
 import cat.ppicas.cleanarch.ui.presenter.Presenter;
+import cat.ppicas.cleanarch.ui.vista.TaskResultVista;
+import cat.ppicas.framework.task.TaskCallback;
 
 /**
- * A {@link TaskCallback} implementation that handles {@link Task} execution errors automatically.
- * This class will stop the loader and call {@link cat.ppicas.cleanarch.ui.vista.TaskResultVista#displayError} when
- * an error is thrown during {@code Task} execution.
+ * A {@link TaskCallback} implementation that handles {@link IOException} errors automatically. This
+ * class will stop the loading animation and call {@link TaskResultVista#displayError} when an error
+ * is thrown during {@code Task} execution.
  */
-public abstract class DisplayErrorTaskCallback<T> implements TaskCallback<T> {
+public abstract class DisplayErrorTaskCallback<T> implements TaskCallback<T, IOException> {
 
     private final Presenter<? extends TaskResultVista> mPresenter;
 
     /**
      * Constructs an instance of {@link DisplayErrorTaskCallback} that will use
      * the specified {@link Presenter} to display the errors. To display the errors
-     * this class expects a {@link Presenter} with a parameter extending {@link cat.ppicas.cleanarch.ui.vista.TaskResultVista}.
+     * this class expects a {@link Presenter} with a parameter extending {@link
+     * TaskResultVista}.
      *
-     * @param presenter a {@link Presenter} with a parameter extending {@link cat.ppicas.cleanarch.ui.vista.TaskResultVista}
+     * @param presenter a {@link Presenter} with a parameter extending {@link
+     *                  TaskResultVista}
      */
     public DisplayErrorTaskCallback(Presenter<? extends TaskResultVista> presenter) {
         mPresenter = presenter;
     }
 
-    public void onError(Exception error) {
+    public void onError(IOException error) {
         TaskResultVista vista = mPresenter.getVista();
-        if (vista == null) {
-            return;
-        }
-
-        vista.displayLoading(false);
-        if (!(error instanceof TaskCancelledException)) {
+        if (vista != null) {
+            vista.displayLoading(false);
             error.printStackTrace();
             vista.displayError(R.string.error__connection);
         }

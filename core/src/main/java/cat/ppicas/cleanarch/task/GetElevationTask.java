@@ -17,8 +17,9 @@
 package cat.ppicas.cleanarch.task;
 
 import cat.ppicas.cleanarch.domain.City;
+import cat.ppicas.framework.task.SuccessTask;
 
-public class GetElevationTask extends CancellableTask<Integer> {
+public class GetElevationTask extends SuccessTask<Integer> {
 
     @SuppressWarnings("FieldCanBeLocal")
     private City mCity;
@@ -28,13 +29,17 @@ public class GetElevationTask extends CancellableTask<Integer> {
     }
 
     @Override
-    protected Integer doExecute() throws Exception {
+    protected Integer doExecute() {
+        int result = (int) (Math.random() * 1500);
         try {
             // Here we simulate an external call to some service
             Thread.sleep(1500);
-            return (int) (Math.random() * 1500);
-        } catch (InterruptedException ignored) {
-            return 0;
-        }
+        } catch (InterruptedException ignored) {}
+        return result;
+    }
+
+
+    public void cancel() {
+        // Here we could have some logic to cancel the current network request
     }
 }

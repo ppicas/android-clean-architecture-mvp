@@ -16,10 +16,15 @@
 
 package cat.ppicas.cleanarch.task;
 
+import java.io.IOException;
+
 import cat.ppicas.cleanarch.domain.City;
 import cat.ppicas.cleanarch.repository.CityRepository;
+import cat.ppicas.framework.task.Task;
+import cat.ppicas.framework.task.TaskResult;
+import retrofit.RetrofitError;
 
-public class GetCityTask extends CancellableTask<City> {
+public class GetCityTask implements Task<City, IOException> {
 
     private String mId;
 
@@ -31,7 +36,11 @@ public class GetCityTask extends CancellableTask<City> {
     }
 
     @Override
-    protected City doExecute() throws Exception {
-        return mRepository.getCity(mId);
+    public TaskResult<City, IOException> execute() {
+        try {
+            return TaskResult.newSuccessResult(mRepository.getCity(mId));
+        } catch (RetrofitError e) {
+            return TaskResult.newErrorResult(new IOException(e));
+        }
     }
 }

@@ -14,14 +14,18 @@
  * the License.
  */
 
-package cat.ppicas.cleanarch.util;
+package cat.ppicas.framework.task;
 
-import cat.ppicas.cleanarch.task.Task;
+/**
+ * @author Pau Picas
+ */
+public abstract class SuccessTask<R> implements Task<R, RuntimeException> {
 
-public interface TaskExecutor {
+    @Override
+    public TaskResult<R, RuntimeException> execute() {
+        return TaskResult.newSuccessResult(doExecute());
+    }
 
-    public <T> void execute(Task<T> task, TaskCallback<T> callback);
-
-    public boolean isRunning(Task<?> task);
+    protected abstract R doExecute();
 
 }

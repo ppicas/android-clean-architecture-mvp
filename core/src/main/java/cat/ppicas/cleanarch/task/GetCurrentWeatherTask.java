@@ -16,10 +16,15 @@
 
 package cat.ppicas.cleanarch.task;
 
+import java.io.IOException;
+
 import cat.ppicas.cleanarch.domain.CurrentWeather;
 import cat.ppicas.cleanarch.repository.CurrentWeatherRepository;
+import cat.ppicas.framework.task.Task;
+import cat.ppicas.framework.task.TaskResult;
+import retrofit.RetrofitError;
 
-public class GetCurrentWeatherTask extends CancellableTask<CurrentWeather> {
+public class GetCurrentWeatherTask implements Task<CurrentWeather, IOException> {
 
     private CurrentWeatherRepository mRepository;
 
@@ -31,7 +36,11 @@ public class GetCurrentWeatherTask extends CancellableTask<CurrentWeather> {
     }
 
     @Override
-    protected CurrentWeather doExecute() throws Exception {
-        return mRepository.getCityCurrentWeather(mCityId);
+    public TaskResult<CurrentWeather, IOException> execute() {
+        try {
+            return TaskResult.newSuccessResult(mRepository.getCityCurrentWeather(mCityId));
+        } catch (RetrofitError e) {
+            return TaskResult.newErrorResult(new IOException(e));
+        }
     }
 }

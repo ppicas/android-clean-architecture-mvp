@@ -33,7 +33,7 @@ import cat.ppicas.cleanarch.owm.OWMService;
 import cat.ppicas.cleanarch.repository.CurrentWeatherRepository;
 import cat.ppicas.cleanarch.repository.DailyForecastRepository;
 import cat.ppicas.cleanarch.util.AsyncTaskExecutor;
-import cat.ppicas.cleanarch.util.TaskExecutor;
+import cat.ppicas.framework.task.TaskExecutor;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 

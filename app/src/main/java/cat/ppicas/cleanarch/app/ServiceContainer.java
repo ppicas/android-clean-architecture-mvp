@@ -19,7 +19,7 @@ package cat.ppicas.cleanarch.app;
 import cat.ppicas.cleanarch.repository.CityRepository;
 import cat.ppicas.cleanarch.repository.CurrentWeatherRepository;
 import cat.ppicas.cleanarch.repository.DailyForecastRepository;
-import cat.ppicas.cleanarch.util.TaskExecutor;
+import cat.ppicas.framework.task.TaskExecutor;
 
 /**
  * Interface to be used as a repository of dependency or services required across the app.

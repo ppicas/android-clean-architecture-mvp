@@ -14,12 +14,10 @@
  * the License.
  */
 
-package cat.ppicas.cleanarch.util;
+package cat.ppicas.framework.task;
 
-public interface TaskCallback<T> {
+public interface Task<R, E extends Exception> {
 
-    public void onSuccess(T result);
-
-    public void onError(Exception error);
+    TaskResult<R, E> execute();
 
 }

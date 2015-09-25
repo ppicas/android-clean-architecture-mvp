@@ -14,25 +14,12 @@
  * the License.
  */
 
-package cat.ppicas.cleanarch.task;
+package cat.ppicas.framework.task;
 
-public abstract class CancellableTask<T> implements Task<T> {
+public interface TaskCallback<R, E extends Exception> {
 
-    protected boolean mCancelled;
+    void onSuccess(R result);
 
-    @Override
-    public T execute() throws Exception {
-        T result = doExecute();
-        if (mCancelled) {
-            throw new TaskCancelledException();
-        }
-        return result;
-    }
+    void onError(E error);
 
-    @Override
-    public void cancel() {
-        mCancelled = true;
-    }
-
-    protected abstract T doExecute() throws Exception;
 }
