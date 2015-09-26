@@ -17,13 +17,16 @@
 package cat.ppicas.framework.task;
 
 /**
+ * Specialized {@link TaskCallback} that can be used with {@link Task} implementations that are
+ * always successful. An always successful {@code Task} is the one that declares that returns
+ * {@link NoException} as error.
+ *
  * @author Pau Picas
  */
-public abstract class SuccessTaskCallback<R> implements TaskCallback<R, RuntimeException> {
+public abstract class SuccessTaskCallback<R> implements TaskCallback<R, NoException> {
 
     @Override
-    public void onError(RuntimeException error) {
+    public void onError(NoException error) {
         throw error;
     }
-
 }

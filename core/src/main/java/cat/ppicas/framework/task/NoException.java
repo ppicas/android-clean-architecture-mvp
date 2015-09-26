@@ -17,15 +17,14 @@
 package cat.ppicas.framework.task;
 
 /**
+ * Special {@link RuntimeException} that can be used to indicate that a {@link Task} doesn't
+ * return any kind of error.
+ *
  * @author Pau Picas
  */
-public abstract class SuccessTask<R> implements Task<R, RuntimeException> {
+public final class NoException extends RuntimeException {
 
-    @Override
-    public TaskResult<R, RuntimeException> execute() {
-        return TaskResult.newSuccessResult(doExecute());
+    private NoException() {
+        // Private constructor to ensure this class is never instantiated
     }
-
-    protected abstract R doExecute();
-
 }

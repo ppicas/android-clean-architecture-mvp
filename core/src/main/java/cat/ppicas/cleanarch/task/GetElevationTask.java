@@ -17,29 +17,39 @@
 package cat.ppicas.cleanarch.task;
 
 import cat.ppicas.cleanarch.domain.City;
-import cat.ppicas.framework.task.SuccessTask;
+import cat.ppicas.framework.task.NoException;
+import cat.ppicas.framework.task.Task;
+import cat.ppicas.framework.task.TaskResult;
 
-public class GetElevationTask extends SuccessTask<Integer> {
+public class GetElevationTask implements Task<Integer, NoException> {
 
     @SuppressWarnings("FieldCanBeLocal")
     private City mCity;
+
+    private volatile boolean mCanceled;
 
     public GetElevationTask(City city) {
         mCity = city;
     }
 
     @Override
-    protected Integer doExecute() {
-        int result = (int) (Math.random() * 1500);
+    public TaskResult<Integer, NoException> execute() {
         try {
             // Here we simulate an external call to some service
-            Thread.sleep(1500);
+            for (int i = 0; i < 15 && !mCanceled; i++) {
+                Thread.sleep(100);
+            }
         } catch (InterruptedException ignored) {}
-        return result;
+
+        if (!mCanceled) {
+            int result = (int) (Math.random() * 1500);
+            return TaskResult.newSuccessResult(result);
+        } else {
+            return TaskResult.newCanceledResult();
+        }
     }
 
-
     public void cancel() {
-        // Here we could have some logic to cancel the current network request
+        mCanceled = true;
     }
 }
