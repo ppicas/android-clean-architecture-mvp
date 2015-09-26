@@ -56,7 +56,7 @@ public class CityAdapter extends ArrayAdapter<City> {
             presenter = new CityListItemPresenter(mTaskExecutor, city);
             presenter.start(vista);
             view.setTag(presenter);
-            view.addOnAttachStateChangeListener(new AdapterViewUnbinder(presenter));
+            view.addOnAttachStateChangeListener(new AdapterViewUnBinder(presenter));
         } else {
             presenter.setCity(city);
         }

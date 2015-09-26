@@ -30,8 +30,8 @@ import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.app.ServiceContainer;
 import cat.ppicas.cleanarch.app.ServiceContainers;
 import cat.ppicas.cleanarch.ui.presenter.CityDetailPresenter;
-import cat.ppicas.cleanarch.ui.presenter.PresenterFactory;
-import cat.ppicas.cleanarch.ui.presenter.PresenterHolder;
+import cat.ppicas.framework.ui.PresenterFactory;
+import cat.ppicas.framework.ui.PresenterHolder;
 import cat.ppicas.cleanarch.ui.vista.CityDetailVista;
 
 public class CityDetailFragment extends Fragment implements CityDetailVista,

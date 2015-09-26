@@ -19,7 +19,7 @@ package cat.ppicas.cleanarch.util;
 import java.io.IOException;
 
 import cat.ppicas.cleanarch.R;
-import cat.ppicas.cleanarch.ui.presenter.Presenter;
+import cat.ppicas.framework.ui.Presenter;
 import cat.ppicas.cleanarch.ui.vista.TaskResultVista;
 import cat.ppicas.framework.task.TaskCallback;
 

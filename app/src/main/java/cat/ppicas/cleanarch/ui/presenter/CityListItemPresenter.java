@@ -22,6 +22,7 @@ import cat.ppicas.cleanarch.text.NumberFormat;
 import cat.ppicas.cleanarch.ui.vista.CityListItemVista;
 import cat.ppicas.framework.task.SuccessTaskCallback;
 import cat.ppicas.framework.task.TaskExecutor;
+import cat.ppicas.framework.ui.Presenter;
 
 public class CityListItemPresenter extends Presenter<CityListItemVista> {
 

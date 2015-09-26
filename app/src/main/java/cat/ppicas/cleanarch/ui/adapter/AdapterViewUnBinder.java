@@ -14,7 +14,27 @@
  * the License.
  */
 
-package cat.ppicas.cleanarch.ui.vista;
+package cat.ppicas.cleanarch.ui.adapter;
 
-public interface Vista {
+import android.view.View;
+
+import cat.ppicas.framework.ui.Presenter;
+
+public class AdapterViewUnBinder implements View.OnAttachStateChangeListener {
+
+    private Presenter<?> mPresenter;
+
+    public AdapterViewUnBinder(Presenter<?> presenter) {
+        mPresenter = presenter;
+    }
+
+    @Override
+    public void onViewAttachedToWindow(View v) {
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(View v) {
+        mPresenter.stop();
+        mPresenter.onDestroy();
+    }
 }

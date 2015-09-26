@@ -30,6 +30,7 @@ import cat.ppicas.cleanarch.ui.activity.ActivityNavigator;
 import cat.ppicas.cleanarch.ui.vista.SearchCitiesVista;
 import cat.ppicas.cleanarch.util.DisplayErrorTaskCallback;
 import cat.ppicas.framework.task.TaskExecutor;
+import cat.ppicas.framework.ui.Presenter;
 
 public class SearchCitiesPresenter extends Presenter<SearchCitiesVista> {
 

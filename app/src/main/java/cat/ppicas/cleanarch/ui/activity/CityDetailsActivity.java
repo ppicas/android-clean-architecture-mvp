@@ -24,9 +24,9 @@ import android.view.Window;
 
 import cat.ppicas.cleanarch.ui.fragment.CityDetailFragment;
 import cat.ppicas.cleanarch.ui.fragment.PresenterHolderFragment;
-import cat.ppicas.cleanarch.ui.presenter.Presenter;
-import cat.ppicas.cleanarch.ui.presenter.PresenterFactory;
-import cat.ppicas.cleanarch.ui.presenter.PresenterHolder;
+import cat.ppicas.framework.ui.Presenter;
+import cat.ppicas.framework.ui.PresenterFactory;
+import cat.ppicas.framework.ui.PresenterHolder;
 
 public class CityDetailsActivity extends Activity implements PresenterHolder {
 

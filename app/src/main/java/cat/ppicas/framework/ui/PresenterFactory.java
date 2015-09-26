@@ -14,12 +14,12 @@
  * the License.
  */
 
-package cat.ppicas.cleanarch.ui.presenter;
+package cat.ppicas.framework.ui;
 
-public interface PresenterHolder {
+public interface PresenterFactory<T extends Presenter<?>> {
 
-    <T extends Presenter<?>> T getOrCreatePresenter(PresenterFactory<T> presenterFactory);
+    T createPresenter();
 
-    void destroyPresenter(PresenterFactory<?> presenterFactory);
+    String getPresenterTag();
 
 }

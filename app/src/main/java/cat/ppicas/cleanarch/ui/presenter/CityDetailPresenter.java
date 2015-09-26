@@ -28,6 +28,7 @@ import cat.ppicas.cleanarch.task.GetCityTask;
 import cat.ppicas.cleanarch.ui.vista.CityDetailVista;
 import cat.ppicas.cleanarch.util.DisplayErrorTaskCallback;
 import cat.ppicas.framework.task.TaskExecutor;
+import cat.ppicas.framework.ui.Presenter;
 
 public class CityDetailPresenter extends Presenter<CityDetailVista> {
 

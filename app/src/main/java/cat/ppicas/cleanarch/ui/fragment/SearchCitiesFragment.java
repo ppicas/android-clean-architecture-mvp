@@ -40,8 +40,8 @@ import cat.ppicas.cleanarch.ui.activity.ActivityNavigator;
 import cat.ppicas.cleanarch.ui.activity.ActivityNavigatorImpl;
 import cat.ppicas.cleanarch.ui.adapter.CityAdapter;
 import cat.ppicas.cleanarch.ui.vista.SearchCitiesVista;
-import cat.ppicas.cleanarch.ui.presenter.PresenterFactory;
-import cat.ppicas.cleanarch.ui.presenter.PresenterHolder;
+import cat.ppicas.framework.ui.PresenterFactory;
+import cat.ppicas.framework.ui.PresenterHolder;
 import cat.ppicas.cleanarch.ui.presenter.SearchCitiesPresenter;
 
 public class SearchCitiesFragment extends Fragment implements SearchCitiesVista,

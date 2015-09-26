@@ -16,6 +16,8 @@
 
 package cat.ppicas.cleanarch.ui.vista;
 
+import cat.ppicas.framework.ui.Vista;
+
 public interface TaskResultVista extends Vista {
 
     public void displayLoading(boolean display);

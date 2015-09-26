@@ -14,14 +14,12 @@
  * the License.
  */
 
-package cat.ppicas.cleanarch.ui.presenter;
+package cat.ppicas.framework.ui;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
-import cat.ppicas.cleanarch.ui.vista.Vista;
 
 public abstract class Presenter<T extends Vista> {
 

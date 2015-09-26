@@ -16,6 +16,8 @@
 
 package cat.ppicas.cleanarch.ui.vista;
 
+import cat.ppicas.framework.ui.Vista;
+
 public interface CityListItemVista extends Vista {
 
     public void setCityName(String name);

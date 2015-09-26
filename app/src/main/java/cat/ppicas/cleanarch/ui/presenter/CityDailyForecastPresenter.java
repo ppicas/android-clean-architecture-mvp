@@ -26,6 +26,7 @@ import cat.ppicas.cleanarch.text.NumberFormat;
 import cat.ppicas.cleanarch.ui.vista.CityDailyForecastVista;
 import cat.ppicas.cleanarch.util.DisplayErrorTaskCallback;
 import cat.ppicas.framework.task.TaskExecutor;
+import cat.ppicas.framework.ui.Presenter;
 
 public class CityDailyForecastPresenter extends Presenter<CityDailyForecastVista> {
 

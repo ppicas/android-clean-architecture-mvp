@@ -29,8 +29,8 @@ import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.app.ServiceContainer;
 import cat.ppicas.cleanarch.app.ServiceContainers;
 import cat.ppicas.cleanarch.ui.presenter.CityCurrentWeatherPresenter;
-import cat.ppicas.cleanarch.ui.presenter.PresenterFactory;
-import cat.ppicas.cleanarch.ui.presenter.PresenterHolder;
+import cat.ppicas.framework.ui.PresenterFactory;
+import cat.ppicas.framework.ui.PresenterHolder;
 import cat.ppicas.cleanarch.ui.vista.CityCurrentWeatherVista;
 
 public class CityCurrentWeatherFragment extends Fragment implements CityCurrentWeatherVista,

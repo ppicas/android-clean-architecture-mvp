@@ -22,9 +22,9 @@ import android.os.Bundle;
 import java.util.HashMap;
 import java.util.Map;
 
-import cat.ppicas.cleanarch.ui.presenter.Presenter;
-import cat.ppicas.cleanarch.ui.presenter.PresenterFactory;
-import cat.ppicas.cleanarch.ui.presenter.PresenterHolder;
+import cat.ppicas.framework.ui.Presenter;
+import cat.ppicas.framework.ui.PresenterFactory;
+import cat.ppicas.framework.ui.PresenterHolder;
 
 public class PresenterHolderFragment extends Fragment implements PresenterHolder {
 
