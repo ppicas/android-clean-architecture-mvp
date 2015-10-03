@@ -27,14 +27,14 @@ public interface OWMService {
 
     @GET("/data/2.5/find?units=metric")
     @Headers("Cache-Control: max-age=300, max-stale=900")
-    public OWMCurrentWeatherList getCurrentWeatherByCityName(@Query("q") String query);
+    OWMCurrentWeatherList getCurrentWeatherByCityName(@Query("q") String query);
 
     @GET("/data/2.5/weather?units=metric")
     @Headers("Cache-Control: max-age=300, max-stale=900")
-    public OWMCurrentWeather getCurrentWeatherByCityId(@Query("id") String id);
+    OWMCurrentWeather getCurrentWeatherByCityId(@Query("id") String id);
 
     @GET("/data/2.5/forecast/daily?units=metric")
     @Headers("Cache-Control: max-age=300, max-stale=900")
-    public OWMDailyForecastList getDailyForecastByCityId(@Query("id") String id,
+    OWMDailyForecastList getDailyForecastByCityId(@Query("id") String id,
             @Query("cnt") int days);
 }

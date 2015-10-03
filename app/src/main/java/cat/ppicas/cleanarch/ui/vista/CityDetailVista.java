@@ -18,6 +18,6 @@ package cat.ppicas.cleanarch.ui.vista;
 
 public interface CityDetailVista extends TaskResultVista {
 
-    public void setTitle(int stringResId, Object... args);
+    void setTitle(int stringResId, Object... args);
 
 }

@@ -30,6 +30,6 @@ public interface ActivityNavigator {
      *
      * @param cityId an ID of the desired {@code City} to open
      */
-    public void openCityDetails(String cityId);
+    void openCityDetails(String cityId);
 
 }

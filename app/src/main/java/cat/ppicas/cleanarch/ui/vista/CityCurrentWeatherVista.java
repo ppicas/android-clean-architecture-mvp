@@ -18,10 +18,10 @@ package cat.ppicas.cleanarch.ui.vista;
 
 public interface CityCurrentWeatherVista extends TaskResultVista {
 
-    public void setCurrentTemp(String temp);
+    void setCurrentTemp(String temp);
 
-    public void setHumidity(String humidity);
+    void setHumidity(String humidity);
 
-    public void setWindSpeed(String windSpeed);
+    void setWindSpeed(String windSpeed);
 
 }

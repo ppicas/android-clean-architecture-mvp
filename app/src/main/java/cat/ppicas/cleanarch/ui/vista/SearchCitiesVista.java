@@ -22,10 +22,10 @@ import cat.ppicas.cleanarch.model.City;
 
 public interface SearchCitiesVista extends TaskResultVista {
 
-    public void setTitle(int stringResId, Object... args);
+    void setTitle(int stringResId, Object... args);
 
-    public void setCities(List<City> cities);
+    void setCities(List<City> cities);
 
-    public void displayCitiesNotFound();
+    void displayCitiesNotFound();
 
 }

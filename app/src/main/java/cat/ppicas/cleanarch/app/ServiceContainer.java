@@ -28,12 +28,12 @@ import cat.ppicas.framework.task.TaskExecutor;
  */
 public interface ServiceContainer {
 
-    public CityRepository getCityRepository();
+    CityRepository getCityRepository();
 
-    public CurrentWeatherRepository getCurrentWeatherRepository();
+    CurrentWeatherRepository getCurrentWeatherRepository();
 
-    public DailyForecastRepository getDailyForecastRepository();
+    DailyForecastRepository getDailyForecastRepository();
 
-    public TaskExecutor getTaskExecutor();
+    TaskExecutor getTaskExecutor();
 
 }

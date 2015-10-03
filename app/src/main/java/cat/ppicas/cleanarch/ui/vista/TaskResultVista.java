@@ -20,8 +20,8 @@ import cat.ppicas.framework.ui.Vista;
 
 public interface TaskResultVista extends Vista {
 
-    public void displayLoading(boolean display);
+    void displayLoading(boolean display);
 
-    public void displayError(int stringResId, Object... args);
+    void displayError(int stringResId, Object... args);
 
 }

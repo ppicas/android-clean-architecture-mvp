@@ -20,14 +20,14 @@ import cat.ppicas.framework.ui.Vista;
 
 public interface CityListItemVista extends Vista {
 
-    public void setCityName(String name);
+    void setCityName(String name);
 
-    public void setCountry(String country);
+    void setCountry(String country);
 
-    public void setCurrentTemp(String temp);
+    void setCurrentTemp(String temp);
 
-    public void setLoadingElevation(boolean loading);
+    void setLoadingElevation(boolean loading);
 
-    public void setElevation(int elevation);
+    void setElevation(int elevation);
 
 }

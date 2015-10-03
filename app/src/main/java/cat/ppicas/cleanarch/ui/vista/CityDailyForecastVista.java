@@ -18,16 +18,16 @@ package cat.ppicas.cleanarch.ui.vista;
 
 public interface CityDailyForecastVista extends TaskResultVista {
 
-    public void setForecastDescription(String description);
+    void setForecastDescription(String description);
 
-    public void setDayTemp(String temp);
+    void setDayTemp(String temp);
 
-    public void setMinTemp(String temp);
+    void setMinTemp(String temp);
 
-    public void setMaxTemp(String temp);
+    void setMaxTemp(String temp);
 
-    public void setHumidity(String humidity);
+    void setHumidity(String humidity);
 
-    public void setWindSpeed(String windSpeed);
+    void setWindSpeed(String windSpeed);
 
 }
