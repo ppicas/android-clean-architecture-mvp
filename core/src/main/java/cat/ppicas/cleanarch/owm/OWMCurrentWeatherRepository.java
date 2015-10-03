@@ -16,7 +16,7 @@
 
 package cat.ppicas.cleanarch.owm;
 
-import cat.ppicas.cleanarch.domain.CurrentWeather;
+import cat.ppicas.cleanarch.model.CurrentWeather;
 import cat.ppicas.cleanarch.owm.model.OWMCurrentWeather;
 import cat.ppicas.cleanarch.repository.CurrentWeatherRepository;
 

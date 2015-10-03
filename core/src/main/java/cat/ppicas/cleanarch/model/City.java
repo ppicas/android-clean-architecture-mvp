@@ -14,7 +14,7 @@
  * the License.
  */
 
-package cat.ppicas.cleanarch.domain;
+package cat.ppicas.cleanarch.model;
 
 public class City {
 

@@ -22,7 +22,7 @@ import android.text.format.DateFormat;
 import java.util.Calendar;
 
 import cat.ppicas.cleanarch.R;
-import cat.ppicas.cleanarch.domain.City;
+import cat.ppicas.cleanarch.model.City;
 import cat.ppicas.cleanarch.repository.CityRepository;
 import cat.ppicas.cleanarch.task.GetCityTask;
 import cat.ppicas.cleanarch.ui.vista.CityDetailVista;

@@ -19,8 +19,8 @@ package cat.ppicas.cleanarch.owm;
 import java.util.ArrayList;
 import java.util.List;
 
-import cat.ppicas.cleanarch.domain.City;
-import cat.ppicas.cleanarch.domain.CurrentWeatherPreview;
+import cat.ppicas.cleanarch.model.City;
+import cat.ppicas.cleanarch.model.CurrentWeatherPreview;
 import cat.ppicas.cleanarch.owm.model.OWMCurrentWeather;
 import cat.ppicas.cleanarch.owm.model.OWMCurrentWeatherList;
 import cat.ppicas.cleanarch.repository.CityRepository;

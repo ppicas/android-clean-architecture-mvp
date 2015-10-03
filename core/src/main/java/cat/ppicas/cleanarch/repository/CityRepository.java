@@ -18,7 +18,7 @@ package cat.ppicas.cleanarch.repository;
 
 import java.util.List;
 
-import cat.ppicas.cleanarch.domain.City;
+import cat.ppicas.cleanarch.model.City;
 
 public interface CityRepository {
 

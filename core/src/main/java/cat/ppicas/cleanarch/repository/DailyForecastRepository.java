@@ -18,7 +18,7 @@ package cat.ppicas.cleanarch.repository;
 
 import java.util.List;
 
-import cat.ppicas.cleanarch.domain.DailyForecast;
+import cat.ppicas.cleanarch.model.DailyForecast;
 
 public interface DailyForecastRepository {
 

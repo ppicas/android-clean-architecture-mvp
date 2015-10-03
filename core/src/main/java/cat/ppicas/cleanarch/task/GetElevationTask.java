@@ -16,7 +16,7 @@
 
 package cat.ppicas.cleanarch.task;
 
-import cat.ppicas.cleanarch.domain.City;
+import cat.ppicas.cleanarch.model.City;
 import cat.ppicas.framework.task.NoException;
 import cat.ppicas.framework.task.Task;
 import cat.ppicas.framework.task.TaskResult;

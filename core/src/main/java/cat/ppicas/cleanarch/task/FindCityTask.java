@@ -19,7 +19,7 @@ package cat.ppicas.cleanarch.task;
 import java.io.IOException;
 import java.util.List;
 
-import cat.ppicas.cleanarch.domain.City;
+import cat.ppicas.cleanarch.model.City;
 import cat.ppicas.cleanarch.repository.CityRepository;
 import cat.ppicas.framework.task.Task;
 import cat.ppicas.framework.task.TaskResult;

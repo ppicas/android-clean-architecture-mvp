@@ -14,24 +14,23 @@
  * the License.
  */
 
-package cat.ppicas.cleanarch.domain;
+package cat.ppicas.cleanarch.model;
 
-public class CurrentWeather extends CurrentWeatherPreview {
+public class CurrentWeatherPreview {
 
-    private int mHumidity;
-    private double mWindSpeed;
+    private String mCityId;
+    private double mCurrentTemp;
 
-    public CurrentWeather(String cityId, double currentTemp, int humidity, double windSpeed) {
-        super(cityId, currentTemp);
-        mHumidity = humidity;
-        mWindSpeed = windSpeed;
+    public CurrentWeatherPreview(String cityId, double currentTemp) {
+        mCityId = cityId;
+        mCurrentTemp = currentTemp;
     }
 
-    public int getHumidity() {
-        return mHumidity;
+    public String getCityId() {
+        return mCityId;
     }
 
-    public double getWindSpeed() {
-        return mWindSpeed;
+    public double getCurrentTemp() {
+        return mCurrentTemp;
     }
 }

@@ -24,7 +24,7 @@ import android.widget.ArrayAdapter;
 
 import cat.ppicas.cleanarch.R;
 import cat.ppicas.cleanarch.app.ServiceContainers;
-import cat.ppicas.cleanarch.domain.City;
+import cat.ppicas.cleanarch.model.City;
 import cat.ppicas.cleanarch.ui.vista.CityListItemVista;
 import cat.ppicas.cleanarch.ui.presenter.CityListItemPresenter;
 import cat.ppicas.framework.task.TaskExecutor;

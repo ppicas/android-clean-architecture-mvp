@@ -19,7 +19,7 @@ package cat.ppicas.cleanarch.ui.presenter;
 import java.util.List;
 
 import cat.ppicas.cleanarch.R;
-import cat.ppicas.cleanarch.domain.DailyForecast;
+import cat.ppicas.cleanarch.model.DailyForecast;
 import cat.ppicas.cleanarch.repository.DailyForecastRepository;
 import cat.ppicas.cleanarch.task.GetDailyForecastsTask;
 import cat.ppicas.cleanarch.text.NumberFormat;

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import cat.ppicas.cleanarch.domain.DailyForecast;
+import cat.ppicas.cleanarch.model.DailyForecast;
 import cat.ppicas.cleanarch.owm.model.OWMDailyForecast;
 import cat.ppicas.cleanarch.owm.model.OWMDailyForecastList;
 import cat.ppicas.cleanarch.repository.DailyForecastRepository;

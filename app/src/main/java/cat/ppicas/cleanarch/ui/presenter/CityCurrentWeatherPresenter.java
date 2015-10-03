@@ -16,7 +16,7 @@
 
 package cat.ppicas.cleanarch.ui.presenter;
 
-import cat.ppicas.cleanarch.domain.CurrentWeather;
+import cat.ppicas.cleanarch.model.CurrentWeather;
 import cat.ppicas.cleanarch.repository.CurrentWeatherRepository;
 import cat.ppicas.cleanarch.task.GetCurrentWeatherTask;
 import cat.ppicas.cleanarch.text.NumberFormat;

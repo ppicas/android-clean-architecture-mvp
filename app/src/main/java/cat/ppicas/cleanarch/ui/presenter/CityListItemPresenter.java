@@ -16,7 +16,7 @@
 
 package cat.ppicas.cleanarch.ui.presenter;
 
-import cat.ppicas.cleanarch.domain.City;
+import cat.ppicas.cleanarch.model.City;
 import cat.ppicas.cleanarch.task.GetElevationTask;
 import cat.ppicas.cleanarch.text.NumberFormat;
 import cat.ppicas.cleanarch.ui.vista.CityListItemVista;

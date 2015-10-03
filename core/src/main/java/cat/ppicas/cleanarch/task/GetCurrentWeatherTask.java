@@ -18,7 +18,7 @@ package cat.ppicas.cleanarch.task;
 
 import java.io.IOException;
 
-import cat.ppicas.cleanarch.domain.CurrentWeather;
+import cat.ppicas.cleanarch.model.CurrentWeather;
 import cat.ppicas.cleanarch.repository.CurrentWeatherRepository;
 import cat.ppicas.framework.task.Task;
 import cat.ppicas.framework.task.TaskResult;

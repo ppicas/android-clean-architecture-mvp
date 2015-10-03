@@ -16,7 +16,7 @@
 
 package cat.ppicas.cleanarch.ui.activity;
 
-import cat.ppicas.cleanarch.domain.City;
+import cat.ppicas.cleanarch.model.City;
 
 /**
  * Interface that can be used to open (launch) different activities of the app without

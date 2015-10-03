@@ -16,7 +16,7 @@
 
 package cat.ppicas.cleanarch.repository;
 
-import cat.ppicas.cleanarch.domain.CurrentWeather;
+import cat.ppicas.cleanarch.model.CurrentWeather;
 
 public interface CurrentWeatherRepository {
 

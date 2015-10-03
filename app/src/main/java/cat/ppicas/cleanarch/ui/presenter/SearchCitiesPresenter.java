@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.List;
 
 import cat.ppicas.cleanarch.R;
-import cat.ppicas.cleanarch.domain.City;
+import cat.ppicas.cleanarch.model.City;
 import cat.ppicas.cleanarch.repository.CityRepository;
 import cat.ppicas.cleanarch.task.FindCityTask;
 import cat.ppicas.cleanarch.ui.activity.ActivityNavigator;
